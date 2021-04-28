@@ -1,0 +1,4 @@
+*.sqlite3
+InstituteMaster/settings.py
+InstituteMaster/wsgi.py
+InstituteMaster/urls.py

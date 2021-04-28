@@ -1,0 +1,311 @@
+{% extends "AdminArea/admin_header.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <title>Dashboard</title>
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
+    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
+    <meta name="author" content="DashboardKit"/>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+
+    
+
+</head>
+
+<body class="">
+    
+        <!-- [ Main Content ] start -->
+<div class="pc-container">
+    <div class="pcoded-content">
+        
+       <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">AdminArea</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'AdminArea:AdminDashboard' %}">Home</a></li>
+                            <li class="breadcrumb-item">Fees</li>
+                            <li class="breadcrumb-item">Fees Details</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- [ sample-page ] start -->
+            <div class="col-lg-4">
+                <div class="card user-card user-card-1 pb-5 pt-5">
+                    <div class="card-body pb-0">
+                        <!-- <div class="float-end">
+                        	<button type="button" class="btn btn-outline-success btn-sm"><i class="me-2" data-feather="check-circle"></i>{{student.final_fees}}</button>
+
+							<button type="button" class="btn btn-outline-danger btn-sm"><i class="me-2" data-feather="slash"></i>{{student.remaining_fees}}</button>
+                        </div> -->
+                        <div class="media user-about-block align-items-center mt-0 mb-3">
+                            <div class="position-relative d-inline-block">
+                                <img class="img-radius img-fluid wid-80" src="{{student.photo.url}}" alt="User image">
+                                <div class="certificated-badge">
+                                    <i class="fas fa-certificate text-primary bg-icon"></i>
+                                    <i class="fas fa-check front-icon text-white"></i>
+                                </div>
+
+
+                            </div>
+                            <div class="media-body ms-3">
+                                <h6 class="mb-1">{{student.fname}}&nbsp;{{student.mname}}</h6>
+                                <p class="mb-0 text-muted">{{student.course_type}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <span class="f-w-500"><i class=""></i>SID</span>
+                            <a href="#" class="float-end text-body">{{student.sid}}</a>
+                        </li>
+                        <li class="list-group-item border-bottom-0">
+                            <span class="f-w-500"><i class=""></i>Gender</span>
+                            <span class="float-end text-body">{{student.gender}}</span>
+                        </li>
+                         <li class="list-group-item border-bottom-0">
+                            <span class="f-w-500"><i class=""></i>Phone</span>
+                            <span class="float-end text-body">{{student.mobile}}</span>
+                        </li>
+                         <li class="list-group-item border-bottom-0">
+                            <span class="f-w-500"><i class=""></i>Email</span>
+                            <span class="float-end">{{student.email}}</span>
+                        </li>
+                         <li class="list-group-item border-bottom-0">
+                            <span class="f-w-500"><i class=""></i>Batch</span>
+                            <span class="float-end">{{student.batch}}</span>
+                        </li>
+
+                    </ul>
+                    <div class="card-body">
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card user-card user-card-1">
+                   <div class="card-body">
+                        <h5>Fees Details</h5>
+                        <hr>
+                        <div class="row">
+                            {% if SuccessMsg %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>{{SuccessMsg}}.</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                            {% if FailedMsg %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>{{FailedMsg}}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                        {% endif %}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                               <form class="login100-form validate-form" enctype="multipart/form-data" action="{% url 'AdminArea:AddFees' %}" method="POST">
+                                {% csrf_token %}
+                                    <div class="form-group">
+                                        <input type="hidden" name="sid" value="{{student.sid}}">
+                                    </div>
+                                	<div class="form-group">
+                                        <label class="form-label" for="exampleInputtext1">Date</label>
+                                        <input type="date" required class="form-control" id="exampleInputdate1" aria-describedby="emailHelp" placeholder="Enter Payment Date" name="date">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="exampleInputtext1">Amount</label>
+                                        <input type="number" required class="form-control" id="exampleInputtext1" aria-describedby="emailHelp" placeholder="Enter Amount" name="amount">
+                                    </div>
+                                     <div class="form-group">
+                                        <label class="form-label" for="exampleInputtext1">Installment Number</label>
+                                        <input type="number" required class="form-control" id="exampleInputtext1" aria-describedby="emailHelp" placeholder="Installment Number" name="ins_num">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="exampleInputtext1">Payment Type</label>
+                                        <input type="text" required class="form-control" id="exampleInputtext1" aria-describedby="emailHelp" placeholder="Enter Payment Type" name="ptype">
+                                    </div>
+                                    <button type="submit" class="btn  btn-primary">Submit</button>
+                                </form>
+                            </div>
+                          </div>
+                         </div> 
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="tab-content" id="user-set-tabContent">
+                    <div class="tab-pane fade show active" id="user-set-profile" role="tabpanel" aria-labelledby="user-set-profile-tab">
+    
+                    </div>
+                </div>
+            </div>
+            <!-- [ sample-page ] end -->
+        </div>
+        <!-- [ Main Content ] end -->
+
+          <div class="row">
+            <!-- subscribe start -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Paid Installment
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="report-table" class="table table-bordered table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>SID</th>
+                                        <th>installment Num</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                        <th>payment Type</th>
+                                        <th>Invoice Num</th>
+                                        <th>Invoice</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in feesdetails %}
+                                    <tr>
+                                        <td>{{i.student_id}}</td>
+                                        <td>{{i.installment_no}}</td>
+                                        <td>{{i.amount}}</td>
+                                        <td>{{i.payment_date}}</td>
+                                        <td>{{i.payment_type}}</td>
+                                        <td>{{i.recipt_no}}</td>
+                                        <td>
+                                             <form action="{% url 'AdminArea:PrintInvoice' %}" method="POST">
+                                            {% csrf_token %} 
+                                                <input type="hidden" name="pk" value="{{i.pk}}">
+                                                <button type="submit" class="btn btn-success btn-sm" target="blank">Download</button> 
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- subscribe end -->
+        </div>
+
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+  
+    <script src="{% static 'js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'js/pcoded.min.js' %}"></script>
+   
+<!-- Apex Chart -->
+<script src="{% static 'js/plugins/apexcharts.min.js' %}"></script>
+
+
+<script>
+    $('#pct-toggler').on('click', function() {
+        $('.pct-customizer').toggleClass('active');
+    });
+    $('#cust-sidebrand').change(function() {
+        if ($(this).is(":checked")) {
+            $('.theme-color.brand-color').removeClass('d-none');
+            $('.m-header').addClass('bg-dark');
+        } else {
+            $('.m-header').removeClassPrefix('bg-');
+            $('.m-header > .b-brand > .logo-lg').attr('src', 'assets/images/logo-dark.svg');
+            $('.theme-color.brand-color').addClass('d-none');
+        }
+    });
+    $('.brand-color > a').on('click', function() {
+        var temp = $(this).attr('data-value');
+        if (temp == "bg-default") {
+            $('.m-header').removeClassPrefix('bg-');
+        } else {
+            $('.m-header').removeClassPrefix('bg-');
+            $('.m-header > .b-brand > .logo-lg').attr('src', 'assets/images/logo.svg');
+            $('.m-header').addClass(temp);
+        }
+    });
+    $('.header-color > a').on('click', function() {
+        var temp = $(this).attr('data-value');
+        if (temp == "bg-default") {
+            $('.pc-header').removeClassPrefix('bg-');
+        } else {
+            $('.pc-header').removeClassPrefix('bg-');
+            $('.pc-header').addClass(temp);
+        }
+    });
+    $('#cust-sidebar').change(function() {
+        if ($(this).is(":checked")) {
+            $('.pc-sidebar').addClass('light-sidebar');
+            $('.pc-horizontal .topbar').addClass('light-sidebar');
+        } else {
+            $('.pc-sidebar').removeClass('light-sidebar');
+            $('.pc-horizontal .topbar').removeClass('light-sidebar');
+        }
+    });
+    $('#cust-darklayout').change(function() {
+        if ($(this).is(":checked")) {
+            $("#main-style-link").attr("href", "assets/css/style-dark.css");
+        } else {
+            $("#main-style-link").attr("href", "assets/css/style.css");
+        }
+    });
+    $.fn.removeClassPrefix = function(prefix) {
+        this.each(function(i, it) {
+            var classes = it.className.split(" ").map(function(item) {
+                return item.indexOf(prefix) === 0 ? "" : item;
+            });
+            it.className = classes.join(" ");
+        });
+        return this;
+    };
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+</script>
+<script src="{% static 'js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'js/pages/dashboard-sale.js' %}"></script>
+{% endblock content %}
+</body>
+
+
+</html>

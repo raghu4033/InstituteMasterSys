@@ -1,0 +1,306 @@
+{% extends "AdminArea/admin_header.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <title>Dashboard</title>
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
+    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
+    <meta name="author" content="DashboardKit"/>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+
+    
+
+</head>
+
+<body class="">
+    
+        <!-- [ Main Content ] start -->
+
+<div class="pc-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">AdminArea</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'AdminArea:AdminDashboard' %}">Home</a></li>
+                            <li class="breadcrumb-item">setting</li>
+                            <li class="breadcrumb-item">Institute Detailes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- [ sample-page ] start -->
+            <div class="col-lg-8">
+                <div class="tab-content" id="user-set-tabContent">
+                    
+                    <div class="tab-pane fade fade show active" id="user-set-information" role="tabpanel" aria-labelledby="user-set-information-tab">
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i data-feather="user" class="icon-svg-primary wid-20"></i><span class="p-l-5">INSTITUTE INFORMATION</span></h5>
+                            </div>
+                             <form class="login100-form validate-form" enctype="multipart/form-data" action="{% url 'AdminArea:InstituteDetailes' %}" method="POST">
+                                    {% csrf_token %}
+                            <div class="card-body">
+
+                                 <div class="row">
+                                        {% if SuccessMsg %}
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                <strong>{{SuccessMsg}}.</strong>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        {% endif %}
+                                        {% if FailedMsg %}
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                <strong>{{FailedMsg}}</strong>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Institute Name <span class="text-danger">*</span></label>
+                                            <input type="hidden" required placeholder="institute name" class="form-control" value="{{InstituteInfo.id}}" name="uid">
+
+                                            <input type="text" required placeholder="institute name" class="form-control" value="{{InstituteInfo.ins_name}}" name="institute_name">
+                                        </div>
+                                    </div>
+                                     <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Institute Code <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" required placeholder="institute code" value="{{InstituteInfo.ins_id}}" name="institute_code">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Address <span class="text-danger">*</span></label>
+                                            <textarea class="form-control" required placeholder="institute address" name="institute_address">{{InstituteInfo.ins_address}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-header"> <h5><i data-feather="share" class="icon-svg-primary wid-20"></i><span class="p-l-5">Social Information</span></h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-label">Facebook</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-facebook text-white">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </span>
+                                        <input type="text" required placeholder="fb url" class="form-control" placeholder="Profile Url" value="{{InstituteInfo.ins_fb}}" name="fb_url">
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Instagram</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-twitter text-white">
+                                            <i class="fab fa-instagram"></i>
+                                        </span>
+                                        <input type="text" required class="form-control" placeholder="Profile Url" value="{{InstituteInfo.ins_insta}}" name="insta_url">
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Google Plus</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-googleplus text-white">
+                                            <i class="fab fa-google-plus-g"></i>
+                                        </span>
+                                        <input type="text" required class="form-control" placeholder="Profile Url" value="{{InstituteInfo.ins_google}}" name="google_url">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-header">
+                                <h5><i data-feather="map-pin" class="icon-svg-primary wid-20"></i><span class="p-l-5">Contact Information</span></h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Institution Phone</label>
+                                            <input type="text" required class="form-control" placeholder="Institution Phone" value="{{InstituteInfo.ins_phone}}" required name="ins_phone">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Institution Email <span class="text-danger">*</span></label>
+                                            <input type="email" required class="form-control" placeholder="Institution Email" value="{{InstituteInfo.ins_email}}" required name="institute_email">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Web Site Url</label>
+                                            <input type="text" required class="form-control" placeholder="Web Site Url" value="{{InstituteInfo.ins_web}}" required name="website_url">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Logo</label>
+                                            <input class="form-control" value="{{InstituteInfo.logo.url}}"  type="file" name="logo" placeholder="logo" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-end">
+                                <button type="submit" class="btn btn-primary">Update Profile</button>
+                            </div>
+                        <form>
+                        </div>
+                    </div>
+  
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card user-card user-card-1">
+                    <div class="card-body pb-0">
+                        <div class="media user-about-block align-items-center mt-0 mb-3">
+                            <div class="position-relative d-inline-block">
+                                {% if InstituteInfo.logo.url %}
+                                <img class="img-radius img-fluid wid-150 float-end" src="{{InstituteInfo.logo.url}}" alt="User image">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <span class="f-w-500"><i class="feather icon-mail m-r-10"></i>Email</span>
+                            <a href="mailto:{{InstituteInfo.email}}"  class="float-end text-body">{{InstituteInfo.ins_email}}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="f-w-500"><i class="feather icon-phone-call m-r-10"></i>Phone</span>
+                            <a href="#" class="float-end text-body">(+91) {{InstituteInfo.ins_phone}}</a>
+                        </li>
+                        
+                    </ul>
+                    <div class="nav flex-column nav-pills list-group list-group-flush list-pills" id="user-set-tab" role="tablist" aria-orientation="vertical">
+                 
+                    </div>
+                </div>
+            </div>
+            <!-- [ sample-page ] end -->
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+  
+    <script src="{% static 'js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'js/pcoded.min.js' %}"></script>
+   
+<!-- Apex Chart -->
+<script src="{% static 'js/plugins/apexcharts.min.js' %}"></script>
+
+
+<script>
+    $('#pct-toggler').on('click', function() {
+        $('.pct-customizer').toggleClass('active');
+    });
+    $('#cust-sidebrand').change(function() {
+        if ($(this).is(":checked")) {
+            $('.theme-color.brand-color').removeClass('d-none');
+            $('.m-header').addClass('bg-dark');
+        } else {
+            $('.m-header').removeClassPrefix('bg-');
+            $('.m-header > .b-brand > .logo-lg').attr('src', 'assets/images/logo-dark.svg');
+            $('.theme-color.brand-color').addClass('d-none');
+        }
+    });
+    $('.brand-color > a').on('click', function() {
+        var temp = $(this).attr('data-value');
+        if (temp == "bg-default") {
+            $('.m-header').removeClassPrefix('bg-');
+        } else {
+            $('.m-header').removeClassPrefix('bg-');
+            $('.m-header > .b-brand > .logo-lg').attr('src', 'assets/images/logo.svg');
+            $('.m-header').addClass(temp);
+        }
+    });
+    $('.header-color > a').on('click', function() {
+        var temp = $(this).attr('data-value');
+        if (temp == "bg-default") {
+            $('.pc-header').removeClassPrefix('bg-');
+        } else {
+            $('.pc-header').removeClassPrefix('bg-');
+            $('.pc-header').addClass(temp);
+        }
+    });
+    $('#cust-sidebar').change(function() {
+        if ($(this).is(":checked")) {
+            $('.pc-sidebar').addClass('light-sidebar');
+            $('.pc-horizontal .topbar').addClass('light-sidebar');
+        } else {
+            $('.pc-sidebar').removeClass('light-sidebar');
+            $('.pc-horizontal .topbar').removeClass('light-sidebar');
+        }
+    });
+    $('#cust-darklayout').change(function() {
+        if ($(this).is(":checked")) {
+            $("#main-style-link").attr("href", "assets/css/style-dark.css");
+        } else {
+            $("#main-style-link").attr("href", "assets/css/style.css");
+        }
+    });
+    $.fn.removeClassPrefix = function(prefix) {
+        this.each(function(i, it) {
+            var classes = it.className.split(" ").map(function(item) {
+                return item.indexOf(prefix) === 0 ? "" : item;
+            });
+            it.className = classes.join(" ");
+        });
+        return this;
+    };
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+</script>
+<script src="{% static 'js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'js/pages/dashboard-sale.js' %}"></script>
+{% endblock content %}
+</body>
+
+
+</html>

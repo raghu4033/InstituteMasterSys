@@ -1,0 +1,276 @@
+{% extends "AdminArea/admin_header.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
+    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
+    <meta name="author" content="DashboardKit"/>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+
+    
+
+</head>
+
+<body class="">
+	
+        <!-- [ Main Content ] start -->
+
+<div class="pc-container">
+    <div class="pcoded-content">
+       <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">AdminArea</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'AdminArea:AdminDashboard' %}">Home</a></li>
+                            <li class="breadcrumb-item">Student Inquiry</li>
+                            <li class="breadcrumb-item">Enroll Student Inquiry</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Student Inquiry</h5>
+                    </div>
+
+                   
+                    <div class="card-body">
+                        <div class="row">
+                            {% if SuccessMsg %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>{{SuccessMsg}}.</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                            {% if FailedMsg %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>{{FailedMsg}}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                        {% endif %}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                            <form class="login100-form validate-form" enctype="multipart/form-data" action="{% url 'AdminArea:EnrollStudentInquiry' %}" method="POST">
+                                    {% csrf_token %}
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="exampleInputPassword1">Date</label>
+                                    <input type="date" required class="form-control" id="exampleInputdate" name="date" placeholder="date">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                 <div class="form-group">
+                                    <label class="form-label" for="exampleInputEmail1">Full Name</label>
+                                    <input type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Full" name="full_name">
+                                </div>
+                            </div>
+
+                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="exampleInputPassword1">Birth of Date</label>
+                                    <input type="date" required class="form-control" id="exampleInputdate" placeholder="date" name="dob">
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="form-label" for="exampleFormControlSelect1">Gender</label>
+                                    <select class="form-control" required id="exampleFormControlSelect1" name="gender">
+                                        <option value="">Choose Your Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                            </div>
+                             <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="exampleFormControlTextarea1"> Address</label>
+                                    <textarea class="form-control" required id="exampleFormControlTextarea1" rows="3" name="address"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Mobile Number</label>
+                                    <input type="text" required class="form-control" placeholder="Mobile Number"  name="mobile_number">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Whatsapp Number</label>
+                                    <input type="text" required class="form-control" placeholder="Whatsapp Number" name="whatsapp_number">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Email</label>
+                                    <input type="text" required class="form-control" placeholder="Email" name="email">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Educations Qualification</label>
+                                    <input type="text" required class="form-control" placeholder="Educations Qualification" name="edu_que">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                        <label class="form-label" for="exampleFormControlSelect1">Course name</label>
+                                        <select class="form-control" required id="exampleFormControlSelect1" name="course">
+                                            <option value="">Choose Course Name</option>
+                                            <option value="Fashion Design">Fashion Design</option>
+                                            <option value="Texttile Design">Texttile Design</option>
+                                            <option value="Graphic Design">Graphic Design</option>
+                                            <option value="Jewellery Design">Jewellery Design</option>
+                                            <option value="Fine Art">Fine Art</option>
+                                            <option value="Art & Cart">Art & Cart</option>
+                                            <option value="PhotoShop">PhotoShop</option>
+                                            <option value="Corel Drew">Corel Drew</option>
+                                            <option value="Illustrator">Illustrator</option>
+                                            <option value="Motifs Design">Motifs Design</option>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                        <label class="form-label" for="exampleFormControlSelect1">Reference</label>
+                                        <select class="form-control" required id="exampleFormControlSelect1" name="reference">
+                                            <option value="">Choose Reference</option>
+                                            <option value="Social Media">Social Media</option>
+                                            <option value="Google">Google</option>
+                                            <option value="News Paper">News Paper</option>
+                                            <option value="Others">Others</option>
+                                        </select>
+                                </div>
+                            </div>
+                              <div class="row">
+                                <div class="form-group col-md-6">
+                                   <button type="submit" class="btn btn-success"><i class="me-2" data-feather="check-circle"></i>Save</button>
+                                </div>
+                            </div> 
+
+                        </div>
+                        </form>
+         </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+
+    <!-- Re quired Js -->
+    <script src="{% static 'js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'js/pcoded.min.js' %}"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script> -->
+    <!-- <script src="assets/js/plugins/clipboard.min.js"></script> -->
+    <!-- <script src="assets/js/uikit.min.js"></script> -->
+
+<!-- Apex Chart -->
+<script src="{% static 'js/plugins/apexcharts.min.js' %}"></script>
+
+<script>
+    $('#pct-toggler').on('click', function() {
+        $('.pct-customizer').toggleClass('active');
+    });
+    $('#cust-sidebrand').change(function() {
+        if ($(this).is(":checked")) {
+            $('.theme-color.brand-color').removeClass('d-none');
+            $('.m-header').addClass('bg-dark');
+        } else {
+            $('.m-header').removeClassPrefix('bg-');
+            $('.m-header > .b-brand > .logo-lg').attr('src', 'assets/images/logo-dark.svg');
+            $('.theme-color.brand-color').addClass('d-none');
+        }
+    });
+    $('.brand-color > a').on('click', function() {
+        var temp = $(this).attr('data-value');
+        if (temp == "bg-default") {
+            $('.m-header').removeClassPrefix('bg-');
+        } else {
+            $('.m-header').removeClassPrefix('bg-');
+            $('.m-header > .b-brand > .logo-lg').attr('src', 'assets/images/logo.svg');
+            $('.m-header').addClass(temp);
+        }
+    });
+    $('.header-color > a').on('click', function() {
+        var temp = $(this).attr('data-value');
+        if (temp == "bg-default") {
+            $('.pc-header').removeClassPrefix('bg-');
+        } else {
+            $('.pc-header').removeClassPrefix('bg-');
+            $('.pc-header').addClass(temp);
+        }
+    });
+    $('#cust-sidebar').change(function() {
+        if ($(this).is(":checked")) {
+            $('.pc-sidebar').addClass('light-sidebar');
+            $('.pc-horizontal .topbar').addClass('light-sidebar');
+        } else {
+            $('.pc-sidebar').removeClass('light-sidebar');
+            $('.pc-horizontal .topbar').removeClass('light-sidebar');
+        }
+    });
+    $('#cust-darklayout').change(function() {
+        if ($(this).is(":checked")) {
+            $("#main-style-link").attr("href", "assets/css/style-dark.css");
+        } else {
+            $("#main-style-link").attr("href", "assets/css/style.css");
+        }
+    });
+    $.fn.removeClassPrefix = function(prefix) {
+        this.each(function(i, it) {
+            var classes = it.className.split(" ").map(function(item) {
+                return item.indexOf(prefix) === 0 ? "" : item;
+            });
+            it.className = classes.join(" ");
+        });
+        return this;
+    };
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+</script>
+<script src="{% static 'js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'js/pages/dashboard-sale.js' %}"></script>
+{% endblock content %}
+</body>
+
+
+<!-- Mirrored from dashboardkit.io/bootstrap/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Mar 2021 09:37:34 GMT -->
+</html>

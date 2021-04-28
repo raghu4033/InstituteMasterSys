@@ -1,0 +1,43 @@
+
+class Faculty_Registration(models.Model):
+	admin_user=models.ForeignKey(Admin_Registration,blank=True,on_delete=models.CASCADE,null=True)
+	Faculty_no=models.AutoField(primary_key=True)
+	Joing_date= models.DateField(max_length=8)
+	Department = (("Teaching",'Teaching'),("Admin",'Admin'),("Teacher",'Teacher'),("Non Teaching Staff",'Non Teaching Staff'),("Administartor",'Administartor'),)
+	Department_catagory=models.CharField(max_length=200,choices=Department,default="")
+	Designation = (("Primary Teacher",'Primary Teacher'),("Admin",'Admin'),("Gurdiance",'Gurdiance'),("Non Teaching Staff",'Non Teaching Staff'),("Class Teacher",'Class Teacher'),)
+	Designation_catagory = models.CharField(max_length=200,choices=Designation,default="")
+	Qulification = models.CharField(max_length=80)
+	Total_Experiance=models.CharField(max_length=80)
+
+	# personal details
+
+	First_name= models.CharField(max_length=50)
+	Middel_name = models.CharField(max_length=50)
+	Last_name = models.CharField(max_length=50)
+	Birth_date = models.DateField(max_length=8)
+	GENDER_CHOICES = (("male",'male'),("female",'female'),)
+	gender=models.CharField(max_length=10,choices=GENDER_CHOICES,default="")
+	aadhar=models.CharField(max_length=12)
+	salary = models.CharField(max_length=50)
+	Description = models.TextField()
+
+	# contect_details
+
+	permanent_address=models.TextField()
+	present_address=models.TextField()
+	city=models.CharField(max_length=100)
+	country=models.CharField(max_length=20)
+	pin=models.CharField(max_length=10)
+	mobile=models.CharField(max_length=12)
+	email=models.CharField(max_length=30)
+	photo=models.ImageField(upload_to='FacultyPhotos/',default="")
+	
+    # bank_details
+
+	holder_name=models.CharField(max_length=100)
+	bank_name = models.CharField(max_length=50)
+	Account_no= models.CharField(max_length=50)
+	online_payment = (("Upi",'Upi'),("Phonepe",'Phonepe'),("paytm",'paytm'),("MobiKwik",'MobiKwik'),("Amazon",'Amazon'),)
+	online_payment_catagory=models.CharField(max_length=200,choices=Department,default="")
+	

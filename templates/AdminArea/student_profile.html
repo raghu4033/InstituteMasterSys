@@ -1,0 +1,435 @@
+{% extends "AdminArea/admin_header.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from dashboardkit.io/bootstrap/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Mar 2021 09:35:42 GMT -->
+<head>
+    <title>Dashboard</title>
+    <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 11]>
+    	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    	<![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
+    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
+    <meta name="author" content="DashboardKit"/>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+
+    
+
+</head>
+
+<body class="">
+	
+        <!-- [ Main Content ] start -->
+
+<div class="pc-container">
+    <div class="pcoded-content">
+        
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">User Profile</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#!">User</a></li>
+                            <li class="breadcrumb-item">Profile</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- [ sample-page ] start -->
+            <div class="col-lg-4">
+                <div class="card user-card user-card-1">
+                    <div class="card-body pb-0">
+                        <div class="float-end">
+                            <span class="badge bg-light-success">Active</span>
+                        </div>
+                        <div class="media user-about-block align-items-center mt-0 mb-3">
+                            <div class="position-relative d-inline-block">
+                                <img class="img-radius img-fluid wid-80" src="{{UpdateUser.photo.url}}" alt="User image">
+                                <div class="certificated-badge">
+                                    <i class="fas fa-certificate text-primary bg-icon"></i>
+                                    <i class="fas fa-check front-icon text-white"></i>
+                                </div>
+                            </div>
+                            <div class="media-body ms-3">
+                                <h6 class="mb-1">{{UpdateUser.fname}}&nbsp;{{UpdateUser.mname}}</h6>
+                                <p class="mb-0 text-muted">{{UpdateUser.course_type}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <span class="f-w-500"><i class="feather icon-mail m-r-10"></i>Email</span>
+                            <a href="mailto:demo@sample" class="float-end text-body">{{UpdateUser.email}}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="f-w-500"><i class="feather icon-phone-call m-r-10"></i>Phone</span>
+                            <a href="#" class="float-end text-body">{{UpdateUser.mobile}}</a>
+                        </li>
+                        <li class="list-group-item border-bottom-0">
+                            <span class="f-w-500"><i class="feather icon-map-pin m-r-10"></i>Location</span>
+                            <span class="float-end">{{UpdateUser.city}}</span>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        
+                    </div>
+                    
+                </div>
+          
+            </div>
+            <div class="col-lg-8">
+                <div class="tab-content" id="user-set-tabContent">
+                    <div class="tab-pane fade show active" id="user-set-profile" role="tabpanel" aria-labelledby="user-set-profile-tab">
+    
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i data-feather="user" class="icon-svg-primary wid-20"></i><span class="p-l-5">About me</span></h5>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="mb-3">Personal Details</h5>
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <td class="">Full Name</td>
+                                            <td class="">:</td>
+                                            <td class="">{{UpdateUser.fname}}&nbsp;{{UpdateUser.mname}}</td>
+                                        
+                                        <tr>
+                                            <td class="">Father's Name</td>
+                                            <td class="">:</td>
+                                            <td class="">{{UpdateUser.lname}}&nbsp;{{UpdateUser.fname}}</td>
+                                        </tr>
+                                         <tr>
+                                            <td class="">Date of Birth</td>
+                                            <td class="">:</td>
+                                            <td class="">{{UpdateUser.dob}}</td>
+                                        </tr>
+                                         <tr>
+                                            <td class="">Gender</td>
+                                            <td class="">:</td>
+                                            <td class="">{{UpdateUser.gender}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">Cast</td>
+                                            <td class="">:</td>
+                                            <td class="">{{UpdateUser.Cast}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">Address</td>
+                                            <td class="">:</td>
+                                            <td class="">{{UpdateUser.present_address}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">City</td>
+                                            <td class="">:</td>
+                                            <td class="">{{UpdateUser.city}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">Zip Code</td>
+                                            <td class="">:</td>
+                                            <td class="">{{UpdateUser.pin}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">Father's Phone</td>
+                                            <td class="">:</td>
+                                            <td class="">{{UpdateUser.father_mobile}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">Phone</td>
+                                            <td class="">:</td>
+                                            <td class="">{{UpdateUser.mobile}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">Email</td>
+                                            <td class="">:</td>
+                                            <td class="">{{UpdateUser.email}}</td>
+                                        </tr>
+                                        
+
+                                    </tbody>
+                                </table>
+                                <!-- Education -->
+                                <h5 class="mt-5 mb-4 pb-3 border-bottom">Education Details</h5>
+                                  <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <td class="">Sid</td>
+                                            <td class="">:</td>
+                                            <td class="">{{UpdateUser.sid}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">Course Name</td>
+                                            <td class="">:</td>
+                                            <td class="">{{UpdateUser.course_type}}</td>
+                                        </tr>
+                                         
+                                        <tr>
+                                            <td class="">Batch Name</td>
+                                            <td>:</td>
+                                            <td class="">{{UpdateUser.batch}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">Join Date</td>
+                                            <td class="">:</td>
+                                            <td class="">{{UpdateUser.join_date}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">Qualification</td>
+                                            <td class="">:</td>
+                                            <td class="">{{UpdateUser.qualification}}</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    
+                    <div class="tab-pane fade" id="user-set-passwort" role="tabpanel" aria-labelledby="user-set-passwort-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i data-feather="lock" class="icon-svg-primary wid-20"></i><span class="p-l-5">Change Password</span></h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Current Password <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="Enter Your currunt password">
+                                            <small class="form-text text-muted">Forgot password? <a href="#!">Click here</a></small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-label">New Password <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="Enter New password">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="Enter your password again">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-end">
+                                <button class="btn btn-danger">Change Password</button>
+                                <button class="btn btn-outline-dark ms-2">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="user-set-email" role="tabpanel" aria-labelledby="user-set-email-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i data-feather="at-sign" class="icon-svg-primary wid-20"></i><span class="p-l-5">Email Settings</span></h5>
+                                <div class="card-header-right">
+                                    <div class="btn-group card-option">
+                                        <button type="button" class="btn dropdown-toggle btn-icon" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="feather icon-more-horizontal"></i>
+                                        </button>
+                                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-end">
+                                            <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                                            <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                                            <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                                            <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                            </ul>
+                            <div class="card-footer text-end">
+                                <button class="btn btn-warning">Update Change</button>
+                                <button class="btn btn-outline-dark ms-2">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ sample-page ] end -->
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+    <!-- Required Js -->
+    <script src="{% static 'js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'js/pcoded.min.js' %}"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script> -->
+    <!-- <script src="assets/js/plugins/clipboard.min.js"></script> -->
+    <!-- <script src="assets/js/uikit.min.js"></script> -->
+
+<!-- Apex Chart -->
+<script src="{% static 'js/plugins/apexcharts.min.js' %}"></script>
+<div class="pct-customizer">
+    <div class="pct-c-btn">
+        <button class="btn btn-light-danger" id="pct-toggler">
+            <i data-feather="settings"></i>
+        </button>
+        <button class="btn btn-light-primary" data-bs-toggle="tooltip" title="Document" data-placement="left">
+            <i data-feather="book"></i>
+        </button>
+        <button class="btn btn-light-success" data-bs-toggle="tooltip" title="Buy Now" data-placement="left">
+            <i data-feather="shopping-bag"></i>
+        </button>
+        <button class="btn btn-light-info" data-bs-toggle="tooltip" title="Support" data-placement="left">
+            <i data-feather="headphones"></i>
+        </button>
+    </div>
+    <div class="pct-c-content ">
+        <div class="pct-header bg-primary">
+            <h5 class="mb-0 text-white f-w-500">DashboardKit Customizer</h5>
+        </div>
+        <div class="pct-body">
+            <h6 class="mt-2"><i data-feather="credit-card" class="me-2"></i>Header settings</h6>
+            <hr class="my-2">
+            <div class="theme-color header-color">
+                <a href="#!" class="" data-value="bg-default"><span></span><span></span></a>
+                <a href="#!" class="" data-value="bg-primary"><span></span><span></span></a>
+                <a href="#!" class="" data-value="bg-danger"><span></span><span></span></a>
+                <a href="#!" class="" data-value="bg-warning"><span></span><span></span></a>
+                <a href="#!" class="" data-value="bg-info"><span></span><span></span></a>
+                <a href="#!" class="" data-value="bg-success"><span></span><span></span></a>
+                <a href="#!" class="" data-value="bg-dark"><span></span><span></span></a>
+            </div>
+            <h6 class="mt-4"><i data-feather="layout" class="me-2"></i>Sidebar settings</h6>
+            <hr class="my-2">
+            <div class="form-check form-switch">
+                <input type="checkbox" class="form-check-input" id="cust-sidebar">
+                <label class="form-check-label f-w-600 pl-1" for="cust-sidebar">Light Sidebar</label>
+            </div>
+            <div class="form-check form-switch mt-2">
+                <input type="checkbox" class="form-check-input" id="cust-sidebrand">
+                <label class="form-check-label f-w-600 pl-1" for="cust-sidebrand">Color Brand</label>
+            </div>
+            <div class="theme-color brand-color d-none">
+                <a href="#!" class="active" data-value="bg-primary"><span></span><span></span></a>
+                <a href="#!" class="" data-value="bg-danger"><span></span><span></span></a>
+                <a href="#!" class="" data-value="bg-warning"><span></span><span></span></a>
+                <a href="#!" class="" data-value="bg-info"><span></span><span></span></a>
+                <a href="#!" class="" data-value="bg-success"><span></span><span></span></a>
+                <a href="#!" class="" data-value="bg-dark"><span></span><span></span></a>
+            </div>
+            <h6 class="mt-4"><i data-feather="sun" class="me-2"></i>Layout settings</h6>
+            <hr class="my-2">
+            <div class="form-check form-switch mt-2">
+                <input type="checkbox" class="form-check-input" id="cust-darklayout">
+                <label class="form-check-label f-w-600 pl-1" for="cust-darklayout">Dark Layout</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#pct-toggler').on('click', function() {
+        $('.pct-customizer').toggleClass('active');
+    });
+    $('#cust-sidebrand').change(function() {
+        if ($(this).is(":checked")) {
+            $('.theme-color.brand-color').removeClass('d-none');
+            $('.m-header').addClass('bg-dark');
+        } else {
+            $('.m-header').removeClassPrefix('bg-');
+            $('.m-header > .b-brand > .logo-lg').attr('src', 'assets/images/logo-dark.svg');
+            $('.theme-color.brand-color').addClass('d-none');
+        }
+    });
+    $('.brand-color > a').on('click', function() {
+        var temp = $(this).attr('data-value');
+        if (temp == "bg-default") {
+            $('.m-header').removeClassPrefix('bg-');
+        } else {
+            $('.m-header').removeClassPrefix('bg-');
+            $('.m-header > .b-brand > .logo-lg').attr('src', 'assets/images/logo.svg');
+            $('.m-header').addClass(temp);
+        }
+    });
+    $('.header-color > a').on('click', function() {
+        var temp = $(this).attr('data-value');
+        if (temp == "bg-default") {
+            $('.pc-header').removeClassPrefix('bg-');
+        } else {
+            $('.pc-header').removeClassPrefix('bg-');
+            $('.pc-header').addClass(temp);
+        }
+    });
+    $('#cust-sidebar').change(function() {
+        if ($(this).is(":checked")) {
+            $('.pc-sidebar').addClass('light-sidebar');
+            $('.pc-horizontal .topbar').addClass('light-sidebar');
+        } else {
+            $('.pc-sidebar').removeClass('light-sidebar');
+            $('.pc-horizontal .topbar').removeClass('light-sidebar');
+        }
+    });
+    $('#cust-darklayout').change(function() {
+        if ($(this).is(":checked")) {
+            $("#main-style-link").attr("href", "assets/css/style-dark.css");
+        } else {
+            $("#main-style-link").attr("href", "assets/css/style.css");
+        }
+    });
+    $.fn.removeClassPrefix = function(prefix) {
+        this.each(function(i, it) {
+            var classes = it.className.split(" ").map(function(item) {
+                return item.indexOf(prefix) === 0 ? "" : item;
+            });
+            it.className = classes.join(" ");
+        });
+        return this;
+    };
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+</script>
+<script src="{% static 'js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'js/pages/dashboard-sale.js' %}"></script>
+{% endblock content %}
+</body>
+
+
+<!-- Mirrored from dashboardkit.io/bootstrap/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Mar 2021 09:37:34 GMT -->
+</html>

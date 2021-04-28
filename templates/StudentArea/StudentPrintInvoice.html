@@ -1,0 +1,234 @@
+{% extends "StudentArea/StudentHeader.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <title>Dashboard</title>
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
+    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
+    <meta name="author" content="DashboardKit"/>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+
+<style type="text/css">
+    .top-text-cs{float:right; margin-left:400px;
+</style>  
+
+</head>
+
+<body class="">
+    
+        <!-- [ Main Content ] start -->
+
+<div class="pc-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Invoice</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="i{% url 'StudentArea:StudentDashboard' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="">Fees</a></li>
+                            <li class="breadcrumb-item">Fees Invoice</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- [ basic-alert ] start -->
+            <div class="col-md-12">
+                <!-- [ Invoice ] start -->
+                <div class="container">
+                    <div>
+                        <div class="card" id="printTable">
+                            <div class="card-body p-5 m-4" style="border: 2px #960000 solid;">
+
+                                <div class="row invoive-info d-print-inline-flex mb-5">
+                                    <div class="col-sm-4 invoice-client-info">
+                                        <td><a href="index.html"><img class="img-fluid" src="{% static 'StudentArea/images/logo_full.png' %}" alt="Nextro Logo" style="width: 220px;"></a>
+                                        </td>
+                                    </div>
+                                    
+                                    <div class="col-sm-8">
+                                        <a class="text-secondary" href="Institue@kalaveethi.com" target="_top"><span class="top-text-cs">Institue@kalaveethi.com</span></a>
+                                        <br><span class="top-text-cs">+91 7698962286</span>
+                                    </div>
+                                </div>
+
+                                <div class="row text-center" style="border: 2px #960000 solid;" >
+                                    <center class="p-1">316,Anupam The business Hub , Yogi Chowk , Surat - 395010</center>
+                                </div>
+
+
+                                <div class="row invoive-info d-print-inline-flex" style="margin-top: 100px;">
+                                    <div class="col-sm-4 invoice-client-info">
+                                        <h6>Student Information :</h6>
+                                        <h6 class="m-0">{{student.fname}}&nbsp;{{student.mname}}&nbsp;{{student.lname}}</h6>
+                                        <p class="m-0 m-t-10">{{student.city}}-{{student.pin}}</p>
+                                        <p class="m-0">{{student.mobile}}</p>
+                                        <p><a class="text-secondary" href="mailto:demo@gmail.com" target="_top">{{student.email}}</a></p>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h6>Fees Information :</h6>
+                                        <table class="table table-responsive invoice-table invoice-order table-borderless">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Date :</th>
+                                                    <td>{{StudentInvoiceInfo.payment_date}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Status :</th>
+                                                    <td>
+                                                        <span class="label label-warning">Paid</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>SID :</th>
+                                                    <td>
+                                                        {{student.sid}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h6 class="m-b-20">Invoice Number :<span>{{StudentInvoiceInfo.installment_no}}</span></h6>
+                                        <h6 class="text-uppercase text-primary">Total Due :
+                                            <span>{{StudentInvoiceInfo.amount}}/-</span>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="table-responsive">
+                                            <table class="table invoice-detail-table">
+                                                <thead>
+                                                    <tr class="thead-default">
+                                                        <th>Installment Number</th>
+                                                        <th>Date</th>
+                                                        <th>Payment Mathod</th>
+                                                        <th>Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h6></h6>
+                                                            <p class="m-0">{{StudentInvoiceInfo.installment_no}}</p>
+                                                        </td>
+                                                        <td>{{StudentInvoiceInfo.payment_date}}</td>                                  <td>{{StudentInvoiceInfo.payment_type}}</td>
+                                                        <td>{{StudentInvoiceInfo.amount}}/-</td>
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-responsive invoice-table invoice-total">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <hr />
+                                                        <h5 class="text-primary m-r-10">Total :</h5>
+                                                    </td>
+                                                    <td>
+                                                        <hr />
+                                                        <h5 class="text-primary">{{StudentInvoiceInfo.amount}}/-</h5>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h6>Terms and Condition :</h6>
+                                        <p>1)Fees once pay will not be refunded in any case.<br>
+                                            2)Rules and regulations of company will have to be obeyed.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row text-center d-print-none">
+                            <div class="col-sm-12 invoice-btn-group text-center">
+                                <button type="button" class="btn btn-print-invoice  btn-primary m-b-10">Print</button>
+                                <button type="button" class="btn   btn-secondary m-b-10">Download</button>
+                                <button type="button" class="btn  btn-primary m-b-10 ">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- [ Invoice ] end -->
+            </div>
+            <!-- [ basic-alert ] end -->
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+  
+    <script src="{% static 'js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'js/pcoded.min.js' %}"></script>
+   
+<!-- Apex Chart -->
+<script src="{% static 'js/plugins/apexcharts.min.js' %}"></script>
+<script>
+    $('.btn-print-invoice').on('click', function() {
+        var link2 = document.createElement('link');
+        link2.innerHTML =
+            '<style>@media print{*,::after,::before{text-shadow:none!important;box-shadow:none!important}a:not(.btn){text-decoration:none}abbr[title]::after{content:" ("attr(title) ")"}pre{white-space:pre-wrap!important}blockquote,pre{border:1px solid #adb5bd;page-break-inside:avoid}thead{display:table-header-group}img,tr{page-break-inside:avoid}h2,h3,p{orphans:3;widows:3}h2,h3{page-break-after:avoid}@page{size:a3}body{min-width:992px!important}.container{min-width:992px!important}.page-header,.pc-sidebar,.pc-mob-header,.pc-header,.pct-customizer,.modal,.navbar{display:none}.pc-container{top:0;}.invoice-contact{padding-top:0;}@page,.card-body,.card-header,body,.pcoded-content{padding:0;margin:0}.badge{border:1px solid #000}.table{border-collapse:collapse!important}.table td,.table th{background-color:#fff!important}.table-bordered td,.table-bordered th{border:1px solid #dee2e6!important}.table-dark{color:inherit}.table-dark tbody+tbody,.table-dark td,.table-dark th,.table-dark thead th{border-color:#dee2e6}.table .thead-dark th{color:inherit;border-color:#dee2e6}.top-text-cs{float:right; margin-left:400px;}}</style>';
+
+        document.getElementsByTagName('head')[0].appendChild(link2);
+        window.print();
+    })
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+</script>
+<script src="{% static 'js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'js/pages/dashboard-sale.js' %}"></script>
+{% endblock content %}
+</body>
+
+
+</html>

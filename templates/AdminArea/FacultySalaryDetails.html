@@ -1,0 +1,319 @@
+{% extends "AdminArea/admin_header.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
+    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
+    <meta name="author" content="DashboardKit"/>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'AdminArea/images/favicon.svg' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'AdminArea/css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'AdminArea/css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+
+    
+
+</head>
+
+<body class="">
+	
+        <!-- [ Main Content ] start -->
+
+<div class="pc-container">
+    <div class="pcoded-content">
+        
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">AdminArea</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'AdminArea:AdminDashboard' %}">Home</a></li>
+                            <li class="breadcrumb-item">Salary</li>
+                            <li class="breadcrumb-item">Salary Detaile</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- [ sample-page ] start -->
+            <div class="col-lg-4">
+                <div class="card user-card user-card-1 pb-5 pt-5">
+                    <div class="card-body pb-0">
+                        <!-- <div class="float-end">
+                            <button type="button" class="btn btn-outline-success btn-sm"><i class="me-2" data-feather="check-circle"></i>{{student.final_fees}}</button>
+
+                            <button type="button" class="btn btn-outline-danger btn-sm"><i class="me-2" data-feather="slash"></i>{{student.remaining_fees}}</button>
+                        </div> -->
+                        <div class="media user-about-block align-items-center mt-0 mb-3">
+                            <div class="position-relative d-inline-block">
+                                <img class="img-radius img-fluid wid-80" src="{{faculty.photo.url}}" alt="User image">
+                                <div class="certificated-badge">
+                                    <i class="fas fa-certificate text-primary bg-icon"></i>
+                                    <i class="fas fa-check front-icon text-white"></i>
+                                </div>
+
+
+                            </div>
+                            <div class="media-body ms-3">
+                                <h6 class="mb-1">{{faculty.first_name}}&nbsp;{{faculty.middel_name}}</h6>
+                                <p class="mb-0 text-muted">{{faculty.department_catagory}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <span class="f-w-500"><i class=""></i>Faclulty Id</span>
+                            <a href="#" class="float-end text-body">{{faculty.faculty_id}}</a>
+                        </li>
+                        <li class="list-group-item border-bottom-0">
+                            <span class="f-w-500"><i class=""></i>Gender</span>
+                            <span class="float-end text-body">{{faculty.gender}}</span>
+                        </li>
+                         <li class="list-group-item border-bottom-0">
+                            <span class="f-w-500"><i class=""></i>Phone</span>
+                            <span class="float-end text-body">{{faculty.mobile}}</span>
+                        </li>
+                         <li class="list-group-item border-bottom-0">
+                            <span class="f-w-500"><i class=""></i>Email</span>
+                            <span class="float-end">{{faculty.email}}</span>
+                        </li>
+                         <li class="list-group-item border-bottom-0">
+                            <span class="f-w-500"><i class=""></i>Designation</span>
+                            <span class="float-end">{{faculty.designation_catagory}}</span>
+                        </li>
+
+                    </ul>
+                    <div class="card-body">
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card user-card user-card-1">
+                   <div class="card-body">
+                        <h5>Salary Details</h5>
+                        <hr>
+                        <div class="row">
+                            {% if SuccessMsg %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>{{SuccessMsg}}.</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                            {% if FailedMsg %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>{{FailedMsg}}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                        {% endif %}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                               <form class="login100-form validate-form" enctype="multipart/form-data" action="{% url 'AdminArea:AddSalary' %}" method="POST">
+                                {% csrf_token %}
+                                    <div class="form-group">
+                                        <input type="hidden" name="fid" value="{{faculty.faculty_id}}">
+                                    </div>
+                                  <div class="row">          
+                                    <div class="col-md-6">
+                                       <div class="form-group">
+                                                    <label class="form-label" for="exampleFormControlSelect1">Year</label>
+                                                    <select class="form-control" required id="exampleFormControlSelect1" name="salary_year">
+                                                        <option value="">Choose Year</option>
+                                                        <option value="2021">2021</option>
+                                                        <option value="2022">2022</option>
+                                                        <option value="2023">2023</option>
+                                                    </select>
+                                            </div>
+                                    </div>
+                                <div class="col-md-6">
+                                   <div class="form-group">
+                                                <label class="form-label" for="exampleFormControlSelect1">Month</label>
+                                                <select class="form-control" required id="exampleFormControlSelect1" name="salary_month">
+                                                    <option value="">Choose Month</option>
+                                                    <option value="January">January</option>
+                                                    <option value="February">February</option>
+                                                    <option value="March">March</option>
+                                                    <option value="April">April</option>
+                                                    <option value="May">May</option>
+                                                    <option value="June">June</option>
+                                                    <option value="June">June</option>
+                                                    <option value="July">July</option>
+                                                    <option value="August">August</option>
+                                                    <option value="September">September</option>
+                                                    <option value="October">October</option>
+                                                    <option value="November">November</option>
+                                                    <option value="December">December</option>
+
+                                                </select>
+                                        </div>
+                                </div>
+                            </div> 
+                                    <div class="form-group">
+                                        <label class="form-label" for="exampleInputtext1">Payment Date</label>
+                                        <input type="date" required class="form-control" id="exampleInputdate1" aria-describedby="emailHelp" placeholder="Enter Payment Date" name="payment_date">
+                                    </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                         <div class="form-group">
+                                            <label class="form-label" for="exampleInputtext1">From Date</label>
+                                            <input type="date" required class="form-control" id="exampleInputdate1" aria-describedby="emailHelp" placeholder="Enter Payment Date" name="from_date">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                         <div class="form-group">
+                                            <label class="form-label" for="exampleInputtext1">To Date</label>
+                                            <input type="date" required class="form-control" id="exampleInputdate1" aria-describedby="emailHelp" placeholder="Enter Payment Date" name="to_date">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">  
+                                    <div class="col-md-3">  
+                                        <div class="form-group">
+                                            <label class="form-label" for="exampleInputtext1">Amount</label>
+                                            <input type="text" required class="form-control" id="exampleInputtext1" aria-describedby="emailHelp" placeholder="Enter Amount" name="amount">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">  
+                                        <div class="form-group">
+                                            <label class="form-label" for="exampleInputtext1">Payment type</label>
+                                            <input type="text" required class="form-control" id="exampleInputtext1" aria-describedby="emailHelp" placeholder="Enter Payment Type" name="payment_type">
+                                        </div>
+                                    </div>    
+                                </div> 
+                                    <button type="submit" class="btn  btn-primary">Save</button>
+                                </form>
+                            </div>
+                          </div>
+                         </div> 
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="tab-content" id="user-set-tabContent">
+                    <div class="tab-pane fade show active" id="user-set-profile" role="tabpanel" aria-labelledby="user-set-profile-tab">
+    
+                    </div>
+                </div>
+            </div>
+            <!-- [ sample-page ] end -->
+        </div>
+        <!-- [ Main Content ] end -->
+
+          <div class="row">
+            
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Paid Salary
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="report-table" class="table table-bordered table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>FID</th>
+                                        <th>Month</th>
+                                        <th>Amount</th>
+                                        <th>payment Date</th>
+                                        <th>payment Type</th>
+                                        <th>Invoice Num</th>
+                                        <th>Invoice</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in Salarysdetails %}
+                                    <tr>
+                                        <td>{{i.faculty_user_id}}</td>
+                                        <td>{{i.month}}</td>
+                                        <td>{{i.amount}}</td>
+                                        <td>{{i.payment_date}}</td>
+                                        <td>{{i.payment_type}}</td>
+                                        <td>{{i.recipt_no}}</td>
+                                        
+                                        <td>
+                                             <form action="{% url 'AdminArea:PrintSalaryInvoice' %}" method="POST">
+                                            {% csrf_token %} 
+                                                <input type="hidden" name="pk" value="{{i.pk}}">
+                                                <button type="submit" class="btn btn-success btn-sm" target="blank">Download</button> 
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- subscribe end -->
+        </div>
+
+    </div>
+</div>
+
+    <!-- Required Js -->
+    <script src="{% static 'AdminArea/js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/pcoded.min.js' %}"></script>
+   
+<!-- Apex Chart -->
+<script src="{% static 'AdminArea/js/plugins/apexcharts.min.js' %}"></script>
+<div class="pct-customizer">
+    <div class="pct-c-btn">
+        <button class="btn btn-light-danger" id="pct-toggler">
+            <i data-feather="settings"></i>
+        </button>
+        <button class="btn btn-light-primary" data-bs-toggle="tooltip" title="Document" data-placement="left">
+            <i data-feather="book"></i>
+        </button>
+        <button class="btn btn-light-success" data-bs-toggle="tooltip" title="Buy Now" data-placement="left">
+            <i data-feather="shopping-bag"></i>
+        </button>
+        <button class="btn btn-light-info" data-bs-toggle="tooltip" title="Support" data-placement="left">
+            <i data-feather="headphones"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+</script>
+<script src="{% static 'AdminArea/js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'AdminArea/js/pages/dashboard-sale.js' %}"></script>
+{% endblock content %}
+</body>
+
+
+<!-- Mirrored from dashboardkit.io/bootstrap/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Mar 2021 09:37:34 GMT -->
+</html>

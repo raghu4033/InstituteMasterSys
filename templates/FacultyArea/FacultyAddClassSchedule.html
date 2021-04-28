@@ -1,0 +1,262 @@
+{% extends "FacultyArea/FacultyHeader.html" %}
+{% block faculty_content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
+    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
+    <meta name="author" content="DashboardKit"/>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'AdminArea/images/favicon.svg' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'AdminArea/css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'AdminArea/css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+
+    
+
+</head>
+
+<body class="">
+	
+        <!-- [ Main Content ] start -->
+
+<div class="pc-container">
+    <div class="pcoded-content">
+       <!-- [ breadcrumb ] start -->
+         <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">FacultyArea</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'FacultyArea:FacultyDashborad' %}">Home</a></li>
+                            <li class="breadcrumb-item">class Scheduale</li>
+                            <li class="breadcrumb-item">Add Class Scheduale</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Add Class Schedule</h5>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="row">
+                            {% if SuccessMsg %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>{{SuccessMsg}}.</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                            {% if FailedMsg %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>{{FailedMsg}}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                        {% endif %}
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-12">
+                            <form class="login100-form validate-form" enctype="multipart/form-data" action="{% url 'FacultyArea:FacultyAddClassSchedule' %}" method="POST">
+                                    {% csrf_token %}
+                            </div>
+                           <div class="col-md-12">
+                               <div class="form-group">
+                                            <label class="form-label" for="exampleFormControlSelect1">Class</label>
+                                            <select class="form-control" required id="exampleFormControlSelect1" name="class_for">
+                                                <option value="">Choose Course Name</option>
+                                                 <option value="All">All</option>
+                                                <option value="fashion">Fashion Design</option>
+                                                <option value="texttile">Texttile Design</option>
+                                                <option value="graphic">Graphic Design</option>
+                                                <option value="jewellery">Jewellery Design</option>
+                                                <option value="fineArt">Fine Art</option>
+                                            </select>
+                                    </div>
+                            </div>
+                              <div class="row">
+                                <div class="form-group col-md-6">
+                                   <button type="submit" class="btn btn-success"><i class="me-2" data-feather="check-circle"></i>Save</button>
+                                </div>
+                            </div> 
+
+                        </div>
+                </form>
+         </div>
+     </div>
+            {% if mylist %}
+
+            <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Add Batch</h5>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="row">
+                            {% if SuccessMsg %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>{{SuccessMsg}}.</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                            {% if FailedMsg %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>{{FailedMsg}}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                        {% endif %}
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-12">
+                            <form class="login100-form validate-form" enctype="multipart/form-data" action="{% url 'FacultyArea:FacultyScheduleClass' %}" method="POST">
+                                    {% csrf_token %}
+                            </div>
+                           <div class="col-md-12">
+                               <div class="form-group">
+                                            <label class="form-label" for="exampleFormControlSelect1">Batch</label>
+                                            <select class="form-control" id="exampleFormControlSelect1" name="batch_for">
+                                                <option value="">Choose Course Name</option>
+                                                {% for i in mylist %}
+                                                <option value="{{i}}">{{i}}</option>
+                                                {% endfor %}
+                                            </select>
+                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="exampleInputPassword1">From Date</label>
+                                    <input type="date" required class="form-control" id="exampleInputtime" name="from_date" placeholder="From date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="exampleInputPassword1">To Date</label>
+                                    <input type="date" required class="form-control" id="exampleInputtime" name="to_date" placeholder="To date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="exampleInputPassword1">From Time</label>
+                                    <input type="time" required class="form-control" id="exampleInputtime" name="from_time" placeholder="From Time">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="exampleInputPassword1">To Time</label>
+                                    <input type="time" required class="form-control" id="exampleInputtime" name="to_time" placeholder="Event Time">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="exampleInputPassword1">Subject</label>
+                                    <input type="text" required class="form-control" id="exampleInputdate" name="subject" placeholder="Subject">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                               <div class="form-group">
+                                            <label class="form-label" for="exampleFormControlSelect1">Class Type</label>
+                                            <select class="form-control" required id="exampleFormControlSelect1" name="class_type">
+                                                <option value="">Choose Class Type</option>
+                                                <option value="lab">Lab</option>
+                                                <option value="skeching">Skeching </option>
+                                                <option value="theory">Theory</option>
+                                                <option value="CAD">Cad</option>
+                                                
+                                            </select>
+                                    </div>
+                            </div>
+
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="exampleInputPassword1">organizer</label>
+                                    <input type="text" required class="form-control" id="exampleInputdate" name="organizer" placeholder="organizer">
+                                </div>
+                            </div>
+                            
+                              <div class="row">
+                                <div class="form-group col-md-6">
+                                   <button type="submit" class="btn btn-success"><i class="me-2" data-feather="check-circle"></i>Save</button>
+                                </div>
+                            </div> 
+                        </div>
+                </form>
+         {% endif %}
+
+                 
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+
+    <!-- Required Js -->
+    <script src="{% static 'AdminArea/js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/pcoded.min.js' %}"></script>
+   
+<!-- Apex Chart -->
+<script src="{% static 'AdminArea/js/plugins/apexcharts.min.js' %}"></script>
+<div class="pct-customizer">
+    <div class="pct-c-btn">
+        <button class="btn btn-light-danger" id="pct-toggler">
+            <i data-feather="settings"></i>
+        </button>
+        <button class="btn btn-light-primary" data-bs-toggle="tooltip" title="Document" data-placement="left">
+            <i data-feather="book"></i>
+        </button>
+        <button class="btn btn-light-success" data-bs-toggle="tooltip" title="Buy Now" data-placement="left">
+            <i data-feather="shopping-bag"></i>
+        </button>
+        <button class="btn btn-light-info" data-bs-toggle="tooltip" title="Support" data-placement="left">
+            <i data-feather="headphones"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+</script>
+<script src="{% static 'AdminArea/js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'AdminArea/js/pages/dashboard-sale.js' %}"></script>
+{% endblock faculty_content %}
+</body>
+
+
+<!-- Mirrored from dashboardkit.io/bootstrap/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Mar 2021 09:37:34 GMT -->
+</html>

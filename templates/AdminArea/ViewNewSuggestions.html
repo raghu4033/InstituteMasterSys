@@ -1,0 +1,169 @@
+{% extends "AdminArea/admin_header.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <title>Dashboard</title>
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
+    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
+    <meta name="author" content="DashboardKit"/>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+
+    
+
+</head>
+
+<body class="">
+    
+        <!-- [ Main Content ] start -->
+
+<div class="pc-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">AdminArea</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'AdminArea:AdminDashboard' %}">Home</a></li>
+                            <li class="breadcrumb-item">Suggestions</li>
+                            <li class="breadcrumb-item">New Suggestions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        
+        <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <nav class="navbar justify-content-between p-0 align-items-center">
+                            <h5>Latest Suggestions List</h5>
+                        </nav>
+                    </div>
+                </div>
+                {% for i in NewSuggestionsList %}
+                <div class="card ticket-card close-ticket">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-auto mb-3 mb-sm-0">
+                                <div class="d-sm-inline-block d-flex align-items-center">
+                                    <img class="media-object wid-60 img-radius" src="{{i.student.photo.url}}" alt="Generic placeholder image ">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="h5 font-weight-bold">{{i.student.faname}}<small class="badge bg-light-secondary ms-2">SID:&nbsp;{{i.student.sid}}</small></div>
+                                <div class="help-sm-hidden">
+                                    <ul class="list-unstyled mt-2 mb-0 text-muted">
+                                        <li class="d-sm-inline-block d-block mt-1">{{i.suggestion_date}}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <br>
+                                <div class="help-md-hidden">
+                                    <div class="bg-body mb-3 p-3">
+                                        <h6><img src="assets/images/user/avatar-5.jpg" alt="" class="wid-20 avatar me-2 rounded">Last Suggestion from <a href="#" class="link-secondary">Harshad:</a></h6>
+                                        <p class="mb-0"><b></b><br>
+                                        {{i.Student_Suggestion}}
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+  
+    <script src="{% static 'js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'js/pcoded.min.js' %}"></script>
+   
+<!-- Apex Chart -->
+<script src="{% static 'js/plugins/apexcharts.min.js' %}"></script>
+
+
+<script>
+    $(window).on('load', function() {
+        $('#tinymce-editor').trumbowyg({
+            svgPath: 'assets/css/plugins/icons.svg',
+            btns: [
+                ['viewHTML'],
+                ['undo', 'redo'],
+                ['formatting'],
+                ['strong', 'em', 'del'],
+                ['superscript', 'subscript'],
+                ['link'],
+                ['insertImage'],
+                ['unorderedList', 'orderedList'],
+                ['horizontalRule'],
+                ['removeformat'],
+                ['fullscreen']
+            ]
+        });
+    });
+    $(".ticket-card").click(function() {
+        $("#qviewModal").modal();
+        var px = new PerfectScrollbar('.scroll-div', {
+            wheelSpeed: .9,
+            swipeEasing: 0,
+            wheelPropagation: 1,
+            minScrollbarLength: 40,
+        });
+    });
+    $(".help-filter a").click(function() {
+        $('.help-filter a').removeClass('active');
+        $(this).addClass('active');
+    });
+</script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+</script>
+<script src="{% static 'js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'js/pages/dashboard-sale.js' %}"></script>
+{% endblock content %}
+</body>
+
+
+</html>

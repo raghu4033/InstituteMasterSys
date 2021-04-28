@@ -1,0 +1,254 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Faculty Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
+    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
+    <meta name="author" content="DashboardKit"/>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'Adminarea/images/favicon-icon.png' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'AdminArea/css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'AdminArea/css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+
+    
+
+</head>
+
+<body class="">
+	<!-- [ Pre-loader ] start -->
+	<div class="loader-bg">
+		<div class="loader-track">
+			<div class="loader-fill"></div>
+		</div>
+	</div>
+	<!-- [ Pre-loader ] End -->
+	<!-- [ Mobile header ] start -->
+	<div class="pc-mob-header pc-header">
+		<div class="pcm-logo">
+			<img src="{% static 'AdminArea/images/logo-white.png' %}" alt="" class="logo logo-lg">
+		</div>
+		<div class="pcm-toolbar">
+			<a href="" class="pc-head-link" id="mobile-collapse">
+				<div class="hamburger hamburger--arrowturn">
+					<div class="hamburger-box">
+						<div class="hamburger-inner"></div>
+					</div>
+				</div>
+				<!-- <i data-feather="menu"></i> -->
+			</a>
+			<a href="#!" class="pc-head-link" id="headerdrp-collapse">
+				<i data-feather="align-right"></i>
+			</a>
+			<a href="#!" class="pc-head-link" id="header-collapse">
+				<i data-feather="more-vertical"></i>
+			</a>
+		</div>
+	</div>
+	<!-- [ Mobile header ] End -->
+
+	<!-- [ navigation menu ] start -->
+	<nav class="pc-sidebar ">
+		<div class="navbar-wrapper">
+			<div class="m-header">
+				<a href="" class="b-brand p-4">
+					<!-- ========   logo hear   ============ -->
+					<img src="{% static 'AdminArea/images/logo-white.png' %}" alt="" class="logo logo-lg img-fluid wid-150">
+					<img src="{% static 'AdminArea/images/logo-white.png' %}" alt="" class="logo logo-sm">
+				</a>
+			</div>
+			<div class="navbar-content">
+				<ul class="pc-navbar">
+					<li class="pc-item pc-caption">
+						<label>Dashboard</label>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="{% url 'FacultyArea:FacultyDashborad' %}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Dashboard</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+					</li>
+					<li class="pc-item pc-caption">
+						<label>Faculty</label>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="{% url 'FacultyArea:FacultyProfile' %}" class="pc-link"><span class="pc-micon"><i class="material-icons-two-tone">account_circle</i></span><span class="pc-mtext">Profile</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link"><span class="pc-micon"><i class="material-icons-two-tone">domain_verification</i></span><span class="pc-mtext">Faculty Leave</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'FacultyArea:FacultyApplyLeave' %}">Apply Leave</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'FacultyArea:FacultyViewLeave' %}">View Leave</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link"><span class="pc-micon"><i class="material-icons-two-tone">payments</i></span><span class="pc-mtext">Salary</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'FacultyArea:FacultySalaryDetailes' %}">Salary detaile</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-caption">
+						<label>Student</label>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link"><span class="pc-micon"><i class="material-icons-two-tone">supervisor_account</i></span><span class="pc-mtext">Student Inquiry</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'FacultyArea:FacultyEnrollStudentInquiry' %}">Enroll Student Inquiry</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'FacultyArea:FacultytInquiryList' %}">Inquiry Lists</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link"><span class="pc-micon"><i class="material-icons-two-tone">flaky</i></span><span class="pc-mtext">Attendence</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="">Take attendence</a></li>
+							<li class="pc-item"><a class="pc-link" href="">Blank</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link"><span class="pc-micon"><i class="material-icons-two-tone">assignment</i></span><span class="pc-mtext">Submitions</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'FacultyArea:FacultyAddSubmitions' %}">Add Submitions</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'FacultyArea:FacultySubmitionsList' %}">Submitions List</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link"><span class="pc-micon"><i class="material-icons-two-tone">table_view</i></span><span class="pc-mtext">Class Shedual</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'FacultyArea:FacultyAddClassSchedule' %}">Add Class Schedule</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'FacultyArea:FacultyViewClassSchedule' %}">View Class Schedule</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link"><span class="pc-micon"><i class="material-icons-two-tone">auto_stories</i></span><span class="pc-mtext">Elaibrary</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'FacultyArea:FacultyAddBook' %}">Add Book</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'FacultyArea:FacultyBookList' %}">Book Lists</a></li>
+						</ul>
+					</li>
+
+					<li class="pc-item pc-caption">
+						<label>Logout</label>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="{% url 'FacultyArea:FacultyLogout' %}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">logout</i></span><span class="pc-mtext">Logout</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- [ navigation menu ] end -->
+	<!-- [ Header ] start -->
+	<header class="pc-header ">
+		<div class="header-wrapper">
+			<div class="ms-auto">
+				<ul class="list-unstyled">
+					<li class="dropdown pc-h-item">
+						
+						<div class="dropdown-menu dropdown-menu-end pc-h-dropdown drp-search">
+							<form class="px-3">
+								<div class="form-group mb-0 d-flex align-items-center">
+									<i data-feather="search"></i>
+									
+								</div>
+							</form>
+						</div>
+					</li>
+					
+					
+					<li class="dropdown pc-h-item">
+						<a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+							{% if request.session.imageurlfaculty %}
+							<img src="{{request.session.imageurlfaculty}}" alt="user-image" class="user-avtar">
+							{% endif %}
+							<span>
+								<span class="user-name">{{request.session.middle_name}}</span>
+								<span class="user-desc">Faculty</span>
+							</span>
+						</a>
+						<div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
+							<div class=" dropdown-header">
+								<h5 class="text-overflow m-0"><span class="badge bg-light-success">Online</span></h5>
+							</div>
+							<a href="{% url 'FacultyArea:FacultyProfile' %}" class="dropdown-item">
+								<i class="material-icons-two-tone">account_circle</i>
+								<span>Profile</span>
+							</a>
+							<a href="{% url 'FacultyArea:FacultyChangePassword' %}" class="dropdown-item">
+								<i class="material-icons-two-tone">vpn_key</i>
+								<span>Change Password</span>
+							</a>
+							<a href="{% url 'FacultyArea:FacultyLogout' %}" class="dropdown-item">
+								<i class="material-icons-two-tone">logout</i>
+								<span>Logout</span>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+	</header>
+
+	
+<!-- [ Main Content ] start -->
+
+    <!-- Required Js -->
+    <script src="{% static 'AdminArea/js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/pcoded.min.js' %}"></script>
+
+<!-- Apex Chart -->
+<script src="{% static 'AdminArea/js/plugins/apexcharts.min.js' %}"></script>
+<div class="pct-customizer">
+    <div class="pct-c-btn">
+        <button class="btn btn-light-danger" id="pct-toggler">
+            <i data-feather="settings"></i>
+        </button>
+        <button class="btn btn-light-primary" data-bs-toggle="tooltip" title="Document" data-placement="left">
+            <i data-feather="book"></i>
+        </button>
+        <button class="btn btn-light-success" data-bs-toggle="tooltip" title="Buy Now" data-placement="left">
+            <i data-feather="shopping-bag"></i>
+        </button>
+        <button class="btn btn-light-info" data-bs-toggle="tooltip" title="Support" data-placement="left">
+            <i data-feather="headphones"></i>
+        </button>
+    </div>
+    
+</div>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+</script>
+<script src="{% static 'AdminArea/js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'AdminArea/js/pages/dashboard-sale.js' %}"></script>
+
+
+
+{% block faculty_content %}
+
+{% endblock faculty_content %}
+
+</body>
+
+</html>

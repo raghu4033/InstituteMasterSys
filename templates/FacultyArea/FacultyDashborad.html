@@ -1,0 +1,395 @@
+{% extends "FacultyArea/FacultyHeader.html" %}
+{% block faculty_content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Faculty Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
+    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
+    <meta name="author" content="DashboardKit"/>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'AdminArea/images/favicon.svg' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'AdminArea/css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'AdminArea/css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+    <style type="text/css">
+        #clock {
+            font-size: 40px;
+            width: 500px;
+            padding: : 50px;
+            text-align: center;
+            border: 4px solid white;
+            border-radius: 10px;
+        }
+
+         @media only screen and (max-device-width: 480px) {
+            #clock {
+            font-size: 40px;
+            width: 270px;
+            padding: : 40px;
+            text-align: center;
+            border: 4px solid white;
+            border-radius: 10px;
+        }
+    </style>
+    
+
+</head>
+
+<body class="">
+	
+        <!-- [ Main Content ] start -->
+
+
+<div class="pc-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">FacultyArea</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'FacultyArea:FacultyDashborad' %}">Home</a></li>
+                            <li class="breadcrumb-item">Dashboard</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- customar project  start -->
+            <div class="col-xl-3 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row align-items-center m-l-0">
+                            <div class="col-auto">
+                                <i class="fas fa-user-graduate f-36 text-info"></i>
+                            </div>
+                            <div class="col-auto">
+                               
+                                <h6 class="text-muted m-b-10">Student</h6>
+                                <h2 class="m-b-0">{{total_student}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row align-items-center m-l-0">
+                            <div class="col-auto">
+                                <i class="fas fa-users f-36 text-danger"></i>
+                            </div>
+                            <div class="col-auto">
+                                <h6 class="text-muted m-b-10">Total Batch</h6>
+                                <h2 class="m-b-0">{{total_batch}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row align-items-center m-l-0">
+                            <div class="col-auto">
+                                <i class="fas fa-user-tie f-36 text-success"></i>
+                            </div>
+                            <div class="col-auto">
+                                <h6 class="text-muted m-b-10">Total Inquiery</h6>
+                                <h2 class="m-b-0">{{total_Inqueiry}} </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row align-items-center m-l-0">
+                            <div class="col-auto">
+                                <i class="fas fa-book-open f-36 text-primary"></i>
+                            </div>
+                            <div class="col-auto">
+                                <h6 class="text-muted m-b-10">Submitions    </h6>
+                                <h2 class="m-b-0">{{AllEvents}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- customar project  end -->
+        </div>
+
+        <div class="row">
+            <div class="col-xl-6 col-md-12">
+                <div class="col-xl-12 col-md-12">
+                <div class="card task-card">
+                    <div class="card-header">
+                        <h5>Notice</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled task-list">
+                             {% for i in AllNotice %}
+                            <li>
+                                <i class="feather icon-check f-w-600 task-icon bg-success"></i>
+                                <p class="m-b-5">{{i.notice_date}}</p>
+                                <h6 class="text-muted"><span class="text-primary">{{i.notice_sub}}</span>.<br>{{i.notice_desc}}</h6> 
+                            </li>
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-xl-6 col-md-12">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card prod-p-card bg-primary background-pattern-white">
+                            <div class="card-body">
+                                <div class="row align-items-center m-b-0">
+                                    <div class="col"> 
+                                         <div id="clock" class="text-white">8:10:45</div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Leave start -->
+                <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>My Leave List </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="report-table" class="table table-bordered table-striped mb-0">
+                                <thead>
+                                    
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>From Date</th>
+                                        <th>To Date</th>
+                                        <th>Days</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in FacultyAllLeavelist %}
+                                    <tr>
+                                        <td>
+                                            {% if i.status == 'Approw' %}
+                                            <a href="#!" class="btn btn-success btn-sm dissabled">Approwd</a>
+                                            {% elif i.status == 'Panding_Request' %}
+                                            <a href="#!" class="btn btn-info btn-sm dissabled">Panding</a>
+                                            {% else %}
+                                            <a href="#!" class="btn btn-danger btn-sm dissabled">Rejected</a>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{i.from_date}}</td>
+                                        <td>{{i.to_date}}</td>
+                                        <td>{{i.Leave_day}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            <!-- Leave end -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Student List </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row align-items-center m-l-0">
+                            <div class="col-sm-6">
+                            </div>
+                            <div class="col-sm-6 text-end">
+                                <a href="{% url 'AdminArea:EnrollStudentInquiry' %}" class="btn btn-success btn-sm mb-3 btn-round"><i class="feather icon-plus"></i> Add Student</a>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="report-table" class="table table-bordered table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th>Name</th>
+                                        <th>Mobile</th>
+                                        <th>Gender</th>
+                                        <th>BOD</th>
+                                        <th>Course</th>
+                                        <th>Email</th>
+                                        <th>Address</th>
+                                        <th>Educations</th>
+                                        <th>Reference</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in StudentInquiryList %}
+                                    <tr>
+                                        <td>{{i.inquiry_num}}</td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input type="checkbox" class="form-check-input" id="customswitch1">
+                                                <label class="form-check-label" for="customswitch1">{{i.status}}</label>
+                                            </div>
+                                        </td>
+                                        <td>{{i.inquiry_date}}</td>
+                                        <td>{{i.full_name}}</td>
+                                        <td>{{i.mobile}}</td>
+                                        <td>{{i.gender}}</td>
+                                        <td>{{i.dob}}</td>
+                                        <td>{{i.course}}</td>
+                                        <td>{{i.email}}</td>
+                                        <td>{{i.address}}</td>
+                                        <td>{{i.edu_que}}</td>
+                                        <td>{{i.reference}}</td>
+                                       
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Account summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="summary-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- subscribe end -->
+            <!-- Tasks start -->
+            
+            <!-- <div class="col-xl-12 col-md-12">
+                <div class="card overflow-hidden">
+                    <div class="card-body bg-light">
+                       <h5>Latast News</h5>
+                    </div>
+                    <div class="card-footer">
+                        
+                           
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+           
+           
+           
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+
+    <!-- Required Js -->
+    <script src="{% static 'AdminArea/js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/pcoded.min.js' %}"></script>
+   
+<!-- Apex Chart -->
+<script src="{% static 'AdminArea/js/plugins/apexcharts.min.js' %}"></script>
+<div class="pct-customizer">
+    <div class="pct-c-btn">
+        <button class="btn btn-light-danger" id="pct-toggler">
+            <i data-feather="settings"></i>
+        </button>
+        <button class="btn btn-light-primary" data-bs-toggle="tooltip" title="Document" data-placement="left">
+            <i data-feather="book"></i>
+        </button>
+        <button class="btn btn-light-success" data-bs-toggle="tooltip" title="Buy Now" data-placement="left">
+            <i data-feather="shopping-bag"></i>
+        </button>
+        <button class="btn btn-light-info" data-bs-toggle="tooltip" title="Support" data-placement="left">
+            <i data-feather="headphones"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script>
+        setInterval(showTime, 1000);
+        function showTime() {
+            let time = new Date();
+            let hour = time.getHours();
+            let min = time.getMinutes();
+            let sec = time.getSeconds();
+            am_pm = "AM";
+  
+            if (hour > 12) {
+                hour -= 12;
+                am_pm = "PM";
+            }
+            if (hour == 0) {
+                hr = 12;
+                am_pm = "AM";
+            }
+  
+            hour = hour < 10 ? "0" + hour : hour;
+            min = min < 10 ? "0" + min : min;
+            sec = sec < 10 ? "0" + sec : sec;
+  
+            let currentTime = hour + ":" 
+                + min + ":" + sec + am_pm;
+  
+            document.getElementById("clock")
+                .innerHTML = currentTime;
+        }
+  
+        showTime();
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+</script>
+<script src="{% static 'AdminArea/js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'AdminArea/js/pages/dashboard-sale.js' %}"></script>
+{% endblock faculty_content %}
+</body>
+
+
+<!-- Mirrored from dashboardkit.io/bootstrap/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Mar 2021 09:37:34 GMT -->
+</html>

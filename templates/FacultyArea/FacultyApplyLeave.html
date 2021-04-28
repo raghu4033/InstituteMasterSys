@@ -1,0 +1,264 @@
+{% extends "FacultyArea/FacultyHeader.html" %}
+{% block faculty_content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
+    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
+    <meta name="author" content="DashboardKit"/>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'AdminArea/images/favicon.svg' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'AdminArea/css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'AdminArea/css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+
+    
+
+</head>
+
+<body class="">
+	
+        <!-- [ Main Content ] start -->
+
+<div class="pc-container">
+    <div class="pcoded-content">
+
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">FacultyArea</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'FacultyArea:FacultyDashborad' %}">Home</a></li>
+                            <li class="breadcrumb-item">Leave</li>
+                            <li class="breadcrumb-item">Apply Leave</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% if PandingLeave %}
+                {% for i in PandingLeave %}
+            <div class="col-12 mt-5">
+                <div class="card text-white bg-dark">
+                    <div class="card-body border-bottom py-3">
+                        <div class="row align-items-center justify-contact-between">
+                            <div class="col">
+                                <h5 class="m-0 text-white"><i class="material-icons-two-tone f-20 text-primary"></i>Student ID : {{i.student_id}}</h5>
+                            </div>
+                            <div class="col text-end">
+                                <button type="button" class="btn btn-outline-success"><i class="me-2" data-feather="check-circle"></i>Send Succesfully</button>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#!" class="card-body border-bottom py-3">
+                        <div class="row justify-content-sm-between align-items-center">
+                            <div class="col-sm-5 mb-3 mb-sm-0 align-middle">
+                                <img src="{{Faculty.photo.url}}" alt="contact-img" title="contact-img" class="rounded me-3" height="60" />
+                                <div class="m-0 d-inline-block align-middle font-16">
+                                    <h6 class="d-inline-block m-0 text-truncate text-white">{{i.full_Name}}</h6>
+                                    <br />
+                                    <p class="m-0 f-12 text-muted"><span class="f-w-500 text-white">{{i.Leave_catagory}}</span> </p>
+                                    <p class="m-0 f-12 text-muted"><span class="f-w-500 text-white">{{i.Leave_day}}&nbsp;Days </span> </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 class="mb-3 mb-sm-0 text-white"><i class="material-icons-two-tone f-20 text-primary text-white"></i>From Date :<br>{{i.from_date}}</h5>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-4">
+                                        <h5 class="mb-3 mb-sm-0 text-white"><i class="material-icons-two-tone f-20 text-primary text-white"></i>To Date: <br>{{i.to_date}}</h5>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class=" d-inline-block text-white">
+                                            <small class="d text-white">{{i.Leave_reason}}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+                {% endfor %}
+            {% endif %}
+        </div>    
+
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Student Information</h5>
+                    </div>
+                   
+                    <div class="card-body">
+                        <div class="row">
+                            {% if SuccessMsg %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>{{SuccessMsg}}.</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                            {% if FailedMsg %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>{{FailedMsg}}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                        {% endif %}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                            <form class="login100-form validate-form" enctype="multipart/form-data" action="{% url 'FacultyArea:FacultyApplyLeave' %}" method="POST">
+                                    {% csrf_token %}
+                            </div>
+                            <center>
+                                <div class=" mt-0 mb-5 mr-5">
+                                <div class="position-relative">
+                                    <img class="img-radius img-fluid wid-150" src="{{Faculty.photo.url}}" alt="User image">
+                                </div>
+                            </center>
+                        </div>
+                            <div class="col-md-12">
+                                 <div class="form-group">
+                                    <label class="form-label" for="exampleInputEmail1">Student Id</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="faculty_id" value="{{Faculty.faculty_id}}" readonly="readonly">
+                                </div>
+                            </div>
+                             <div class="col-md-12">
+                                 <div class="form-group">
+                                    <label class="form-label" for="exampleInputEmail1">Full Name</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="faculty_name" value="{{Faculty.first_name}}&nbsp;{{Faculty.middel_name}}&nbsp;{{Faculty.last_name}}" readonly="readonly" >
+                                </div>
+                            </div>
+                             <div class="col-md-12">
+                                 <div class="form-group">
+                                    <label class="form-label" for="exampleInputEmail1">Department</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="faculty_department" value="{{Faculty.department_catagory}}" readonly="readonly">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Apply Leave</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                            </div>
+                            
+                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="exampleInputPassword1">From Date</label>
+                                    <input type="date" required class="form-control" id="exampleInputdate" placeholder="from_date" name="from_date">
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="form-label" for="exampleFormControlSelect1">To Date</label>
+                                    <input type="date" required class="form-control" id="exampleInputdate" placeholder="date" name="to_date">
+                            </div>
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                        <label class="form-label" for="exampleFormControlSelect1">Leave applied under the category</label>
+                                        <select class="form-control" required id="exampleFormControlSelect1"  name="leave_type">
+                                            <option value="">Select Your Leave Type</option>
+                                            <option value="Sick_Leave">Sick Leave ( 1 to 2 days )</option>
+                                            <option value="Extended_Sick">Extended Sick Leave</option>
+                                            <option value="Emergency_Leave">Emergency Leave</option>
+                                            <option value="Long_Leave">Long Leave</option>
+                                            <option value="Others">Others</option>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Leave Reason</label>
+                                    <input type="text" required class="form-control" placeholder="Enter Your Leave Reason"  name="Leave_Reason">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Leave Day</label>
+                                    <input type="text" required class="form-control" placeholder="Enter Your Leave Day" name="Leave_Day">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                   <button type="submit" class="btn btn-success"><i class="me-2" data-feather="check-circle"></i>Apply Leave</button>
+                                </div>
+                            </div> 
+
+                        </div>
+                    </form>
+ 
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+
+    <!-- Required Js -->
+    <script src="{% static 'AdminArea/js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/pcoded.min.js' %}"></script>
+   
+<!-- Apex Chart -->
+<script src="{% static 'AdminArea/js/plugins/apexcharts.min.js' %}"></script>
+<div class="pct-customizer">
+    <div class="pct-c-btn">
+        <button class="btn btn-light-danger" id="pct-toggler">
+            <i data-feather="settings"></i>
+        </button>
+        <button class="btn btn-light-primary" data-bs-toggle="tooltip" title="Document" data-placement="left">
+            <i data-feather="book"></i>
+        </button>
+        <button class="btn btn-light-success" data-bs-toggle="tooltip" title="Buy Now" data-placement="left">
+            <i data-feather="shopping-bag"></i>
+        </button>
+        <button class="btn btn-light-info" data-bs-toggle="tooltip" title="Support" data-placement="left">
+            <i data-feather="headphones"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+</script>
+<script src="{% static 'AdminArea/js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'AdminArea/js/pages/dashboard-sale.js' %}"></script>
+{% endblock faculty_content %}
+</body>
+
+
+<!-- Mirrored from dashboardkit.io/bootstrap/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Mar 2021 09:37:34 GMT -->
+</html>

@@ -1,0 +1,20 @@
+from django.contrib import admin
+from .models import Notice_Registration,Student_Certificate,Student_Schedule,Student_Attendence,Faculty_Salary,Faculty_Leave,Faculty_Registration,ELibrary,Submitions_Registration,Student_Suggestion,Student_Registration,Student_Inquiry,Admin_Registration,institute_Detaile,Event_Registration,StudentFees,Student_Leave
+# Register your models here.
+admin.site.register(Student_Registration)
+admin.site.register(Student_Inquiry)
+admin.site.register(Admin_Registration)
+admin.site.register(institute_Detaile)
+admin.site.register(Event_Registration)
+admin.site.register(StudentFees)
+admin.site.register(Notice_Registration)
+admin.site.register(Submitions_Registration)
+admin.site.register(Student_Leave)
+admin.site.register(Student_Suggestion)
+admin.site.register(ELibrary)
+admin.site.register(Faculty_Registration)
+admin.site.register(Faculty_Leave)
+admin.site.register(Student_Schedule)
+admin.site.register(Faculty_Salary)
+admin.site.register(Student_Attendence)
+admin.site.register(Student_Certificate)

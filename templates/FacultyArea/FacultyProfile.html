@@ -1,0 +1,311 @@
+{% extends "FacultyArea/FacultyHeader.html" %}
+{% block faculty_content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
+    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
+    <meta name="author" content="DashboardKit"/>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'AdminArea/images/favicon.svg' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'AdminArea/css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'AdminArea/css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+
+    
+
+</head>
+
+<body class="">
+	
+        <!-- [ Main Content ] start -->
+
+<div class="pc-container">
+    <div class="pcoded-content">
+        
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">FacultyArea</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'FacultyArea:FacultyDashborad' %}">Home</a></li>
+                            <li class="breadcrumb-item">Profile</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- [ sample-page ] start -->
+            <div class="col-lg-4">
+                <div class="card user-card user-card-1">
+                    <div class="card-body pb-0">
+                        
+                        <div class="media user-about-block align-items-center mt-0 mb-3">
+                            <div class="position-relative d-inline-block">
+                                <img class="img-radius img-fluid wid-80" src="{{FacultyUser.photo.url}}" alt="User image">
+                                <div class="certificated-badge">
+                                    <i class="fas fa-certificate text-primary bg-icon"></i>
+                                    <i class="fas fa-check front-icon text-white"></i>
+                                </div>
+                            </div>
+                            <div class="media-body ms-3">
+                                <h6 class="mb-1">{{FacultyUser.first_name}}&nbsp;{{FacultyUser.middel_name}}&nbsp;{{FacultyUser.last_name}}</h6>
+                                <p class="mb-0 text-muted">{{FacultyUser.faculty_id}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <span class="f-w-500"><i class="feather icon-mail m-r-10"></i>Email</span>
+                            <a href="mailto:demo@sample" class="float-end text-body">{{FacultyUser.email}}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="f-w-500"><i class="feather icon-phone-call m-r-10"></i>Phone</span>
+                            <a href="#" class="float-end text-body">{{FacultyUser.mobile}}</a>
+                        </li>
+                        <li class="list-group-item border-bottom-0">
+                            <span class="f-w-500"><i class="feather icon-map-pin m-r-10"></i>Location</span>
+                            <span class="float-end">{{FacultyUser.city}}</span>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        
+                    </div>
+                    
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5></h5>
+                        <div class="card-header-right">
+                           
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="nav flex-column nav-pills list-group list-group-flush list-pills" id="user-set-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link list-group-item list-group-item-action active"  href="" role="tab" aria-controls="user-set-profile" aria-selected="true">
+                            <span class="f-w-500"><i class="feather icon-user m-r-10 h5 "></i>Profile Informations</span>
+                            <span class="float-end"><i class="feather icon-chevron-right"></i></span>
+                        </a>
+                        <a class="nav-link list-group-item list-group-item-action"  href="{% url 'FacultyArea:FacultyChangePassword' %}" role="tab" aria-controls="user-set-passwort" aria-selected="false">
+                            <span class="f-w-500"><i class="feather icon-shield m-r-10 h5 "></i>Change Password</span>
+                            <span class="float-end"><i class="feather icon-chevron-right"></i></span>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="tab-content" id="user-set-tabContent">
+                    <div class="tab-pane fade show active" id="user-set-profile" role="tabpanel" aria-labelledby="user-set-profile-tab">
+    
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i data-feather="user" class="icon-svg-primary wid-20"></i><span class="p-l-5">About me</span></h5>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="mb-3">Personal Details</h5>
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <td class="">Full Name</td>
+                                            <td class="">:</td>
+                                            <td class="">{{FacultyUser.first_name}}&nbsp;{{FacultyUser.middel_name}}&nbsp;{{FacultyUser.last_name}}</td>
+                                        </tr>
+                                         <tr>
+                                            <td class="">Date of Birth</td>
+                                            <td class="">:</td>
+                                            <td class="">{{FacultyUser.birth_date}}</td>
+                                        </tr>
+                                         <tr>
+                                            <td class="">Gender</td>
+                                            <td class="">:</td>
+                                            <td class="">{{FacultyUser.gender}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">Address</td>
+                                            <td class="">:</td>
+                                            <td class="">{{FacultyUser.present_address}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">City</td>
+                                            <td class="">:</td>
+                                            <td class="">{{FacultyUser.city}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">Zip Code</td>
+                                            <td class="">:</td>
+                                            <td class="">{{FacultyUser.pin}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">Phone</td>
+                                            <td class="">:</td>
+                                            <td class="">{{FacultyUser.mobile}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">Email</td>
+                                            <td class="">:</td>
+                                            <td class="">{{FacultyUser.email}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">Department</td>
+                                            <td class="">:</td>
+                                            <td class="">{{FacultyUser.department_catagory}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">Joining Date</td>
+                                            <td class="">:</td>
+                                            <td class="">{{FacultyUser.joing_date}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">Qulification</td>
+                                            <td class="">:</td>
+                                            <td class="">{{FacultyUser.qulification}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="">Bank Name</td>
+                                            <td class="">:</td>
+                                            <td class="">{{FacultyUser.bank_name}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- Education -->
+                                
+                            </div>
+                        </div>
+                    </div>
+                   
+                    
+                    <div class="tab-pane fade" id="user-set-passwort" role="tabpanel" aria-labelledby="user-set-passwort-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i data-feather="lock" class="icon-svg-primary wid-20"></i><span class="p-l-5">Change Password</span></h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Current Password <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="Enter Your currunt password">
+                                            <small class="form-text text-muted">Forgot password? <a href="#!">Click here</a></small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-label">New Password <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="Enter New password">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="Enter your password again">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-end">
+                                <button class="btn btn-danger">Change Password</button>
+                                <button class="btn btn-outline-dark ms-2">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="user-set-email" role="tabpanel" aria-labelledby="user-set-email-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i data-feather="at-sign" class="icon-svg-primary wid-20"></i><span class="p-l-5">Email Settings</span></h5>
+                                <div class="card-header-right">
+                                    <div class="btn-group card-option">
+                                        <button type="button" class="btn dropdown-toggle btn-icon" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="feather icon-more-horizontal"></i>
+                                        </button>
+                                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-end">
+                                            <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                                            <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                                            <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                                            <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                            </ul>
+                            <div class="card-footer text-end">
+                                <button class="btn btn-warning">Update Change</button>
+                                <button class="btn btn-outline-dark ms-2">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ sample-page ] end -->
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+
+    <!-- Required Js -->
+    <script src="{% static 'AdminArea/js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/pcoded.min.js' %}"></script>
+   
+<!-- Apex Chart -->
+<script src="{% static 'AdminArea/js/plugins/apexcharts.min.js' %}"></script>
+<div class="pct-customizer">
+    <div class="pct-c-btn">
+        <button class="btn btn-light-danger" id="pct-toggler">
+            <i data-feather="settings"></i>
+        </button>
+        <button class="btn btn-light-primary" data-bs-toggle="tooltip" title="Document" data-placement="left">
+            <i data-feather="book"></i>
+        </button>
+        <button class="btn btn-light-success" data-bs-toggle="tooltip" title="Buy Now" data-placement="left">
+            <i data-feather="shopping-bag"></i>
+        </button>
+        <button class="btn btn-light-info" data-bs-toggle="tooltip" title="Support" data-placement="left">
+            <i data-feather="headphones"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+</script>
+<script src="{% static 'AdminArea/js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'AdminArea/js/pages/dashboard-sale.js' %}"></script>
+{% endblock faculty_content %}
+</body>
+
+
+<!-- Mirrored from dashboardkit.io/bootstrap/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Mar 2021 09:37:34 GMT -->
+</html>

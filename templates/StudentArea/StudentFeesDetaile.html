@@ -1,0 +1,226 @@
+{% extends "StudentArea/StudentHeader.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Dashboard</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
+    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
+    <meta name="author" content="DashboardKit"/>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'StudentArea//fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'StudentArea/fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'StudentArea/fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'StudentArea/css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'StudentArea/css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+
+    
+
+</head>
+
+<body class="">
+	
+<!-- [ Main Content ] start -->
+<div class="pc-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">StudentArea</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'StudentArea:StudentDashboard' %}">Home</a></li>
+                            <li class="breadcrumb-item">Fees</li>
+                            <li class="breadcrumb-item">Fees Detaile</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ Main Content ] start -->
+
+        <div class="col-12 mt-5">
+                <div class="card text-white bg-white">
+                    <div class="card-body border-bottom py-3">
+                        <div class="row align-items-center justify-contact-between">
+                            <div class="col">
+                                <h5 class="m-0 text-white"><i class="material-icons-two-tone f-20 text-primary"></i>Fees Summary</h5>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row justify-content-sm-between align-items-center">
+                            <div class="col-md-4 col-sm-4 mb-3 mb-sm-0 align-middle">
+                                <div class="p-4 d-inline-block align-middle font-16">
+                                    <h6 class="d-inline-block m-0 text-truncate text-primary">Total Fees</h6>
+                                    <br/>
+                                     <button type="button" class="btn btn-outline-primary disabled"><i class="me-2" data-feather="check-circle"></i>{{student.final_fees}}/-</button>
+                                </div>
+                            </div>
+                             <div class="col-md-4 col-sm-4 mb-3 mb-sm-0 align-middle">
+                                <div class="p-4 d-inline-block align-middle font-16">
+                                    <h6 class="d-inline-block m-0 text-truncate text-success">Paid Fees</h6>
+                                    <br/>
+                                     <button type="button" class="btn btn-outline-success disabled"><i class="me-2" data-feather="check-circle"></i>{{Total_Fees_Amount}}/-</button>
+                                </div>
+                            </div>
+                             <div class="col-md-4 col-sm-4 mb-3 mb-sm-0 align-middle">
+                                <div class="p-4 d-inline-block align-middle font-16">
+                                    <h6 class="d-inline-block m-0 text-truncate text-danger">Remaining Fees</h6>
+                                    <br/>
+                                     <button type="button" class="btn btn-outline-danger disabled"><i class="me-2" data-feather="check-circle"></i>{{Rimainig_Fees}}/-</button>
+                                </div>
+                            </div>
+
+                        </div>
+                </div>
+            </div>
+
+        <div class="row">
+            <!-- subscribe start -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Paid Installment Detailes</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="report-table" class="table table-bordered table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Installment</th>
+                                        <th>Amount</th>
+                                        <th>Payment Date</th>
+                                        <th>Payment Type</th>
+                                        <th>Invoice Number</th>
+                                        <th>Download</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% for i in FeesDetaile %}
+                                    <tr>
+                                        <td>{{i.installment_no}}</td>
+                                        <td>{{i.amount}}</td>
+                                        <td>{{i.payment_date}}</td>
+                                        <td>{{i.payment_type}}</td>
+                                        <td>{{i.recipt_no}}</td>
+                                        <td>
+
+                                            <a href="{% url 'StudentArea:StudentPrintInvoice' pk=i.pk %}" class="btn btn-success btn-sm">
+                                                Download
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- subscribe end -->
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+
+    <!-- Required Js -->
+    <script src="{% static 'StudentArea/js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'StudentArea/js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'StudentArea/js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'StudentArea/js/pcoded.min.js' %}"></script>
+<!-- Apex Chart -->
+<script src="{% static 'StudentAreajs/plugins/apexcharts.min.js' %}"></script>
+
+<script>
+    $('#pct-toggler').on('click', function() {
+        $('.pct-customizer').toggleClass('active');
+    });
+    $('#cust-sidebrand').change(function() {
+        if ($(this).is(":checked")) {
+            $('.theme-color.brand-color').removeClass('d-none');
+            $('.m-header').addClass('bg-dark');
+        } else {
+            $('.m-header').removeClassPrefix('bg-');
+            $('.m-header > .b-brand > .logo-lg').attr('src', 'assets/images/logo-dark.svg');
+            $('.theme-color.brand-color').addClass('d-none');
+        }
+    });
+    $('.brand-color > a').on('click', function() {
+        var temp = $(this).attr('data-value');
+        if (temp == "bg-default") {
+            $('.m-header').removeClassPrefix('bg-');
+        } else {
+            $('.m-header').removeClassPrefix('bg-');
+            $('.m-header > .b-brand > .logo-lg').attr('src', 'assets/images/logo.svg');
+            $('.m-header').addClass(temp);
+        }
+    });
+    $('.header-color > a').on('click', function() {
+        var temp = $(this).attr('data-value');
+        if (temp == "bg-default") {
+            $('.pc-header').removeClassPrefix('bg-');
+        } else {
+            $('.pc-header').removeClassPrefix('bg-');
+            $('.pc-header').addClass(temp);
+        }
+    });
+    $('#cust-sidebar').change(function() {
+        if ($(this).is(":checked")) {
+            $('.pc-sidebar').addClass('light-sidebar');
+            $('.pc-horizontal .topbar').addClass('light-sidebar');
+        } else {
+            $('.pc-sidebar').removeClass('light-sidebar');
+            $('.pc-horizontal .topbar').removeClass('light-sidebar');
+        }
+    });
+    $('#cust-darklayout').change(function() {
+        if ($(this).is(":checked")) {
+            $("#main-style-link").attr("href", "assets/css/style-dark.css");
+        } else {
+            $("#main-style-link").attr("href", "assets/css/style.css");
+        }
+    });
+    $.fn.removeClassPrefix = function(prefix) {
+        this.each(function(i, it) {
+            var classes = it.className.split(" ").map(function(item) {
+                return item.indexOf(prefix) === 0 ? "" : item;
+            });
+            it.className = classes.join(" ");
+        });
+        return this;
+    };
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+</script>
+<script src="{% static 'StudentArea/js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'StudentArea/js/pages/dashboard-sale.js' %}"></script>
+{% endblock content %}
+</body>
+
+</html>

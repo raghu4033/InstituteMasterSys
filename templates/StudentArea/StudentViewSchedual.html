@@ -1,0 +1,237 @@
+{% extends "StudentArea/StudentHeader.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Dashboard</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
+    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
+    <meta name="author" content="DashboardKit"/>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'StudentArea//fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'StudentArea/fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'StudentArea/fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'StudentArea/css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'StudentArea/css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+
+    
+
+</head>
+
+<body class="">
+	
+<!-- [ Main Content ] start -->
+<div class="pc-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">StudentArea</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'StudentArea:StudentDashboard' %}">Home</a></li>
+                            <li class="breadcrumb-item">Schedual</li>
+                            <li class="breadcrumb-item">Class Schedual</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- subscribe start -->
+            <div class="col-xl-12 col-md-12">
+                <div class="card latest-update-card">
+                    <div class="card-header">
+                        <h5>Class Shedule</h5>
+                        <div class="card-header-right">
+                            
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="latest-update-box">
+                            <div class="row p-b-30">
+                                {% for i in YourClass %}
+                                <div class="col-auto text-end update-meta">
+                                    <p class="text-muted m-b-0 d-inline-flex">_________</p>
+                                    <i class="feather icon-check f-w-600 bg-success update-icon"></i>
+                                </div>
+                                <div class="col">
+                                    <a href="#!">
+                                        <h6>{{i.to_date}}</h6>
+                                        <p class="text-muted m-b-0"><span class="text-primary"> <a href="#!" class="text-primary">To Date</a> </span>.</p>
+                                    </a>
+                                        <div class="card-body">
+                                            <ul class="list-unstyled task-list">
+                                                
+                                                <li>
+                                                    <i class="task-icon bg-danger"></i>
+                                                    <p class="m-b-5">{{i.to_time}}</p>
+                                                    <h6 class=" text-primary">{{i.subject}}</h6>
+                                                </li>
+                                                <li>
+                                                    <i class="task-icon bg-warning"></i>
+                                                    <p class="m-b-5">{{i.from_time}}</p>
+                                                    <h6 class=" text-primary">{{i.subject}}</h6>
+                                                </li>   
+                                            </ul>
+                                        </div>      
+                                </div>
+                            </div>
+                            <div class="row p-b-30">
+                                <div class="col-auto text-end update-meta">
+                                    <p class="text-muted m-b-0 d-inline-flex">_________</p>
+                                    <i class="feather icon-check f-w-600 bg-success update-icon"></i>
+                                </div>
+                                <div class="col">
+                                    <a href="#!">
+                                        <h6>{{i.from_date}}</h6>
+                                    </a>
+                                    <p class="text-muted m-b-0"><span class="text-primary"> <a href="#!" class="text-primary">From Date</a> </span>.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="row p-b-0">
+                                <div class="col-auto text-end update-meta">
+                                    <p class="text-muted m-b-0 d-inline-flex">_________</p>
+                                   <i class="feather icon-check f-w-600 bg-success update-icon"></i>
+                                </div>
+                                <div class="col">
+                                    <a href="#!">
+                                        <h6>Class Informations</h6>
+                                    </a>
+                                    
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <tr>
+                                                <td class="b-none">
+                                                    <a href="#!" class="align-middle">
+                                                        {% if i.faculty_user %}
+                                                        <img src="{{i.faculty_user.photo.url}}" alt="user image" class="img-radius wid-40 align-top m-r-15">
+                                                        {% endif %}
+                                                        {% if i.admin_user %}
+                                                        <img src="{{i.admin_user.photo.ulr}}" alt="user image" class="img-radius wid-40 align-top m-r-15">
+                                                        {% endif %}
+                                                        <div class="d-inline-block">
+                                                            <h6>{{i.organizer}}</h6>
+                                                            <p class="text-muted mb-0">{{i.classtype}}</p>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            
+                                        </table>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- subscribe end -->
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+ Section Ends -->
+    <!-- Required Js -->
+    <script src="{% static 'StudentArea/js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'StudentArea/js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'StudentArea/js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'StudentArea/js/pcoded.min.js' %}"></script>
+<!-- Apex Chart -->
+<script src="{% static 'StudentAreajs/plugins/apexcharts.min.js' %}"></script>
+
+<script>
+    $('#pct-toggler').on('click', function() {
+        $('.pct-customizer').toggleClass('active');
+    });
+    $('#cust-sidebrand').change(function() {
+        if ($(this).is(":checked")) {
+            $('.theme-color.brand-color').removeClass('d-none');
+            $('.m-header').addClass('bg-dark');
+        } else {
+            $('.m-header').removeClassPrefix('bg-');
+            $('.m-header > .b-brand > .logo-lg').attr('src', 'assets/images/logo-dark.svg');
+            $('.theme-color.brand-color').addClass('d-none');
+        }
+    });
+    $('.brand-color > a').on('click', function() {
+        var temp = $(this).attr('data-value');
+        if (temp == "bg-default") {
+            $('.m-header').removeClassPrefix('bg-');
+        } else {
+            $('.m-header').removeClassPrefix('bg-');
+            $('.m-header > .b-brand > .logo-lg').attr('src', 'assets/images/logo.svg');
+            $('.m-header').addClass(temp);
+        }
+    });
+    $('.header-color > a').on('click', function() {
+        var temp = $(this).attr('data-value');
+        if (temp == "bg-default") {
+            $('.pc-header').removeClassPrefix('bg-');
+        } else {
+            $('.pc-header').removeClassPrefix('bg-');
+            $('.pc-header').addClass(temp);
+        }
+    });
+    $('#cust-sidebar').change(function() {
+        if ($(this).is(":checked")) {
+            $('.pc-sidebar').addClass('light-sidebar');
+            $('.pc-horizontal .topbar').addClass('light-sidebar');
+        } else {
+            $('.pc-sidebar').removeClass('light-sidebar');
+            $('.pc-horizontal .topbar').removeClass('light-sidebar');
+        }
+    });
+    $('#cust-darklayout').change(function() {
+        if ($(this).is(":checked")) {
+            $("#main-style-link").attr("href", "assets/css/style-dark.css");
+        } else {
+            $("#main-style-link").attr("href", "assets/css/style.css");
+        }
+    });
+    $.fn.removeClassPrefix = function(prefix) {
+        this.each(function(i, it) {
+            var classes = it.className.split(" ").map(function(item) {
+                return item.indexOf(prefix) === 0 ? "" : item;
+            });
+            it.className = classes.join(" ");
+        });
+        return this;
+    };
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+</script>
+<script src="{% static 'StudentArea/js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'StudentArea/js/pages/dashboard-sale.js' %}"></script>
+{% endblock content %}
+</body>
+
+</html>

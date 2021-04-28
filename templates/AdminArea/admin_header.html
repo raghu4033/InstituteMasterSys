@@ -1,0 +1,373 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
+    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
+    <meta name="author" content="DashboardKit"/>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'Adminarea/images/favicon-icon.png' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'AdminArea/fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'AdminArea/css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'AdminArea/css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+
+
+</head>
+
+<body class="">
+	<!-- [ Pre-loader ] start -->
+	<div class="loader-bg">
+		<div class="loader-track">
+			<div class="loader-fill"></div>
+		</div>
+	</div>
+	<!-- [ Pre-loader ] End -->
+	<!-- [ Mobile header ] start -->
+	<div class="pc-mob-header pc-header">
+		<div class="pcm-logo">
+			<img src="{% static 'AdminArea/images/logo-white.png' %}" alt="" class="logo logo-lg">
+		</div>
+		<div class="pcm-toolbar">
+			<a href="#!" class="pc-head-link" id="mobile-collapse">
+				<div class="hamburger hamburger--arrowturn">
+					<div class="hamburger-box">
+						<div class="hamburger-inner"></div>
+					</div>
+				</div>
+				<!-- <i data-feather="menu"></i> -->
+			</a>
+			</a>
+			<a href="#!" class="pc-head-link" id="header-collapse">
+				<i data-feather="more-vertical"></i>
+			</a>
+		</div>
+	</div>
+	<!-- [ Mobile header ] End -->
+
+	<!-- [ navigation menu ] start -->
+	<nav class="pc-sidebar">
+		<div class="navbar-wrapper">
+			<div class="m-header">
+				<a href="" class="b-brand p-4">
+					<!-- ========   logo hear   ============ -->
+					<img src="{% static 'AdminArea/images/logo-white.png' %}" alt="" class="logo logo-lg img-fluid wid-150">
+					<img src="{% static 'AdminArea/images/logo-white.png' %}" alt="" class="logo logo-sm">
+				</a>
+			</div>
+			<div class="navbar-content">
+				<ul class="pc-navbar">
+					<li class="pc-item pc-caption">
+						<label>Dashboard</label>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="{% url 'AdminArea:AdminDashboard' %}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Dashboard</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+					</li>
+					<li class="pc-item pc-caption">
+						<label>Setting</label>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link ">
+						<span class="pc-micon"><i class="material-icons-two-tone">settings</i></span>
+						</span><span class="pc-mtext">Setting</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:InstituteDetailes' %}">Institute Detailes</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:Users' %}">User</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-caption">
+						<label>Student</label>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link">
+							<span class="pc-micon"><i class="material-icons-two-tone">supervisor_account</i></span>
+							<span class="pc-mtext">Student Inquiry</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:EnrollStudentInquiry' %}">Enroll Student Inquiry</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:InquiryLists' %}">Inquiry Lists</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link">
+							<span class="pc-micon"><i class="material-icons-two-tone">how_to_reg</i></span>
+							<span class="pc-mtext">Student Admmision</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:StudentAdmission' %}">Student Admission</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:StudentList' %}">Student Lists</a></li>
+						</ul>
+					</li>
+					
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link">
+							<span class="pc-micon"><i class="material-icons-two-tone">domain_verification</i></span>
+							<span class="pc-mtext">Student Leave</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:ViewLeaveRequest' %}">View Leave Request</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:ViewleaveList' %}">View Leave List</a></li>
+						
+						</ul>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link">
+						<span class="pc-micon"><i class="material-icons-two-tone">flaky</i></span>
+						<span class="pc-mtext">Student Attendence</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a  class="pc-link" href="{% url 'AdminArea:TakeStudentAttendence' %}">TakeAttendence</a></li>
+							<li class="pc-item"><a  class="pc-link" href="{% url 'AdminArea:ViewStudentAttandence' %}">ViewAttandence</a></li>
+							
+						</ul>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link">
+						<span class="pc-micon"><i class="material-icons-two-tone">assignment</i></span>
+						<span class="pc-mtext">Student Submition</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:AddSubmitions' %}">Add Submition</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:SubmitionsList' %} ">Submition List</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link">
+							<span class="pc-micon"><i class="material-icons-two-tone">table_view</i></span>
+							<span class="pc-mtext">Class Schedule</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:AddClassSchedule' %}">Add Class Schedule</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:ViewClassSchedule' %} ">View Class Schedule</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link">
+							<span class="pc-micon"><i class="material-icons-two-tone">school</i></span>
+							<span class="pc-mtext">Certificate</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a  class="pc-link" href="{% url 'AdminArea:GenarateCertificate' %}">Genarate Certificate</a></li>
+							<li class="pc-item"><a  class="pc-link" href="{% url 'AdminArea:ViewAllCertificate' %}">ViewAllCertificate</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-caption">
+						<label>Notice Board</label>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link ">
+						<span class="pc-micon"><i class="material-icons-two-tone">event</i></span>
+						<span class="pc-mtext">Event</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:ScheduleEvent' %}">Schedule Event</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:EventList' %}">Event List</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link ">
+						<span class="pc-micon"><i class="material-icons-two-tone">notification_add</i></span>
+						<span class="pc-mtext">Notice</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:AddNotice' %}">Add Notice</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:NoticeList' %}">Notice List</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-caption">
+						<label>Finance</label>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link ">
+						<span class="pc-micon"><i class="material-icons-two-tone">account_balance_wallet</i></span>
+						<span class="pc-mtext">Fees</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:FeesCollection' %}">Fees Collection</a></li>
+							
+						</ul>
+					</li>
+					
+					
+					<li class="pc-item pc-caption">
+						<label>E-Library</label>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link ">
+						<span class="pc-micon"><i class="material-icons-two-tone">auto_stories</i></span>
+						<span class="pc-mtext">E-Library</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:AddBook' %}">Add Book</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:BookList' %}">Book List</a></li>
+						</ul>
+					</li>
+					
+					<li class="pc-item pc-caption">
+						<label>Employee Managment</label>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link ">
+						<span class="pc-micon"><i class="material-icons-two-tone">manage_accounts</i></span>
+						<span class="pc-mtext">Employee</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:Addemployee' %}">Add Employee</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:Viewemployee' %}">View Employee</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link ">
+						<span class="pc-micon"><i class="material-icons-two-tone">payments</i></span>
+						<span class="pc-mtext">Salary</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:Addfacultysalary' %}">Add Salary</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:Viewfacultysalary' %}">View Salary</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link ">
+						<span class="pc-micon"><i class="material-icons-two-tone">domain_verification</i></span>
+						<span class="pc-mtext">Employee Leave</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:FacultyLeaveRequest' %}">View Leave Request</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:FacultyLeaveList' %}">View Leave List</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-caption">
+						<label>Suggestions</label>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link ">
+						<span class="pc-micon"><i class="material-icons-two-tone">assistant</i></span>
+						<span class="pc-mtext">Suggestions</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:ViewNewSuggestions' %}">View New Suggestions</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'AdminArea:AllSuggestions' %}">All Suggestions</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-caption">
+						<label>Logout</label>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link ">
+						<span class="pc-micon"><i class="material-icons-two-tone">logout</i></span>
+						<span class="pc-mtext">Logout</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- [ navigation menu ] end -->
+	<!-- [ Header ] start -->
+	<header class="pc-header ">
+		<div class="header-wrapper">
+			<div class="ms-auto">
+				<ul class="list-unstyled">
+					<li class="dropdown pc-h-item">
+						
+
+						<div class="dropdown-menu dropdown-menu-end pc-h-dropdown drp-search">
+							<form class="px-3">
+								<div class="form-group mb-0 d-flex align-items-center">
+									<i data-feather="search"></i>
+								</div>
+							</form>
+						</div>
+					</li>
+					
+					
+					<li class="dropdown pc-h-item">
+						<a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+							{% if request.session.imageurl %}
+							<img src="{{request.session.imageurl}}" alt="user-image" class="user-avtar">
+							{% endif %}
+							<span>
+								<span class="user-name">{{request.session.mname}}</span>
+								<span class="user-desc">Administrator</span>
+							</span>
+						</a>
+						<div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
+							<div class=" dropdown-header">
+								<h5 class="text-overflow m-0"><span class="badge bg-light-success">Online</span></h5>
+							</div>
+							<a href="{% url 'AdminArea:AdminProfile' %}" class="dropdown-item">
+								<i class="material-icons-two-tone">account_circle</i>
+								<span>Profile</span>
+							</a>
+
+							<a href="{% url 'AdminArea:AdminLockScreen' %}" class="dropdown-item">
+								<i class="material-icons-two-tone">lock_clock</i>
+								<span>Lock Screen</span>
+							</a>
+							<a href="{% url 'AdminArea:AdminChangePassword' %}" class="dropdown-item">
+								<span class="material-icons-two-tone">vpn_key</span>
+								<span>Change Password</span>
+							</a>
+							<a href="{% url 'AdminArea:admin_logout' %}" class="dropdown-item">
+									<span class="material-icons-two-tone">logout</span>
+								<span>Logout</span>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+	</header>
+
+	
+<!-- [ Main Content ] start -->
+
+    <!-- Required Js -->
+    <script src="{% static 'AdminArea/js/vendor-all.min' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/pcoded.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+<!-- Apex Chart -->
+<script src="{% static 'AdminArea/js/plugins/apexcharts.min.js' %}"></script>
+<div class="pct-customizer">
+    <div class="pct-c-btn">
+        <button class="btn btn-light-danger" id="pct-toggler">
+            <i data-feather="settings"></i>
+        </button>
+        <button class="btn btn-light-primary" data-bs-toggle="tooltip" title="Document" data-placement="left">
+            <i data-feather="book"></i>
+        </button>
+        <button class="btn btn-light-success" data-bs-toggle="tooltip" title="Buy Now" data-placement="left">
+            <i data-feather="shopping-bag"></i>
+        </button>
+        <button class="btn btn-light-info" data-bs-toggle="tooltip" title="Support" data-placement="left">
+            <i data-feather="headphones"></i>
+        </button>
+    </div>
+    
+</div>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+</script>
+<script src="{% static 'AdminArea/js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'AdminArea/js/pages/dashboard-sale.js' %}"></script>
+
+
+
+{% block content %}
+
+{% endblock content %}
+
+</body>
+
+</html>
