@@ -110,74 +110,16 @@
 
 <!-- [ Main Content ] end -->
   
-    <script src="{% static 'js/vendor-all.min.js' %}"></script>
-    <script src="{% static 'js/plugins/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/plugins/feather.min.js' %}"></script>
-    <script src="{% static 'js/pcoded.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/pcoded.min.js' %}"></script>
    
 <!-- Apex Chart -->
 <script src="{% static 'js/plugins/apexcharts.min.js' %}"></script>
 
 
-<script>
-    $('#pct-toggler').on('click', function() {
-        $('.pct-customizer').toggleClass('active');
-    });
-    $('#cust-sidebrand').change(function() {
-        if ($(this).is(":checked")) {
-            $('.theme-color.brand-color').removeClass('d-none');
-            $('.m-header').addClass('bg-dark');
-        } else {
-            $('.m-header').removeClassPrefix('bg-');
-            $('.m-header > .b-brand > .logo-lg').attr('src', 'assets/images/logo-dark.svg');
-            $('.theme-color.brand-color').addClass('d-none');
-        }
-    });
-    $('.brand-color > a').on('click', function() {
-        var temp = $(this).attr('data-value');
-        if (temp == "bg-default") {
-            $('.m-header').removeClassPrefix('bg-');
-        } else {
-            $('.m-header').removeClassPrefix('bg-');
-            $('.m-header > .b-brand > .logo-lg').attr('src', 'assets/images/logo.svg');
-            $('.m-header').addClass(temp);
-        }
-    });
-    $('.header-color > a').on('click', function() {
-        var temp = $(this).attr('data-value');
-        if (temp == "bg-default") {
-            $('.pc-header').removeClassPrefix('bg-');
-        } else {
-            $('.pc-header').removeClassPrefix('bg-');
-            $('.pc-header').addClass(temp);
-        }
-    });
-    $('#cust-sidebar').change(function() {
-        if ($(this).is(":checked")) {
-            $('.pc-sidebar').addClass('light-sidebar');
-            $('.pc-horizontal .topbar').addClass('light-sidebar');
-        } else {
-            $('.pc-sidebar').removeClass('light-sidebar');
-            $('.pc-horizontal .topbar').removeClass('light-sidebar');
-        }
-    });
-    $('#cust-darklayout').change(function() {
-        if ($(this).is(":checked")) {
-            $("#main-style-link").attr("href", "assets/css/style-dark.css");
-        } else {
-            $("#main-style-link").attr("href", "assets/css/style.css");
-        }
-    });
-    $.fn.removeClassPrefix = function(prefix) {
-        this.each(function(i, it) {
-            var classes = it.className.split(" ").map(function(item) {
-                return item.indexOf(prefix) === 0 ? "" : item;
-            });
-            it.className = classes.join(" ");
-        });
-        return this;
-    };
-</script>
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
 <script>
