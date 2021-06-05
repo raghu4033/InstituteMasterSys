@@ -57,42 +57,51 @@
         </div>
         <!-- [ Main Content ] start -->
 
-        <div class="col-12 mt-5">
-                <div class="card text-white bg-white">
+         {% for i in salary %}
+            <div class="card text-white bg-white " style="margin-top:70px;">
                     <div class="card-body border-bottom py-3">
                         <div class="row align-items-center justify-contact-between">
                             <div class="col">
-                                <h5 class="m-0 text-white"><i class="material-icons-two-tone f-20 text-primary"></i>Fees Summary</h5>
+                                <h5 class="m-0 text-"><i class="material-icons-two-tone f-20 text-primary"></i>Last Salary Summary</h5>
                             </div>
                         </div>
                     </div>
                         <div class="row justify-content-sm-between align-items-center">
                             <div class="col-md-4 col-sm-4 mb-3 mb-sm-0 align-middle">
                                 <div class="p-4 d-inline-block align-middle font-16">
-                                    <h6 class="d-inline-block m-0 text-truncate text-primary">Total Fees</h6>
-                                    <br/>
-                                     <button type="button" class="btn btn-outline-primary disabled"><i class="me-2" data-feather="check-circle"></i>{{student.final_fees}}/-</button>
+                                    <h6 class="d-inline-block m-0 text-truncate text-primary">Month</h6>
+                                    <br>
+                                     <button type="button" class="btn btn-outline-primary disabled"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle me-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>{{i.month}}</button>
                                 </div>
                             </div>
                              <div class="col-md-4 col-sm-4 mb-3 mb-sm-0 align-middle">
                                 <div class="p-4 d-inline-block align-middle font-16">
-                                    <h6 class="d-inline-block m-0 text-truncate text-success">Paid Fees</h6>
-                                    <br/>
-                                     <button type="button" class="btn btn-outline-success disabled"><i class="me-2" data-feather="check-circle"></i>{{Total_Fees_Amount}}/-</button>
+                                    <h6 class="d-inline-block m-0 text-truncate text-success">Amount</h6>
+                                    <br>
+                                     <button type="button" class="btn btn-outline-success disabled"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle me-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>{{i.amount}}/-</button>
                                 </div>
                             </div>
                              <div class="col-md-4 col-sm-4 mb-3 mb-sm-0 align-middle">
                                 <div class="p-4 d-inline-block align-middle font-16">
-                                    <h6 class="d-inline-block m-0 text-truncate text-danger">Remaining Fees</h6>
-                                    <br/>
-                                     <button type="button" class="btn btn-outline-danger disabled"><i class="me-2" data-feather="check-circle"></i>{{Rimainig_Fees}}/-</button>
+                                    <form action="{% url 'AdminArea:PrintSalaryInvoice' %}" method="POST">
+                                            {% csrf_token %} 
+                                    <h6 class="d-inline-block m-0 text-truncate text-danger">Invoice</h6>
+                                    <br>
+                                    <input type="hidden" name="pk" value="{{i.pk}}">
+                                    <button type="submit" class="btn btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle me-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>View Invoice</button>
+                                     </form>
                                 </div>
                             </div>
 
-                        </div>
+
+                                  
+                        
                 </div>
-            </div>
+                
+                <!-- end fees -->
 
+            </div>
+            {% endfor %}
         <div class="row">
             <!-- subscribe start -->
               <div class="col-md-12">

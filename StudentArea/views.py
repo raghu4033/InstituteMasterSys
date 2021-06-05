@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.conf import settings
 from django.urls import reverse
-from AdminArea.models import Student_Registration,Student_Schedule,Student_Leave,Student_Suggestion,ELibrary,Submitions_Registration,Student_Inquiry,Admin_Registration,institute_Detaile,Event_Registration,StudentFees,Notice_Registration
+from AdminArea.models import Student_Registration,Student_Certificate,Student_Schedule,Student_Leave,Student_Suggestion,ELibrary,Submitions_Registration,Student_Inquiry,Admin_Registration,institute_Detaile,Event_Registration,StudentFees,Notice_Registration
 from datetime import datetime
 from twilio.rest import Client
 from django.core.mail import send_mail
@@ -226,7 +226,8 @@ def StudentElibrary(request):
 	return render(request,'StudentArea/StudentElibrary.html',{'AllBooks':AllBooks})
 
 def StudentCertificate(request):
-	return render(request,'StudentArea/StudentCertificate.html')
+	MyCertificateList=Student_Certificate.objects.filter(student_id=request.session['sid'])
+	return render(request,'StudentArea/StudentCertificate.html',{'MyCertificateList':MyCertificateList})
 
 def StudentInsertSuggestion(request):
 	if request.method=="POST":

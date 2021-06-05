@@ -55,23 +55,31 @@
                 </div>
             </div>
         </div>
-        {% for i in AllBooks %}
-            <div class="col-md-6 col-xl-4">
-                <h5>{{i.book_title}}</h5>
-                <hr>
-                <div class="card mb-3">
-                    <img class="img-fluid card-img-top" src="{{i.book_photo.url}}" alt="Card image cap">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="{{i.book_link}}" target="blank" class="btn  btn-primary">View Book</a>
-                            <a href="{{i.book_pdf.url}}" class="btn  btn-primary Download" Download >Download</a>
-                            </div>
+        <div class="row">
+           
+
+    <section id="layouts" class="theme-alt-bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                {% for i in AllBooks %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="layout-block wow fadeInUp" data-wow-delay="0.2s" style="border: 2px solid darkblue; margin: 10px; border-radius: 20px; padding: 15px;">
+                        <a href="#!" class="layout-img">
+                            <img src="{% static 'AdminArea/images/book.jpg' %}" alt="" class="img-fluid">
+                            <span class="overlay-action">
+                                <i class="material-icons-two-tone"></i>
+                            </span>
+                        </a>
+                        <h4 class="m-0">{{i.book_title}}</h4>
+                        <a class="text-muted ml-4 btn btn-white btn-sm " href="{{i.book_pdf.url}}" download>Download</a>
+                         <a href="{{i.book_link}}" target="blank" class="btn btn-sm  btn-primary">View Book</a><br /></p>
                     </div>
                 </div>
-            </div>
-            {% endfor %}
+                {% endfor %}
+        </div>
+    </section>
+           
+    </div>
         <!-- [ Main Content ] end -->
 
     </div>

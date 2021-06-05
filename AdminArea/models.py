@@ -157,10 +157,9 @@ class Student_Inquiry(models.Model):
 	REFERENCE_CHOICES = (("Social Media",'Social Media'),("Google",'Google'),("News Paper",'News Paper'),("Others",'Others'),)
 	reference=models.CharField(max_length=200,choices=REFERENCE_CHOICES,default="")
 	
-	
 
 	def __str__(self):
-		return self.inquiry_num
+		return self.full_name
 
 
 class institute_Detaile(models.Model):

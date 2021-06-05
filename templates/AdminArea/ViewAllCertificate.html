@@ -75,6 +75,8 @@
                                         <th>Name</th>
                                         <th>SID</th>
                                         <th>Course</th>
+                                        <th>Date</th>
+                                        <th>Gread</th>
                                         <th>Options</th>
                                     </tr>
                                 </thead>
@@ -89,10 +91,10 @@
                                         <td>{{i.student.fname}}&nbsp;{{i.student.mname}}&nbsp;{{i.student.lname}}</td>
                                         <td>{{i.student.sid}}</td>
                                         <td>{{i.student.course_type}}</td>
+                                        <td>{{i.take_date}}</td>
+                                        <td>{{i.grade}}</td>
                                         <td>
-                                            <a href="" class="btn btn-success btn-sm">Genarated</a>
-                                            <a href="" class="btn btn-info btn-sm">Print</a>
-                                            <a href="" class="btn btn-danger btn-sm">Download</a>
+                                            <a href="{{i.certificate_pdf.url}}" class="btn btn-success btn-sm">View</a>
                                         </td>
                                     </tr>
                                     {% endfor %}

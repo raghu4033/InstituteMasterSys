@@ -56,8 +56,10 @@ def FacultyDashborad(request):
 	FacultyAllLeavelist=Faculty_Leave.objects.filter(faculty_user_id=request.session['faculty_id']).order_by('-id')[0:3]
 	AllLeavelist=Student_Leave.objects.all().order_by('-id')[0:5]
 	StudentInquiryList=Student_Inquiry.objects.all().order_by('-inquiry_date')[0:5]
+	AllNotice=Notice_Registration.objects.all().order_by('-notice_date')[0:4]
 
-	return render(request,'FacultyArea/FacultyDashborad.html',{'FacultyAllLeavelist':FacultyAllLeavelist,'StudentInquiryList':StudentInquiryList,'AllLeavelist':AllLeavelist,'total_batch':total_batch,'total_Inqueiry':total_Inqueiry,'total_student':total_student,'AllEvents':AllEvents})
+	salary=Faculty_Salary.objects.filter(faculty_user_id=request.session['faculty_id']).order_by('-recipt_no')[:1]
+	return render(request,'FacultyArea/FacultyDashborad.html',{'salary':salary,'FacultyAllLeavelist':FacultyAllLeavelist,'AllNotice':AllNotice,'StudentInquiryList':StudentInquiryList,'AllLeavelist':AllLeavelist,'total_batch':total_batch,'total_Inqueiry':total_Inqueiry,'total_student':total_student,'AllEvents':AllEvents})
 
 
 def FacultyForgotPassword(request):
@@ -166,9 +168,10 @@ def FacultyViewLeave(request):
 	return render(request,'FacultyArea/FacultyViewLeave.html',{'Faculty':Faculty,'YourAllLeave':YourAllLeave})
 
 def FacultySalaryDetailes(request):
+	salary=Faculty_Salary.objects.filter(faculty_user_id=request.session['faculty_id']).order_by('-recipt_no')[:1]
 	faculty=Faculty_Registration.objects.get(faculty_id=request.session['faculty_id'])
 	Salarysdetails=Faculty_Salary.objects.filter(faculty_user_id=faculty.faculty_id)
-	return render(request,'FacultyArea/FacultySalaryDetailes.html',{'Salarysdetails':Salarysdetails})
+	return render(request,'FacultyArea/FacultySalaryDetailes.html',{'salary':salary,'Salarysdetails':Salarysdetails})
 
 
 def FacultyEnrollStudentInquiry(request):

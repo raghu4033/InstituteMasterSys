@@ -753,9 +753,10 @@ def CertificateGrade(request):
 		sid=request.POST['sid']
 		grade=request.POST['grade']
 		date=request.POST['date']
+		Certificate_file=request.FILES['Certificate_file']
 		admin_user=request.session['admin_email']
 		try:
-			Student_Certificate.objects.create(admin_user_id=admin_user,student_id=sid,grade=grade,take_date=date)
+			Student_Certificate.objects.create(admin_user_id=admin_user,student_id=sid,grade=grade,take_date=date,certificate_pdf=Certificate_file)
 			SuccessMsg="Certificate Successefully Genarated"
 			student=Student_Registration.objects.get(sid=sid)
 			return render(request,'AdminArea/CertificateGrad.html',{'student':student,'SuccessMsg':SuccessMsg})
@@ -907,10 +908,10 @@ def TakeStudentAttendence(request):
 def FillStudentAttendence(request):
 	if request.method=="POST":
 		batch_for=request.POST['batch_for']
+		date=request.POST['date']
 		try:
 			StudentList=Student_Registration.objects.filter(batch=batch_for)
-			print(StudentList)
-			return render(request,'AdminArea/FillStudentAttendence.html',{'StudentList':StudentList})
+			return render(request,'AdminArea/FillStudentAttendence.html',{'StudentList':StudentList,'date':date})
 		except:
 			return render(request,'AdminArea/TakeStudentAttendence.html')
 	else:

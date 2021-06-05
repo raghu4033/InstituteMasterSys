@@ -68,8 +68,9 @@
                             </div>
                             <div class="col-sm-6 text-end">
                                 <div class="form-group">
-                                    <label class="form-label" for="exampleInputPassword1"> Date</label>
-                                    <input type="date" required class="form-control" id="exampleInputdate" name="notice_date" placeholder="date">
+                                    <label class="form-label" for="exampleInputPassword1"> {{date}}</label>
+                                    <input type="hidden" name="date" value="{{date}}">
+
                                 </div>
                             </div>
                         </div>
@@ -94,7 +95,7 @@
                                         <td>{{i.fname}}&nbsp;{{i.mname}}&nbsp;{{i.lname}}</td>
                                         <td>{{i.mobile}}</td>
                                         <td>
-                                        	<input type="text" name="">
+                                        	<input type="text" name="" class="form-control h-25">
                                         </td>
                                        
                                     </tr>
