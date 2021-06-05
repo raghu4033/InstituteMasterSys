@@ -117,7 +117,7 @@ def AdminNewPassword(request):
 		pass
 def AdminProfile(request):
 	AdminUser=Admin_Registration.objects.get(email = request.session['admin_email'])
-	return render(request,'Adminarea/AdminProfile.html',{'AdminUser':AdminUser})
+	return render(request,'AdminArea/AdminProfile.html',{'AdminUser':AdminUser})
 
 def AdminChangePassword(request):
 	AdminUser=Admin_Registration.objects.get(email = request.session['admin_email'])
@@ -855,19 +855,19 @@ def AddSalary(request):
 		payment_type=request.POST['payment_type']
 		admin_user=request.session['admin_email']
 		try:
-			Faculty_Salary.objects.create(faculty_user_id=fid,month=salary_month,amount=amount,payment_date=payment_date,payment_type=payment_date,from_date=from_date,year=salary_year,to_date=to_date,admin_user_id=admin_user)
+			Faculty_Salary.objects.create(faculty_user_id=fid,month=salary_month,amount=amount,payment_date=payment_date,payment_type=payment_type,from_date=from_date,year=salary_year,to_date=to_date,admin_user_id=admin_user)
 			
 			faculty = Faculty_Registration.objects.get(faculty_id=fid)
 			Salarysdetails = Faculty_Salary.objects.filter(faculty_user_id=fid)
 			
-			email=student.email
-			mobile_number=student.mobile
-			full_name=student.fname+" "+student.mname
+			email=faculty.email
+			mobile_number=faculty.mobile
+			full_name=faculty.first_name+" "+faculty.middel_name
 
 			rec=[email,]
 			subject="Fees installment paid successefully"
 			website="https://kalaveethi.com/"
-			message=f" \n Hello {full_name}, \n \n This is a confirmation that we have just received your secure payment. \n \n Thank you for the recent payment that you made on {date} for the amount of Rs: {amount}. This is a confirmation that amount has been successfully received.\n \n \n Kalaveethi Institue Of Design. \n {website} "
+			message=f" \n Hello {full_name} \n \n This is a confirmation that we have just received your secure payment. \n \n Thank you for the recent payment that you made on {from_date} for the amount of Rs: {amount}. This is a confirmation that amount has been successfully received.\n \n \n Kalaveethi Institue Of Design. \n {website} "
 			email_from=settings.EMAIL_HOST_USER
 			send_mail(subject,message,email_from,rec)
 			
@@ -948,12 +948,27 @@ def Addemployee(request):
         bank_holder=request.POST['bank_holder']
         ifsc_code=request.POST['ifsc_code']
         account_number=request.POST['account_number']
-        print(admin_user,fid,experience,join_date,Deparment,que,Salary,fname,dob,category,aadhar_num,mname,gender,nationality,lname,blood_group,cast,permanent_address,present_address,city,pin,mobile,photo,email,bank_holder,bank_name,ifsc_code,account_number)
+        password=request.POST['mobile']
+        cpassword=request.POST['mobile']
         try:
-            Faculty_Registration.objects.create(admin_user_id=admin_user,faculty_id=fid,joing_date=join_date,category=category,department_catagory=Deparment,qulification=que,total_Experiance=experience,first_name=fname,middel_name=mname,last_name=lname,birth_date=dob,gender=gender,blood_group=blood_group,nationality=nationality,Cast=cast,aadhar=aadhar_num,salary=Salary,permanent_address=permanent_address,present_address=present_address,city=city,pin=pin,mobile=mobile,email=email,photo=photo,holder_name=bank_holder,ifsc=ifsc_code,bank_name=bank_name,account_no=account_number)
+            Faculty_Registration.objects.create(admin_user_id=admin_user,faculty_id=fid,joing_date=join_date,category=category,department_catagory=Deparment,qulification=que,total_Experiance=experience,first_name=fname,middel_name=mname,last_name=lname,birth_date=dob,gender=gender,blood_group=blood_group,nationality=nationality,Cast=cast,aadhar=aadhar_num,salary=Salary,permanent_address=permanent_address,present_address=present_address,city=city,pin=pin,mobile=mobile,email=email,photo=photo,holder_name=bank_holder,ifsc=ifsc_code,bank_name=bank_name,account_no=account_number,password=password,cpassword=cpassword)
             SuccessMsg="Add Faculty Successefully"
+
+            rec=[email,]
+            subject="Joining Successefully"
+            full_name=fname+" "+lname
+            website="https://student.kalaveethi.com/"
+            message=f" \n Dear {full_name},  \n \n Your SID Number is : {fid} \n Password is : {password} \n \n   Welcome to Kalaveethi!  Thank you, for being part of Kalaveethi family. Kalaveethi Institute Of Design Enhance your knowledge towards designing, personality development skill, will as sure you the best guidance in the field of  and will give you an opportunity to meet with different skill expertise in your respective field. Wish you very all the best and hope to build better career. \n From, Kalaveethi Institute of Design. \n Visit Now :-\n {website} "
+            email_from=settings.EMAIL_HOST_USER
+            send_mail(subject,message,email_from,rec)
+			
+			# client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
+			# client.api.messages.create(to=f"+91{mobile}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
+
+
             return render(request,'AdminArea/Addemployee.html',{'SuccessMsg':SuccessMsg})
         except Exception as e:
+            print("Faculty")
             print(e)
             FailedMsg="Add Faculty Failed"
             return render(request,'AdminArea/Addemployee.html',{'FailedMsg':FailedMsg})
