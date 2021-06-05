@@ -461,7 +461,6 @@ def EnrollStudentInquiry(request):
 			SuccessMsg="Student Inquery Successefully Added"
 			return render(request,'AdminArea/EnrollStudentInquiry.html',{'SuccessMsg':SuccessMsg})
 		except Exception as e:
-			print(e)
 			FailedMsg="Student Inquery Added Failed!"
 			return render(request,'AdminArea/EnrollStudentInquiry.html',{'FailedMsg':FailedMsg})
 	else:

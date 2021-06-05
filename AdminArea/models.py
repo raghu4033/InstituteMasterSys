@@ -332,6 +332,7 @@ class Student_Certificate(models.Model):
 	student=models.ForeignKey(Student_Registration,on_delete=models.CASCADE,null=True,blank=True)
 	grade=models.CharField(max_length=10,default="")
 	take_date=models.DateField(max_length=8,default="")
+	certificate_pdf=models.FileField(upload_to='StudenCertificate/',default="")
 	
 	def __str__(self ):
 		return self.student_id
