@@ -78,6 +78,7 @@ urlpatterns = [
     path('Viewemployee/',views.Viewemployee,name='Viewemployee'),
      
     path('FillStudentAttendence/',views.FillStudentAttendence,name='FillStudentAttendence'),   
+    path('SubmitStudentAttendence/', views.SubmitStudentAttendence, name='SubmitStudentAttendence'),
     path('test/',views.test,name='test'),
 
     path('CertificateGrade/',views.CertificateGrade,name='CertificateGrade'),

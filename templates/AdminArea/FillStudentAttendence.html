@@ -1,5 +1,5 @@
-{% extends "AdminArea/TakeStudentAttendence.html" %}
-{% block Attendencecontent %}
+{% extends "AdminArea/admin_header.html" %}
+{% block content %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -28,13 +28,15 @@
     <link rel="stylesheet" href="{% static 'css/customizer.css' %}">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
     
 
 </head>
 
 <body class="">
-    
+<div class="pc-container">
  <div class="pcoded-content">
         <!-- [ breadcrumb ] start -->
         <div class="page-header">
@@ -82,20 +84,23 @@
                                         <th>SID</th>
                                         <th>Student Name</th>
                                         <th>Student Mobile</th>
-                                        <th>Late Arrival</th>
+                                        <th>Absent/Present</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="attendence_list">
                                     {% for i in StudentList %}
                                     <tr>
                                         <td>
-                                        	<input type="checkbox" name="">
+                                        	<input value={{i.sid}} type="checkbox" id="Check">
                                         </td>
                                         <td>{{i.sid}}</td>
                                         <td>{{i.fname}}&nbsp;{{i.mname}}&nbsp;{{i.lname}}</td>
                                         <td>{{i.mobile}}</td>
-                                        <td>
+                                       <!--  <td>
                                         	<input type="text" name="" class="form-control h-25">
+                                        </td> -->
+                                        <td>
+                                            <button class="btn btn-success" type="button" onclick="checkIN({{i.sid}},this)" id="checkin">Present</button>
                                         </td>
                                        
                                     </tr>
@@ -108,20 +113,21 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <button type="submit" class="btn btn-success"><i class="me-2" data-feather="check-circle"></i>Save</button>
+                    {% csrf_token %}
+                    <button type="button" id="list_sid" class="btn btn-success"><i class="me-2" data-feather="check-circle"></i>Save</button>
                 </div>
             </div>                 
             <!-- subscribe end -->
         </div>
         <!-- [ Main Content ] end -->
-    </div>
+</div>
 
 <!-- [ Main Content ] end -->
   
     <script src="{% static 'AdminArea/js/vendor-all.min.js' %}"></script>
     <script src="{% static 'AdminArea/js/plugins/bootstrap.min.js' %}"></script>
     <script src="{% static 'AdminArea/js/plugins/feather.min.js' %}"></script>
-    <script src="{% static 'AdminArea/js/pcoded.min.js' %}"></script>
+    <!-- <script src="{% static 'AdminArea/js/pcoded.min.js' %}"></script> -->
    
 <!-- Apex Chart -->
 <script src="{% static 'js/plugins/apexcharts.min.js' %}"></script>
@@ -135,12 +141,48 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-Q8H86P6FK7');
+    let sid = []
+    function checkIN(id,e){
+        if(e.className === "btn btn-success"){
+            e.setAttribute("class","btn btn-danger")
+            sid.push(id)
+            e.innerHTML = "Absent"
+        }else{
+            e.setAttribute("class","btn btn-success")
+            let index = sid.indexOf(id)
+            sid.splice(index,1)
+            e.innerHTML = "Present"
+        }
+       
+    }
+    $("#list_sid").on("click",()=>{
+        console.log(sid)
+
+        $.ajax({
+              type: 'POST',
+              url:  {% url 'AdminArea:SubmitStudentAttendence' %},
+              data: {
+                "sid":sid,
+                "date": "{{ date }}",
+                "batch": "{{ batch }}" 
+              },
+              contenttype:"multipart/form-data",
+              success: (res) => {
+                console.log(res)
+              },
+              error:(err) => {
+                console.log(err)
+              }
+            })
+    })   
 </script>
 <script src="{% static 'js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
 
 <!-- custom-chart js -->
 <script src="{% static 'js/pages/dashboard-sale.js' %}"></script>
-{% endblock Attendencecontent %}
+
+{% endblock content %}
+
 </body>
 
 

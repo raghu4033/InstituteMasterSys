@@ -315,13 +315,18 @@ class Faculty_Salary(models.Model):
 		return self.faculty_user_id
 
 class Student_Attendence(models.Model):
+	attendence_choice = (
+		("A","Absent"),
+		("P","Present")
+		)
+
 	admin_user=models.ForeignKey(Admin_Registration,on_delete=models.CASCADE,null=True,blank=True)
 	faculty_user=models.ForeignKey(Faculty_Registration,on_delete=models.CASCADE,null=True,blank=True)
 	student=models.ForeignKey(Student_Registration,on_delete=models.CASCADE,null=True,blank=True)
 	take_date=models.DateField(max_length=8,default="")
 	batch=models.CharField(max_length=100)
 	late_arrival=models.CharField(max_length=100)
-	ap=models.CharField(max_length=100)
+	ap=models.CharField(default="A",choices=attendence_choice,max_length=1)
 
 	def __str__(self ):
 		return self.student_id

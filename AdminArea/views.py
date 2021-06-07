@@ -7,7 +7,11 @@ from django.core.mail import BadHeaderError,send_mail
 from datetime import datetime
 from django.utils import timezone
 import random
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from datetime import date
 
+# @csrf_exempt
 
 def index(request):
 	return render(request,'Login/index.html')
@@ -56,13 +60,18 @@ def AdminDashboard(request):
 	total_feeslen = sum(total_amount)
 	
 	
+	todays_date = date.today()
+	studentBday=Student_Registration.objects.filter(dob=todays_date).count()
+	facultytBday=Faculty_Registration.objects.filter(birth_date=todays_date).count()
+	
+
 	StudentLeaveReq=Student_Leave.objects.filter(status="Panding_Request").count()
 	FacultyLeaveReq=Faculty_Leave.objects.filter(status="Panding_Request").count()
 	AllEvents=Event_Registration.objects.all().count()
 	AllNotice=Notice_Registration.objects.all().order_by('-notice_date')[0:3]
 	AllLeavelist=Student_Leave.objects.all().order_by('-id')[0:5]
 	StudentInquiryList=Student_Inquiry.objects.all().order_by('-inquiry_date')[0:5]
-	return render(request,'AdminArea/AdminDashboard.html',{'FacultyLeaveReq':FacultyLeaveReq,'StudentLeaveReq':StudentLeaveReq,'total_feeslen':total_feeslen,'total_batch':total_batch,'total_student':total_student,'AllNotice':AllNotice,'AllLeavelist':AllLeavelist,'StudentInquiryList':StudentInquiryList,'AllEvents':AllEvents})
+	return render(request,'AdminArea/AdminDashboard.html',{'studentBday':studentBday,'facultytBday':facultytBday,'FacultyLeaveReq':FacultyLeaveReq,'StudentLeaveReq':StudentLeaveReq,'total_feeslen':total_feeslen,'total_batch':total_batch,'total_student':total_student,'AllNotice':AllNotice,'AllLeavelist':AllLeavelist,'StudentInquiryList':StudentInquiryList,'AllEvents':AllEvents})
 
 def AdminForgotPassword(request):
 	if request.method=="POST":
@@ -425,7 +434,7 @@ def StudentAdmission(request):
 	else:
 		return render(request,'AdminArea/StudentAdmission.html')
 def StudentList(request):
-	StudentList=Student_Registration.objects.all()
+	StudentList=Student_Registration.objects.all().order_by('sid')
 	return render(request,'AdminArea/StudentList.html',{'StudentList':StudentList})
 def EnrollStudentInquiry(request):
 	if request.method=="POST":
@@ -451,8 +460,8 @@ def EnrollStudentInquiry(request):
 			booklate="https://kalaveethi.com/courses/kalaveethibook/"
 			message=f"Hi {full_name}\n \nThank you for reaching out to Kalaveethi Institue Of Design. I’m Trupal, your admissions counselor. I look forward to working with you. Please feel free to text me here or my colleagues at  if you have any questions. \n \n \n Phone: +91 8160892915 \n Website: {website} \n \nDownload Booklate:{booklate}"
 			
-			# client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
-			# client.api.messages.create(to=f"+91{mobile_number}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
+			client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
+			client.api.messages.create(to=f"+91{mobile_number}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
 
 			rec=[email,]
 			email_from=settings.EMAIL_HOST_USER
@@ -461,6 +470,7 @@ def EnrollStudentInquiry(request):
 			SuccessMsg="Student Inquery Successefully Added"
 			return render(request,'AdminArea/EnrollStudentInquiry.html',{'SuccessMsg':SuccessMsg})
 		except Exception as e:
+			print("Inquery",e)
 			FailedMsg="Student Inquery Added Failed!"
 			return render(request,'AdminArea/EnrollStudentInquiry.html',{'FailedMsg':FailedMsg})
 	else:
@@ -911,13 +921,28 @@ def FillStudentAttendence(request):
 		date=request.POST['date']
 		try:
 			StudentList=Student_Registration.objects.filter(batch=batch_for)
-			return render(request,'AdminArea/FillStudentAttendence.html',{'StudentList':StudentList,'date':date})
-		except:
+			print("Lenght of ::>>>>",len(StudentList))
+			return render(request,'AdminArea/FillStudentAttendence.html',{'StudentList':StudentList,'date':date,'batch':batch_for})
+		except Exception as e:
+			print("attendence ::>>>>",e)
 			return render(request,'AdminArea/TakeStudentAttendence.html')
 	else:
 		return render(request,'AdminArea/FillStudentAttendence.html')
 def ViewStudentAttandence(request):
 	return render(request,'AdminArea/ViewStudentAttandence.html')
+
+@csrf_exempt
+def SubmitStudentAttendence(request):
+	if request.method == "POST":
+		Sid=request.POST.getlist('sid')
+		Date=request.POST['date']
+		Batch=request.POST['batch']
+
+		print(Sid,Date,Batch)
+
+		return JsonResponse({"success":True})
+	return render(request,'AdminArea/FillStudentAttendence.html')
+
 
 def Addemployee(request):
     if request.method=="POST":
@@ -1170,3 +1195,5 @@ def deleteprofile(request,slug):
 	delete_profile.delete()
 	FacultyList=Faculty_Registration.objects.all()
 	return render(request,'AdminArea/Viewemployeedetail.html',{'FacultyList':FacultyList})
+
+# def test(request):
