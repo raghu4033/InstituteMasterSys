@@ -1,13 +1,17 @@
 from django.shortcuts import render,redirect
 from django.conf import settings
 from django.urls import reverse
-from AdminArea.models import Student_Registration,Faculty_Salary,Student_Schedule,Faculty_Leave,Faculty_Registration,Student_Leave,Student_Suggestion,ELibrary,Submitions_Registration,Student_Inquiry,Admin_Registration,institute_Detaile,Event_Registration,StudentFees,Notice_Registration
+from AdminArea.models import Student_Registration,Faculty_Salary,Student_Attendence,Student_Schedule,Faculty_Leave,Faculty_Registration,Student_Leave,Student_Suggestion,ELibrary,Submitions_Registration,Student_Inquiry,Admin_Registration,institute_Detaile,Event_Registration,StudentFees,Notice_Registration
 from datetime import datetime
 from django.utils import timezone
 import pytz
 import random
 from twilio.rest import Client
 from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.http import HttpResponse
 
 def index(request):
 	return render(request,'FacultyArea/FacultyDashborad.html')
@@ -20,7 +24,7 @@ def FacultyLogin(request):
 			if faculty_user.status == 'activated':
 				request.session['faculty_id']=faculty_user.faculty_id
 	 
-				request.session['middle_name']=faculty_user.middel_name
+				request.session['middle_name']=faculty_user.first_name
 				request.session['imageurlfaculty']=faculty_user.photo.url
 				return redirect('FacultyArea:FacultyDashborad')
 			else:
@@ -298,3 +302,84 @@ def FacultyBookList(request):
 	AllBooks=ELibrary.objects.all()
 	return render(request,'FacultyArea/FacultyBookList.html',{'AllBooks':AllBooks})
 
+def TakeAttendance(request):
+	if request.method=="POST":
+		class_for=request.POST['class_for']
+		Batch=Student_Registration.objects.filter(course_type=class_for)
+		result = []
+		for i in Batch:
+			result.append(i.batch)
+		mylist = list(dict.fromkeys(result))
+		return render(request,'FacultyArea/TakeAttendance.html',{'mylist':mylist})
+	else:
+		return render(request,'FacultyArea/TakeAttendance.html')
+
+
+def FillAttendence(request):
+	if request.method=="POST":
+		batch_for=request.POST['batch_for']
+		date=request.POST['date']
+		try:
+			StudentList=Student_Registration.objects.filter(batch=batch_for)
+			return render(request,'FacultyArea/FillAttendence.html',{'StudentList':StudentList,'date':date,'batch':batch_for})
+		except Exception as e:
+			return render(request,'FacultyArea/TakeAttendence.html')
+	else:
+		return render(request,'FacultyArea/FillAttendence.html')
+
+@csrf_exempt		
+def SubmitAttendence(request):
+	if request.method == "POST":
+		Sid=json.loads(request.POST['sid'])
+		#(1)Absent Student
+		Date=request.POST['date']
+		Batch=request.POST['batch']
+		faculty_user=request.session['faculty_id']
+		Batchstudent=Student_Registration.objects.filter(batch=Batch).exclude(sid__in=Sid).values_list('sid',flat=True)
+		PresentStd = list(Batchstudent)
+		try:
+			for i in Sid:
+				Student_Attendence.objects.create(student_id=i,take_date=Date,batch=Batch,ap="A",faculty_user_id=faculty_user)
+			for i in PresentStd:
+				Student_Attendence.objects.create(student_id=i,take_date=Date,batch=Batch,ap="P",faculty_user_id=faculty_user)
+
+		except Exception as e:
+			print(e)
+			return JsonResponse({"success":True})
+			return render(request,'FacultyArea/FilltAttendence.html')
+
+	return render(request,'FacultyArea/FillAttendence.html')
+
+def ViewAttendance(request):
+	if request.method=="POST":
+		class_for=request.POST['class_for']
+		Batch=Student_Registration.objects.filter(course_type=class_for)
+		result = []
+		for i in Batch:
+			result.append(i.batch)
+		mylist = list(dict.fromkeys(result))
+		return render(request,'FacultyArea/ViewAttandenceBatchVise.html',{'mylist':mylist})
+	else:
+		return render(request,'FacultyArea/ViewAttendance.html')
+
+def ViewAttandenceList(request):
+	if request.method=="POST":
+		batch_for=request.POST['batch_for']
+		todate=request.POST['todate']
+		fromdate=request.POST['todate']
+		print(batch_for,todate,fromdate)
+		try:
+			StudentList=Student_Attendence.objects.filter(batch=batch_for)
+			print(StudentList)
+			return render(request,'FacultyArea/ViewAttandenceList.html',{'StudentList':StudentList,'todate':todate,'fromdate':fromdate,'batch_for':batch_for})
+		except Exception as e:
+			FailedMsg="Student Data Not Found"
+			return render(request,'FacultyArea/ViewAttandenceBatchVise.html',{'FailedMsg':FailedMsg})
+	else:
+		return render(request,'FacultyArea/ViewAttandenceList.html')
+
+def PrintInvoice(request):
+	pk=request.POST['pk']
+	InvoiceInfo=Faculty_Salary.objects.get(pk=pk)
+	faculty=Faculty_Registration.objects.get(faculty_id=InvoiceInfo.faculty_user_id)
+	return render(request,'FacultyArea/PrintInvoice.html',{'InvoiceInfo':InvoiceInfo,'faculty':faculty})

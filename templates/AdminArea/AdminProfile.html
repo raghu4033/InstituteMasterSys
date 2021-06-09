@@ -17,10 +17,7 @@
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
-    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
-    <meta name="author" content="DashboardKit"/>
+    
 
     <!-- Favicon icon -->
     <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
@@ -76,10 +73,7 @@
                         <div class="media user-about-block align-items-center mt-0 mb-3">
                             <div class="position-relative d-inline-block">
                                 <img class="img-radius img-fluid wid-80" src="{{AdminUser.photo.url}}" alt="User image">
-                                <div class="certificated-badge">
-                                    <i class="fas fa-certificate text-primary bg-icon"></i>
-                                    <i class="fas fa-check front-icon text-white"></i>
-                                </div>
+                                
                             </div>
                             <div class="media-body ms-3">
                                 <h6 class="mb-1">{{AdminUser.fname}}&nbsp;{{AdminUser.mname}}</h6>
@@ -107,17 +101,7 @@
                     
                 </div>
                 <div class="card">
-                    <div class="card-header">
-                        <h5>Hello card</h5>
-                        <div class="card-header-right">
-                            <div class="btn-group card-option">
-                                <button type="button" class="btn dropdown-toggle btn-icon" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="feather icon-more-horizontal"></i>
-                                </button>
-                                
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="card-body">
                         <div class="nav flex-column nav-pills list-group list-group-flush list-pills" id="user-set-tab" role="tablist" aria-orientation="vertical">
                         <a class="nav-link list-group-item list-group-item-action active"  href="{% url 'AdminArea:AdminProfile' %}" role="tab" aria-controls="user-set-profile" aria-selected="true">
@@ -147,12 +131,12 @@
                                         <tr>
                                             <td class="">Full Name</td>
                                             <td class="">:</td>
-                                            <td class="">{{AdminUser.fname}}&nbsp;{{AdminUser.mname}}</td>
+                                            <td class="">{{AdminUser.fname}}&nbsp;{{AdminUser.lname}}</td>
                                         </tr>
                                         <tr>
                                             <td class="">Father's Name</td>
                                             <td class="">:</td>
-                                            <td class="">{{AdminUser.lname}}&nbsp;{{AdminUser.fname}}</td>
+                                            <td class="">{{AdminUser.mname}}&nbsp;{{AdminUser.lname}}</td>
                                         </tr>
                                          <tr>
                                             <td class="">Date of Birth</td>

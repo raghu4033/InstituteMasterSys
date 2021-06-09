@@ -74,6 +74,8 @@ urlpatterns = [
     path('TakeStudentAttendence/',views.TakeStudentAttendence,name='TakeStudentAttendence'),
     path('ViewStudentAttandence/',views.ViewStudentAttandence,name='ViewStudentAttandence'),
 
+    path('ViewStudentAttandenceList/',views.ViewStudentAttandenceList,name='ViewStudentAttandenceList'),
+
     path('Addemployee/',views.Addemployee,name='Addemployee'),
     path('Viewemployee/',views.Viewemployee,name='Viewemployee'),
      

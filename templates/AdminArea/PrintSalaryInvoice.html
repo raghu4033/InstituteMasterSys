@@ -10,10 +10,7 @@
   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
-    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
-    <meta name="author" content="DashboardKit"/>
+    
 
     <!-- Favicon icon -->
     <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
@@ -76,7 +73,7 @@
 										
 									</div>
 									<div class="col-sm-4">
-										<a class="text-secondary" href="Institue@kalaveethi.com" target="_top">Institue@kalaveethi.com</a>
+										<a class="text-secondary" href="Institue@kalaveethi.com" target="_top">institute@kalaveethi.com</a>
 										<br><span>+91 7698962286</span>
 									</div>
 								</div>
@@ -88,7 +85,7 @@
 
 								<div class="row invoive-info d-print-inline-flex" style="margin-top: 100px;">
 									<div class="col-sm-4 invoice-client-info">
-										<h6>Student Information :</h6>
+										<h6>Faculty Information :</h6>
 										<h6 class="m-0">{{faculty.first_name}}&nbsp;{{faculty.middel_name}}&nbsp;{{faculty.last_name}}</h6>
 										<p class="m-0 m-t-10">{{student.permanent_address}}</p>
 										<p class="m-0">{{student.mobile}}</p>
@@ -109,16 +106,16 @@
 													</td>
 												</tr>
 												<tr>
-													<th>SID :</th>
+													<th>ID :</th>
 													<td>
-														{{student.sid}}
+														{{faculty.faculty_id}}
 													</td>
 												</tr>
 											</tbody>
 										</table>
 									</div>
 									<div class="col-sm-4">
-										<h6 class="m-b-20">Invoice Number :<span>{{InvoiceInfo.installment_no}}</span></h6>
+										<h6 class="m-b-20">Invoice Number :{{InvoiceInfo.recipt_no}}<span>{{InvoiceInfo.installment_no}}</span></h6>
 										<h6 class="text-uppercase text-primary">Total Due :
 											<span>{{InvoiceInfo.amount}}/-</span>
 										</h6>
@@ -130,7 +127,7 @@
 											<table class="table invoice-detail-table">
 												<thead>
 													<tr class="thead-default">
-														<th>Installment Number</th>
+														<th>No</th>
 														<th>Date</th>
 														<th>Payment Mathod</th>
 														<th>Amount</th>
@@ -140,7 +137,7 @@
 													<tr>
 														<td>
 															<h6></h6>
-															<p class="m-0">{{InvoiceInfo.installment_no}}</p>
+															<p class="m-0">1.</p>
 														</td>
 														<td>{{InvoiceInfo.payment_date}}</td>
 														<td>{{InvoiceInfo.payment_type}}</td>

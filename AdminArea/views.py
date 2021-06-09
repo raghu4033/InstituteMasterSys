@@ -10,8 +10,9 @@ import random
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from datetime import date
+import json
+from django.http import HttpResponse
 
-# @csrf_exempt
 
 def index(request):
 	return render(request,'Login/index.html')
@@ -419,14 +420,14 @@ def StudentAdmission(request):
 			rec=[email,]
 			subject="Admission Successefully"
 			full_name=fname+" "+lname
-			website="https://student.kalaveethi.com/"
+			website="https://InstituteMaster.kalaveethi.com/"
 			message=f" \n Dear {full_name},  \n \n Your SID Number is : {sid} \n Password is : {password} \n \n   Welcome to Kalaveethi!  Thank you, for being part of Kalaveethi family. Kalaveethi Institute Of Design Enhance your knowledge towards designing, personality development skill, will as sure you the best guidance in the field of {course_type}  and will give you an opportunity to meet with different skill expertise in your respective field. Wish you very all the best and hope to build better career. \n From, Kalaveethi Institute of Design. \n Visit Now :-\n {website} "                                
 			email_from=settings.EMAIL_HOST_USER
 			send_mail(subject,message,email_from,rec)
 			print(message)
 
-			# client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
-			# client.api.messages.create(to=f"+91{mobile}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
+			client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
+			client.api.messages.create(to=f"+91{mobile}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
 
 
 			SuccessMsg="Student Registered Successefully"
@@ -721,8 +722,8 @@ def AddFees(request):
 			send_mail(subject,message,email_from,rec)
 		
 
-			# client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
-			# client.api.messages.create(to=f"+91{mobile_number}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
+			client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
+			client.api.messages.create(to=f"+91{mobile_number}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
 
 			feesdetails = StudentFees.objects.filter(student_id=sid)
 			SuccessMsg="Student Fees Paid Successefully"
@@ -883,8 +884,8 @@ def AddSalary(request):
 			send_mail(subject,message,email_from,rec)
 			
 
-			# client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
-			# client.api.messages.create(to=f"+91{mobile_number}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
+			client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
+			client.api.messages.create(to=f"+91{mobile_number}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
 
 			
 			SuccessMsg="Salary Paid Successefully"
@@ -921,33 +922,70 @@ def FillStudentAttendence(request):
 		date=request.POST['date']
 		try:
 			StudentList=Student_Registration.objects.filter(batch=batch_for)
-			print("Lenght of ::>>>>",len(StudentList))
 			return render(request,'AdminArea/FillStudentAttendence.html',{'StudentList':StudentList,'date':date,'batch':batch_for})
 		except Exception as e:
-			print("attendence ::>>>>",e)
 			return render(request,'AdminArea/TakeStudentAttendence.html')
 	else:
 		return render(request,'AdminArea/FillStudentAttendence.html')
-def ViewStudentAttandence(request):
-	return render(request,'AdminArea/ViewStudentAttandence.html')
+
+	
 
 @csrf_exempt
 def SubmitStudentAttendence(request):
 	if request.method == "POST":
-		Sid=request.POST.getlist('sid')
+		Sid=json.loads(request.POST['sid'])
+		#(1)Absent Student
 		Date=request.POST['date']
 		Batch=request.POST['batch']
+		admin_user=request.session['admin_email']
 
-		print(Sid,Date,Batch)
 
-		return JsonResponse({"success":True})
+		Batchstudent=Student_Registration.objects.filter(batch=Batch).exclude(sid__in=Sid).values_list('sid',flat=True)
+		PresentStd = list(Batchstudent)
+		
+		try:
+			for i in Sid:
+				Student_Attendence.objects.create(student_id=i,take_date=Date,batch=Batch,ap="A",admin_user_id=admin_user)
+			for i in PresentStd:
+				Student_Attendence.objects.create(student_id=i,take_date=Date,batch=Batch,ap="P",admin_user_id=admin_user)
+
+		except Exception as e:
+			return JsonResponse({"success":True})
+			return render(request,'AdminArea/TakeStudentAttendence.html')
 	return render(request,'AdminArea/FillStudentAttendence.html')
 
+# ViewStudentAttandence
+
+def ViewStudentAttandenceList(request):
+	if request.method=="POST":
+		batch_for=request.POST['batch_for']
+		todate=request.POST['todate']
+		fromdate=request.POST['todate']
+		try:
+			StudentList=Student_Attendence.objects.filter(take_date__range=[todate, todate]).filter(batch=batch_for)
+			return render(request,'AdminArea/ViewStudentAttandenceList.html',{'StudentList':StudentList,'todate':todate,'fromdate':fromdate,'batch_for':batch_for})
+		except Exception as e:
+			FailedMsg="Student Data Not Found"
+			return render(request,'AdminArea/ViewStudentAttandenceBatch.html',{'FailedMsg':FailedMsg})
+	else:
+		return render(request,'AdminArea:ViewStudentAttandenceList.html')
+
+def ViewStudentAttandence(request):
+	if request.method=="POST":
+		class_for=request.POST['class_for']
+		Batch=Student_Registration.objects.filter(course_type=class_for)
+		result = []
+		for i in Batch:
+			result.append(i.batch)
+		mylist = list(dict.fromkeys(result))
+		return render(request,'AdminArea/ViewStudentAttandenceBatch.html',{'mylist':mylist})
+	else:
+		return render(request,'AdminArea/ViewStudentAttandence.html')
 
 def Addemployee(request):
     if request.method=="POST":
         admin_user=request.session['admin_email']
-        fid=request.POST['fid']
+        fid=request.POST['fid']	
         experience=request.POST['experience']
         join_date=request.POST['join_date']
         Deparment=request.POST['Deparment']
@@ -987,9 +1025,9 @@ def Addemployee(request):
             message=f" \n Dear {full_name},  \n \n Your SID Number is : {fid} \n Password is : {password} \n \n   Welcome to Kalaveethi!  Thank you, for being part of Kalaveethi family. Kalaveethi Institute Of Design Enhance your knowledge towards designing, personality development skill, will as sure you the best guidance in the field of  and will give you an opportunity to meet with different skill expertise in your respective field. Wish you very all the best and hope to build better career. \n From, Kalaveethi Institute of Design. \n Visit Now :-\n {website} "
             email_from=settings.EMAIL_HOST_USER
             send_mail(subject,message,email_from,rec)
-			
-			# client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
-			# client.api.messages.create(to=f"+91{mobile}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
+
+            client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
+            client.api.messages.create(to=f"+91{mobile}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
 
 
             return render(request,'AdminArea/Addemployee.html',{'SuccessMsg':SuccessMsg})

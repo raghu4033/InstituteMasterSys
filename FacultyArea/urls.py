@@ -26,4 +26,12 @@ urlpatterns = [
     path('FacultyAddClassSchedule/',views.FacultyAddClassSchedule,name='FacultyAddClassSchedule'),
     path('FacultyViewClassSchedule/',views.FacultyViewClassSchedule,name='FacultyViewClassSchedule'),
     path('FacultyScheduleClass/',views.FacultyScheduleClass,name='FacultyScheduleClass'),
+
+    path('TakeAttendance/',views.TakeAttendance,name='TakeAttendance'),
+    path('ViewAttendance/',views.ViewAttendance,name='ViewAttendance'),
+    path('FillAttendence/',views.FillAttendence,name='FillAttendence'),
+    path('SubmitAttendence/',views.SubmitAttendence,name='SubmitAttendence'),
+    path('ViewAttandenceList',views.ViewAttandenceList,name='ViewAttandenceList'),
+
+    path('PrintInvoice/',views.PrintInvoice,name='PrintInvoice'),
 ]

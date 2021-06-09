@@ -10,10 +10,7 @@
   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
-    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
-    <meta name="author" content="DashboardKit"/>
+    
 
     <!-- Favicon icon -->
     <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
@@ -39,8 +36,139 @@
 
 <div class="pc-container">
     <div class="pcoded-content">
-        Admin User
+       <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">AdminArea</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'AdminArea:AdminDashboard' %}">Home</a></li>
+                            <li class="breadcrumb-item">Student Attendence</li>
+                            <li class="breadcrumb-item"> View Attendence</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>View Student Attendece</h5>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="row">
+                            {% if SuccessMsg %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>{{SuccessMsg}}.</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                            {% if FailedMsg %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>{{FailedMsg}}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                        {% endif %}
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-12">
+                            <form class="login100-form validate-form" enctype="multipart/form-data" action="{% url 'AdminArea:ViewStudentAttandence' %}" method="POST">
+                                    {% csrf_token %}
+                            </div>
+                           <div class="col-md-12">
+                               <div class="form-group">
+                                            <label class="form-label" for="exampleFormControlSelect1">Class</label>
+                                            <select class="form-control" id="exampleFormControlSelect1" name="class_for">
+                                                <option value="">Choose Course Name</option>
+                                                <option value="fashion">Fashion Design</option>
+                                                <option value="texttile">Texttile Design</option>
+                                                <option value="graphic">Graphic Design</option>
+                                                <option value="jewellery">Jewellery Design</option>
+                                                <option value="fineArt">Fine Art</option>
+                                            </select>
+                                    </div>
+                            </div>
+                              <div class="row">
+                                <div class="form-group col-md-6">
+                                   <button type="submit" class="btn btn-success"><i class="me-2" data-feather="check-circle"></i>Save</button>
+                                </div>
+                            </div> 
+
+                        </div>
+                </form>
+         </div>
+        </div>
+            {% if mylist %}
+
+            <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Add Batch</h5>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="row">
+                            {% if SuccessMsg %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>{{SuccessMsg}}.</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                            {% if FailedMsg %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>{{FailedMsg}}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                        {% endif %}
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-12">
+                            <form class="login100-form validate-form" enctype="multipart/form-data" action="{% url 'AdminArea:FillStudentAttendence' %}" method="POST">
+                                    {% csrf_token %}
+                            </div>
+                           <div class="col-md-12">
+                               <div class="form-group">
+                                            <label class="form-label" for="exampleFormControlSelect1">Batch</label>
+                                            <select class="form-control" id="exampleFormControlSelect1" name="batch_for">
+                                                <option value="">Choose Course Name</option>
+                                                {% for i in mylist %}
+                                                <option value="{{i}}">{{i}}</option>
+                                                {% endfor %}
+                                            </select>
+                                </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="exampleInputfile1">Date</label>
+                                    <input type="date" class="form-control" required id="exampleInputdate" name="date" placeholder="Date">
+                                </div>
+                            </div>
+                            </div>
+                              <div class="row">
+                                <div class="form-group col-md-6">
+                                   <button type="submit" class="btn btn-success"><i class="me-2" data-feather="check-circle"></i>Save</button>
+                                </div>
+                            </div> 
+                        </div>
+                </form>
+         {% endif %}
+
+                 
         <!-- [ Main Content ] end -->
+        </div>
+        </div>
+        </div>
+        {% block Attendencecontent %}
+        {% endblock Attendencecontent %}
     </div>
 </div>
 <!-- [ Main Content ] end -->

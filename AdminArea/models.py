@@ -82,7 +82,7 @@ class Student_Registration(models.Model):
 	remaining_fees=models.PositiveIntegerField(default=0)
 
 	def __str__(self):
-		return self.sid+" "+self.mname+" "+self.course_type
+		return self.sid+" "+self.fname+" "+self.course_type
 
 class Faculty_Registration(models.Model):
 	admin_user=models.ForeignKey(Admin_Registration,blank=True,on_delete=models.CASCADE,null=True)
@@ -325,7 +325,6 @@ class Student_Attendence(models.Model):
 	student=models.ForeignKey(Student_Registration,on_delete=models.CASCADE,null=True,blank=True)
 	take_date=models.DateField(max_length=8,default="")
 	batch=models.CharField(max_length=100)
-	late_arrival=models.CharField(max_length=100)
 	ap=models.CharField(default="A",choices=attendence_choice,max_length=1)
 
 	def __str__(self ):

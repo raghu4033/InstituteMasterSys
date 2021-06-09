@@ -11,10 +11,7 @@
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
-    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
-    <meta name="author" content="DashboardKit"/>
+    
 
     <!-- Favicon icon -->
     <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
@@ -325,33 +322,35 @@
                                 </div>
                                     <div class="form-group">
                                        <div class="form-check">
+                                        <input type="hidden" name="course_type" value="{{student_update.course_type}}">
+
                                            <label class="form-check-label" for="customCheckc1">Fashion</label>
-                                        {% if student_update.course_type == 'Fashion' %}
-                                           <input class="form-check-input input-primary" checked="checked" type="radio" id="customCheckc1" name="course_type" value="Fashion">
+                                        {% if student_update.course_type == 'fashion' %}
+                                           <input class="form-check-input input-primary" checked="checked" type="radio" id="customCheckc1" name="" value="Fashion">
                                         {% endif %}   
                                         </div>
                                         <div class="form-check">
                                             <label class="form-check-label" for="customCheckc1">Graphics</label>
-                                        {% if student_update.course_type == 'Graphics' %}    
-                                            <input class="form-check-input input-secondary" checked="checked" type="radio" id="customCheckc2" name="course_type" value="Graphics">
+                                        {% if student_update.course_type == 'graphics' %}    
+                                            <input class="form-check-input input-secondary" checked="checked" type="radio" id="customCheckc2" name="" value="Graphics">
                                         {% endif %}    
                                         </div>
                                         <div class="form-check">
                                             <label class="form-check-label" for="customCheckc1">Fineart</label>
-                                        {% if student_update.course_type == 'Fineart' %}    
-                                            <input class="form-check-input input-secondary" checked="checked" type="radio" id="customCheckc2" name="course_type" value="Fineart">
+                                        {% if student_update.course_type == 'gineart' %}    
+                                            <input class="form-check-input input-secondary" checked="checked" type="radio" id="customCheckc2" name="" value="Fineart">
                                         {% endif %}    
                                         </div>
                                         <div class="form-check">
                                             <label class="form-check-label" for="customCheckc1">Textile</label>
-                                        {% if student_update.course_type == 'Textile' %}    
-                                            <input class="form-check-input input-secondary" checked="checked" type="radio" id="customCheckc2" name="course_type" value="Textile">
+                                        {% if student_update.course_type == 'textile' %}    
+                                            <input class="form-check-input input-secondary" checked="checked" type="radio" id="customCheckc2" name="" value="Textile">
                                         {% endif %}    
                                         </div>
                                         <div class="form-check">
                                             <label class="form-check-label" for="customCheckc1">Jwellery</label>
-                                        {% if student_update.course_type == 'Jwellery' %}
-                                            <input class="form-check-input input-secondary" checked="checked" type="radio" id="customCheckc2" name="course_type" value="Jwellery">
+                                        {% if student_update.course_type == 'jwellery' %}
+                                            <input class="form-check-input input-secondary" checked="checked" type="radio" id="customCheckc2" name="" value="Jwellery">
                                         {% endif %}    
                                         </div>
                                         <div class="form-check">

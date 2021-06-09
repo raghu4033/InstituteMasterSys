@@ -9,10 +9,7 @@
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
-    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
-    <meta name="author" content="DashboardKit"/>
+    
 
     <!-- Favicon icon -->
     <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
@@ -31,7 +28,6 @@
     
 
 </head>
-
 <body class="">
 	
 <!-- [ Main Content ] start -->
@@ -53,9 +49,113 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-       VIEW ATTENDENCE
+
+        <!-- Attendence Summery Start -->
+        <div class="card text-white bg-white mt-5">
+                    <div class="card-body border-bottom py-3">
+                        <div class="row align-items-center justify-contact-between">
+                            <div class="col">
+                                <h5 class="m-0 text-"><i class="material-icons-two-tone f-20 text-primary"></i>Attendece Summary</h5>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row justify-content-sm-between align-items-center">
+                            <div class="col-md-3 col-sm-3 mb-3 mb-sm-0 align-middle">
+                                <div class="p-4 d-inline-block align-middle font-16">
+                                    <h6 class="d-inline-block m-0 text-truncate text-primary">Total Sessions</h6>
+                                    <br>
+                                     <button type="button" class="btn btn-outline-primary disabled"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle me-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>{{TatalClass}}</button>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 mb-3 mb-sm-0 align-middle">
+                                <div class="p-4 d-inline-block align-middle font-16">
+                                    <h6 class="d-inline-block m-0 text-truncate text-success">Present</h6>
+                                    <br>
+                                     <button type="button" class="btn btn-outline-success disabled"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle me-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>{{PresentClass}}</button>
+                                </div>
+                            </div>
+                             <div class="col-md-3 col-sm-3 mb-3 mb-sm-0 align-middle">
+                                <div class="p-4 d-inline-block align-middle font-16">
+                                    <h6 class="d-inline-block m-0 text-truncate text-danger">Absent</h6>
+                                    <br>
+                                     <button type="button" class="btn btn-outline-danger disabled"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle me-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>{{AbsentClass}}</button>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 mb-3 mb-sm-0 align-middle">
+                                <div class="p-4 d-inline-block align-middle font-16">
+                                    <h6 class="d-inline-block m-0 text-truncate text-info">Percentage</h6>
+                                    <br>
+                                     <button type="button" class="btn btn-outline-info disabled"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle me-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>{{Total_Fees_Amount}}/-</button>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        <!-- Attendence Summery End -->
+
+        <!-- Attendence List Start -->
+         <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Attendence Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row align-items-center m-l-0">
+                            <div class="col-sm-6">
+                               
+                               
+                            </div>
+                           <div class="col-sm-6 text-end">
+                                
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="report-table" class="table table-bordered table-striped mb-0">
+                                <thead class="">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>A/P</th>
+                                        <th>Faculty</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in AttendeceList %}
+                                    <tr>
+                                        <td>{{i.take_date}}</td>
+                                        {% if i.ap == 'A' %}
+                                        <td>
+                                            <button class="btn btn-success btn-sm dissabled text-white">Absent</button>
+                                        </td>
+                                        {% else %}
+                                        <td>
+                                            <button class="btn btn-danger btn-sm dissabled text-white">Present</button>
+                                        </td>
+                                        {% endif %}
+
+                                        {% if i.admin_user %}
+                                        <td>{{i.admin_user.fname}}&nbsp;{{i.admin_user.mname}}</td>
+                                        {% endif %}
+
+                                        {% if i.faculty_user %}
+                                        <td>{{i.faculty_user.first_name}}&nbsp;{{i.faculty_user.middel_name}}</td>
+                                        {% endif %}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
         </div>
+        <!-- Attendence List End -->
+
+    </div>
+
+
+
         <!-- [ Main Content ] end -->
     </div>
 </div>

@@ -6,10 +6,7 @@
     <title>Faculty Dashboard</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
-    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
-    <meta name="author" content="DashboardKit"/>
+    
 
     <!-- Favicon icon -->
     <link rel="icon" href="{% static 'Adminarea/images/favicon-icon.png' %}" type="image/x-icon">
@@ -111,8 +108,8 @@
 					<li class="pc-item pc-hasmenu">
 						<a href="#!" class="pc-link"><span class="pc-micon"><i class="material-icons-two-tone">flaky</i></span><span class="pc-mtext">Attendence</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
 						<ul class="pc-submenu">
-							<li class="pc-item"><a class="pc-link" href="">Take attendence</a></li>
-							<li class="pc-item"><a class="pc-link" href="">Blank</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'FacultyArea:TakeAttendance' %}">Take Attendance</a></li>
+							<li class="pc-item"><a class="pc-link" href="{% url 'FacultyArea:ViewAttendance' %}">View Attendance </a></li>
 						</ul>
 					</li>
 					<li class="pc-item pc-hasmenu">

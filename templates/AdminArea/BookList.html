@@ -10,10 +10,7 @@
   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
-    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
-    <meta name="author" content="DashboardKit"/>
+    
 
     <!-- Favicon icon -->
     <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
@@ -65,14 +62,14 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="layout-block wow fadeInUp" data-wow-delay="0.2s" style="border: 2px solid darkblue; margin: 10px; border-radius: 20px; padding: 15px;">
                         <a href="#!" class="layout-img">
-                            <img src="{% static 'AdminArea/images/book.jpg' %}" alt="" class="img-fluid">
+                            <img src="{{i.book_photo.url}}" alt="" class="img-fluid">
                             <span class="overlay-action">
                                 <i class="material-icons-two-tone"></i>
                             </span>
                         </a>
                         <h4 class="m-0">{{i.book_title}}</h4>
                         <a class="text-muted ml-4 btn btn-white btn-sm " href="{{i.book_pdf.url}}" download>Download</a>
-                         <a href="{{i.book_link}}" target="blank" class="btn btn-sm  btn-primary">View Book</a><br /></p>
+                         <a href="{{i.book_pdf.url}}    " target="blank" class="btn btn-sm  btn-primary">View Book</a><br /></p>
                     </div>
                 </div>
                 {% endfor %}

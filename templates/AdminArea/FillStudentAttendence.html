@@ -10,10 +10,7 @@
   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
-    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
-    <meta name="author" content="DashboardKit"/>
+    
 
     <!-- Favicon icon -->
     <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
@@ -70,7 +67,7 @@
                             </div>
                             <div class="col-sm-6 text-end">
                                 <div class="form-group">
-                                    <label class="form-label" for="exampleInputPassword1"> {{date}}</label>
+                                    <label class="form-label" for="exampleInputPassword1">Date : &nbsp; {{date}}</label>
                                     <input type="hidden" name="date" value="{{date}}">
 
                                 </div>
@@ -80,7 +77,6 @@
                             <table id="report-table" class="table table-bordered table-striped mb-0">
                                 <thead>
                                     <tr>
-                                        <th>A/P</th>
                                         <th>SID</th>
                                         <th>Student Name</th>
                                         <th>Student Mobile</th>
@@ -90,9 +86,6 @@
                                 <tbody id="attendence_list">
                                     {% for i in StudentList %}
                                     <tr>
-                                        <td>
-                                        	<input value={{i.sid}} type="checkbox" id="Check">
-                                        </td>
                                         <td>{{i.sid}}</td>
                                         <td>{{i.fname}}&nbsp;{{i.mname}}&nbsp;{{i.lname}}</td>
                                         <td>{{i.mobile}}</td>
@@ -162,13 +155,14 @@
               type: 'POST',
               url:  {% url 'AdminArea:SubmitStudentAttendence' %},
               data: {
-                "sid":sid,
+                "sid":JSON.stringify(sid),
                 "date": "{{ date }}",
                 "batch": "{{ batch }}" 
               },
               contenttype:"multipart/form-data",
               success: (res) => {
                 console.log(res)
+                location.assign("{% url 'AdminArea:TakeStudentAttendence' %}")
               },
               error:(err) => {
                 console.log(err)

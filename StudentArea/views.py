@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.conf import settings
 from django.urls import reverse
-from AdminArea.models import Student_Registration,Student_Certificate,Student_Schedule,Student_Leave,Student_Suggestion,ELibrary,Submitions_Registration,Student_Inquiry,Admin_Registration,institute_Detaile,Event_Registration,StudentFees,Notice_Registration
+from AdminArea.models import Student_Registration,Student_Attendence,Student_Certificate,Student_Schedule,Student_Leave,Student_Suggestion,ELibrary,Submitions_Registration,Student_Inquiry,Admin_Registration,institute_Detaile,Event_Registration,StudentFees,Notice_Registration
 from datetime import datetime
 from twilio.rest import Client
 from django.core.mail import send_mail
@@ -25,7 +25,7 @@ def StudentLogin(request):
 				# student.save()
 				request.session['sid']=student.sid
 				# request.session['last_login'] = student.last_login
-				request.session['studentmname']=student.mname
+				request.session['studentmname']=student.fname
 				request.session['studentphoto']=student.photo.url
 				return redirect('StudentArea:StudentDashboard')
 			else:
@@ -54,7 +54,7 @@ def StudentDashboard(request):
 	AllSubmitions=Submitions_Registration.objects.all().count()
 
 	Event=Event_Registration.objects.all().order_by('-id')[0:1]
-	Notice=Notice_Registration.objects.filter(notice_for=Student.course_type).order_by('-id')[0:1]
+	Notice=Notice_Registration.objects.all().order_by('-id')[0:1]
 	Submitions=Submitions_Registration.objects.filter(batch=Student.batch).order_by('-id')[0:1]
 	
 
@@ -179,7 +179,16 @@ def StudentViewLeave(request):
 	return render(request,'StudentArea/StudentViewLeave.html',{'YourAllLeave':YourAllLeave,'student':student})
 
 def StudentViewAttendence(request):
-	return render(request,'StudentArea/StudentViewAttendence.html')
+	AttendeceList=Student_Attendence.objects.filter(student_id=request.session['sid']).order_by('-take_date')
+	TotalSesion = Student_Attendence.objects.filter(student_id=request.session['sid'])
+	TatalClass = len(TotalSesion)
+	PresentSesion = Student_Attendence.objects.filter(student_id=request.session['sid'],ap = 'P' )
+	PresentClass = len(PresentSesion)
+	AbsentSesion = Student_Attendence.objects.filter(student_id=request.session['sid'],ap = 'A' )
+	AbsentClass = len(AbsentSesion)
+
+
+	return render(request,'StudentArea/StudentViewAttendence.html',{'AttendeceList':AttendeceList,'AbsentClass':AbsentClass,'PresentClass':PresentClass,'TatalClass':TatalClass})
 
 def StudentPayFees(request):
 	return render(request,'StudentArea/StudentPayFees.html')

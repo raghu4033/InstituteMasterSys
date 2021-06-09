@@ -1,0 +1,183 @@
+{% extends "FacultyArea/FacultyHeader.html" %}
+{% block faculty_content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <title>Dashboard</title>
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+    
+
+</head>
+
+<body class="">
+<div class="pc-container">
+ <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">FacultyArea</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="">Home</a></li>
+                            <li class="breadcrumb-item"><a href="">Attendence</a></li>
+                            <li class="breadcrumb-item">Fill Student Attendence</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- subscribe start -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Student List</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row align-items-center m-l-0">
+                            <div class="col-sm-6">
+                            </div>
+                            <div class="col-sm-6 text-end">
+                                <div class="form-group">
+                                    <label class="form-label" for="exampleInputPassword1">Date : &nbsp; {{date}}</label>
+                                    <input type="hidden" name="date" value="{{date}}">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="report-table" class="table table-bordered table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>SID</th>
+                                        <th>Student Name</th>
+                                        <th>Student Mobile</th>
+                                        <th>Absent/Present</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="attendence_list">
+                                    {% for i in StudentList %}
+                                    <tr>
+                                        <td>{{i.sid}}</td>
+                                        <td>{{i.fname}}&nbsp;{{i.mname}}&nbsp;{{i.lname}}</td>
+                                        <td>{{i.mobile}}</td>
+                                       <!--  <td>
+                                        	<input type="text" name="" class="form-control h-25">
+                                        </td> -->
+                                        <td>
+                                            <button class="btn btn-success" type="button" onclick="checkIN({{i.sid}},this)" id="checkin">Present</button>
+                                        </td>
+                                       
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    {% csrf_token %}
+                    <button type="button" id="list_sid" class="btn btn-success"><i class="me-2" data-feather="check-circle"></i>Save</button>
+                </div>
+            </div>                 
+            <!-- subscribe end -->
+        </div>
+        <!-- [ Main Content ] end -->
+</div>
+
+<!-- [ Main Content ] end -->
+  
+    <script src="{% static 'AdminArea/js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/feather.min.js' %}"></script>
+    <!-- <script src="{% static 'AdminArea/js/pcoded.min.js' %}"></script> -->
+   
+<!-- Apex Chart -->
+<script src="{% static 'js/plugins/apexcharts.min.js' %}"></script>
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+    let sid = []
+    function checkIN(id,e){
+        if(e.className === "btn btn-success"){
+            e.setAttribute("class","btn btn-danger")
+            sid.push(id)
+            e.innerHTML = "Absent"
+        }else{
+            e.setAttribute("class","btn btn-success")
+            let index = sid.indexOf(id)
+            sid.splice(index,1)
+            e.innerHTML = "Present"
+        }
+       
+    }
+    $("#list_sid").on("click",()=>{
+        console.log(sid)
+
+        $.ajax({
+              type: 'POST',
+              url:  "{% url 'FacultyArea:SubmitAttendence' %}",
+              data: {
+                "sid":JSON.stringify(sid),
+                "date": "{{ date }}",
+                "batch": "{{ batch }}" 
+              },
+              contenttype:"multipart/form-data",
+              success: (res) => {
+                console.log(res)
+                location.assign("{% url 'FacultyArea:TakeAttendance' %}")
+              },
+              error:(err) => {
+                console.log(err)
+              }
+            })
+    })   
+</script>
+<script src="{% static 'js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'js/pages/dashboard-sale.js' %}"></script>
+
+{% endblock faculty_content %}
+
+</body>
+
+
+</html>
