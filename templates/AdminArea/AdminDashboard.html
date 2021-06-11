@@ -311,13 +311,23 @@
                 </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Account summary</h5>
+                        <h5>Fees Summary</h5>
                     </div>
                     <div class="card-body">
-                        <div id="summary-chart"></div>
+                        <div id="pie-chart-1" style="width:100%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Attdence Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="pie-chart-2" style="width:100%"></div>
                     </div>
                 </div>
             </div>
@@ -441,6 +451,91 @@
         }
   
         showTime();
+</script>
+<script type="text/javascript">
+    $(function() {
+            var options = {
+                chart: {
+                    height: 320,
+                    type: 'pie',
+                },
+                labels: [ 'Paid Fees', 'Unpaid Fees'],
+                series: [{{PaidPER}}, {{UnPaidPER}}],
+                colors: [ "#0e9e4a", "#EA4D4D"],
+                legend: {
+                    show: true,
+                    position: 'bottom',
+                },
+                dataLabels: {
+                    enabled: true,
+                    dropShadow: {
+                        enabled: false,
+                    }
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            }
+            var chart = new ApexCharts(
+                document.querySelector("#pie-chart-1"),
+                options
+            );
+            chart.render();
+        });
+        $(function() {
+            var options = {
+                chart: {
+                    height: 320,
+                    type: 'donut',
+                },
+                labels: [ 'Present Class', 'Absent Class'],
+                series: [ {{PPer}}, {{APer}}],
+                colors: ["#0e9e4a",  "#EA4D4D"],
+                legend: {
+                    show: true,
+                    position: 'bottom',
+                },
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            labels: {
+                                show: true,
+                                name: {
+                                    show: true
+                                },
+                                value: {
+                                    show: true
+                                }
+                            }
+                        }
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    dropShadow: {
+                        enabled: false,
+                    }
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {          
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            }
+            var chart = new ApexCharts(
+                document.querySelector("#pie-chart-2"),
+                options
+            );
+            chart.render();
+        });
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
 <script>

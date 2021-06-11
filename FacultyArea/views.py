@@ -366,10 +366,10 @@ def ViewAttandenceList(request):
 	if request.method=="POST":
 		batch_for=request.POST['batch_for']
 		todate=request.POST['todate']
-		fromdate=request.POST['todate']
+		fromdate=request.POST['fromdate']
 		print(batch_for,todate,fromdate)
 		try:
-			StudentList=Student_Attendence.objects.filter(batch=batch_for)
+			StudentList=Student_Attendence.objects.filter(take_date__lte=todate,take_date__gte=fromdate,batch=batch_for)
 			print(StudentList)
 			return render(request,'FacultyArea/ViewAttandenceList.html',{'StudentList':StudentList,'todate':todate,'fromdate':fromdate,'batch_for':batch_for})
 		except Exception as e:

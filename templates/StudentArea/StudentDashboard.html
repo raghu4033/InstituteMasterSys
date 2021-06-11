@@ -281,7 +281,7 @@
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h5>RadialBar Charts Custom Angle</h5>
+                            <h5>Attendence Chart</h5>
                         </div>
                         <div class="card-body">
                             <div id="radialBar-chart-2"></div>
@@ -349,7 +349,7 @@
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
 <script src="{% static 'StudentArea/js/plugins/apexcharts.min.js' %}"></script>
-<script src="{% static 'StudentArea/js/pages/chart-apex.js' %}"></script>
+<!-- <script src="{% static 'StudentArea/js/pages/chart-apex.js' %}"></script> -->
 <script>
         setInterval(showTime, 1000);
         function showTime() {
@@ -380,6 +380,76 @@
         }
   
         showTime();
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            var options = {
+                chart: {
+                    height: 350,
+                    type: 'radialBar',
+                },
+                plotOptions: {
+                    radialBar: {
+                        offsetY: -30,
+                        startAngle: 0,
+                        endAngle: 270,
+                        hollow: {
+                            margin: 5,
+                            size: '30%',
+                            background: 'transparent',
+                            image: undefined,
+                        },
+                        dataLabels: {
+                            name: {
+                                show: false,
+
+                            },
+                            value: {
+                                show: false,
+                            }
+                        }
+                    }
+                },
+                colors: ["#7267EF", "#0e9e4a", "#EA4D4D", "#ffa21d"],
+                series: [{{TatalClass}}, {{PresentClass}}, {{AbsentClass}},{{PER}}],
+                labels: ['Total', 'Present', 'Absent', 'Presentage'],
+                legend: {
+                    show: true,
+                    floating: true,
+                    fontSize: '16px',
+                    position: 'left',
+                    offsetX: 0,
+                    offsetY: 0,
+                    labels: {
+                        useSeriesColors: true,
+                    },
+                    markers: {
+                        size: 0
+                    },
+                    formatter: function(seriesName, opts) {
+                        return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
+                    },
+                    itemMargin: {
+                        horizontal: 1,
+                    }
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        legend: {
+                            show: false
+                        }
+                    }
+                }]
+            }
+
+            var chart = new ApexCharts(
+                document.querySelector("#radialBar-chart-2"),
+                options
+            );
+
+            chart.render();
+        });
     </script>
 
 <script>

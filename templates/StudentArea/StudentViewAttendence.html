@@ -85,7 +85,7 @@
                                 <div class="p-4 d-inline-block align-middle font-16">
                                     <h6 class="d-inline-block m-0 text-truncate text-info">Percentage</h6>
                                     <br>
-                                     <button type="button" class="btn btn-outline-info disabled"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle me-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>{{Total_Fees_Amount}}/-</button>
+                                     <button type="button" class="btn btn-outline-info disabled"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle me-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>{{PER}}%</button>
                                 </div>
                             </div>
                         </div>
@@ -125,11 +125,11 @@
                                         <td>{{i.take_date}}</td>
                                         {% if i.ap == 'A' %}
                                         <td>
-                                            <button class="btn btn-success btn-sm dissabled text-white">Absent</button>
+                                            <button class="btn btn-danger btn-sm dissabled text-white">Absent</button>
                                         </td>
                                         {% else %}
                                         <td>
-                                            <button class="btn btn-danger btn-sm dissabled text-white">Present</button>
+                                            <button class="btn btn-success btn-sm dissabled text-white">Present</button>
                                         </td>
                                         {% endif %}
 

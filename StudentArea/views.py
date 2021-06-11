@@ -8,6 +8,7 @@ from django.core.mail import send_mail
 from django.utils import timezone
 import pytz
 import random
+import math
 
 
 # Create your views here.
@@ -56,7 +57,19 @@ def StudentDashboard(request):
 	Event=Event_Registration.objects.all().order_by('-id')[0:1]
 	Notice=Notice_Registration.objects.all().order_by('-id')[0:1]
 	Submitions=Submitions_Registration.objects.filter(batch=Student.batch).order_by('-id')[0:1]
-	
+
+	AttendeceList=Student_Attendence.objects.filter(student_id=request.session['sid']).order_by('-take_date')
+	TotalSesion = Student_Attendence.objects.filter(student_id=request.session['sid'])
+	TatalClass = len(TotalSesion)
+	PresentSesion = Student_Attendence.objects.filter(student_id=request.session['sid'],ap = 'P' )
+	PresentClass = len(PresentSesion)
+	AbsentSesion = Student_Attendence.objects.filter(student_id=request.session['sid'],ap = 'A' )
+	AbsentClass = len(AbsentSesion)
+
+	P = int(PresentClass)
+	T = int(TatalClass)
+	PER = '{:}'.format((P/T)*100)
+	print(PER)
 
 
 	total_amount=[]
@@ -73,7 +86,7 @@ def StudentDashboard(request):
 
 	
 	YourClass=Student_Schedule.objects.filter(batch_nm=Student.batch).order_by('-id')[0:1]
-	return render(request,'StudentArea/StudentDashboard.html',{'Submitions':Submitions,'Notice':Notice,'Event':Event,'Student':Student,'Total_Fees_Amount':Total_Fees_Amount,'Rimainig_Fees':Rimainig_Fees,'AllSubmitions':AllSubmitions,'AllBook':AllBook,'AllNotice':AllNotice,'AllEvent':AllEvent,'YourClass':YourClass})
+	return render(request,'StudentArea/StudentDashboard.html',{'AbsentClass':AbsentClass,'PresentClass':PresentClass,'TatalClass':TatalClass,'PER':PER,'Submitions':Submitions,'Notice':Notice,'Event':Event,'Student':Student,'Total_Fees_Amount':Total_Fees_Amount,'Rimainig_Fees':Rimainig_Fees,'AllSubmitions':AllSubmitions,'AllBook':AllBook,'AllNotice':AllNotice,'AllEvent':AllEvent,'YourClass':YourClass})
 
 def StudentForgotPassword(request):
 	if request.method=="POST":
@@ -187,8 +200,13 @@ def StudentViewAttendence(request):
 	AbsentSesion = Student_Attendence.objects.filter(student_id=request.session['sid'],ap = 'A' )
 	AbsentClass = len(AbsentSesion)
 
+	P = int(PresentClass)
+	T = int(TatalClass)
+	PER = '{:}'.format((P/T)*100)
+	print(PER)
 
-	return render(request,'StudentArea/StudentViewAttendence.html',{'AttendeceList':AttendeceList,'AbsentClass':AbsentClass,'PresentClass':PresentClass,'TatalClass':TatalClass})
+
+	return render(request,'StudentArea/StudentViewAttendence.html',{'PER':PER,'AttendeceList':AttendeceList,'AbsentClass':AbsentClass,'PresentClass':PresentClass,'TatalClass':TatalClass})
 
 def StudentPayFees(request):
 	return render(request,'StudentArea/StudentPayFees.html')

@@ -59,7 +59,7 @@ def AdminDashboard(request):
 	for i in total_fees:
 		total_amount.append(int(i.amount))
 	total_feeslen = sum(total_amount)
-	
+	# Paid Fees
 	
 	todays_date = date.today()
 	studentBday=Student_Registration.objects.filter(dob=todays_date).count()
@@ -72,7 +72,35 @@ def AdminDashboard(request):
 	AllNotice=Notice_Registration.objects.all().order_by('-notice_date')[0:3]
 	AllLeavelist=Student_Leave.objects.all().order_by('-id')[0:5]
 	StudentInquiryList=Student_Inquiry.objects.all().order_by('-inquiry_date')[0:5]
-	return render(request,'AdminArea/AdminDashboard.html',{'studentBday':studentBday,'facultytBday':facultytBday,'FacultyLeaveReq':FacultyLeaveReq,'StudentLeaveReq':StudentLeaveReq,'total_feeslen':total_feeslen,'total_batch':total_batch,'total_student':total_student,'AllNotice':AllNotice,'AllLeavelist':AllLeavelist,'StudentInquiryList':StudentInquiryList,'AllEvents':AllEvents})
+
+
+	TotalSesion = Student_Attendence.objects.all()
+	TatalClass = len(TotalSesion)
+
+	PresentSesion = Student_Attendence.objects.filter(ap = 'P' )
+	PresentClass = len(PresentSesion)
+	AbsentSesion = Student_Attendence.objects.filter(ap = 'A' )
+	AbsentClass = len(AbsentSesion)
+
+	P = int(PresentClass)
+	T = int(TatalClass)
+	PPer = '{:}'.format((P/T)*100)
+	A = int(AbsentClass)
+	APer = '{:}'.format((A/T)*100)
+	
+
+	unpain_amount=[]
+	total_unpain_fees=Student_Registration.objects.all()
+	for i in total_unpain_fees:
+		unpain_amount.append(int(i.final_fees))
+	total_unpaid_feeslen = sum(unpain_amount)
+	# Total Fees
+	UnpaisFees = total_unpaid_feeslen - total_feeslen
+	# UnPaid Fees
+	PaidPER = '{:}'.format((total_feeslen/total_unpaid_feeslen)*100)
+	UnPaidPER = '{:}'.format((UnpaisFees/total_unpaid_feeslen)*100)
+
+	return render(request,'AdminArea/AdminDashboard.html',{'PaidPER':PaidPER,'UnPaidPER':UnPaidPER,'APer':APer,'PPer':PPer,'studentBday':studentBday,'facultytBday':facultytBday,'FacultyLeaveReq':FacultyLeaveReq,'StudentLeaveReq':StudentLeaveReq,'total_feeslen':total_feeslen,'total_batch':total_batch,'total_student':total_student,'AllNotice':AllNotice,'AllLeavelist':AllLeavelist,'StudentInquiryList':StudentInquiryList,'AllEvents':AllEvents})
 
 def AdminForgotPassword(request):
 	if request.method=="POST":
@@ -960,9 +988,9 @@ def ViewStudentAttandenceList(request):
 	if request.method=="POST":
 		batch_for=request.POST['batch_for']
 		todate=request.POST['todate']
-		fromdate=request.POST['todate']
+		fromdate=request.POST['fromdate']
 		try:
-			StudentList=Student_Attendence.objects.filter(take_date__range=[todate, todate]).filter(batch=batch_for)
+			StudentList=Student_Attendence.objects.filter(take_date__lte=todate,take_date__gte=fromdate,batch=batch_for)
 			return render(request,'AdminArea/ViewStudentAttandenceList.html',{'StudentList':StudentList,'todate':todate,'fromdate':fromdate,'batch_for':batch_for})
 		except Exception as e:
 			FailedMsg="Student Data Not Found"
