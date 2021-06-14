@@ -52,9 +52,54 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-        Admin User
-        <!-- [ Main Content ] end -->
+       
+         <div class="row">
+            <!-- subscribe start -->
+              <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Paid Salary
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="report-table" class="table table-bordered table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>FID</th>
+                                        <th>Month</th>
+                                        <th>Amount</th>
+                                        <th>payment Date</th>
+                                        <th>payment Type</th>
+                                        <th>Invoice Num</th>
+                                        <th>Invoice</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in SalaryList %}
+                                    <tr>
+                                        <td>{{i.faculty_user_id}}</td>
+                                        <td>{{i.month}}</td>
+                                        <td>{{i.amount}}</td>
+                                        <td>{{i.payment_date}}</td>
+                                        <td>{{i.payment_type}}</td>
+                                        <td>{{i.recipt_no}}</td>
+                                        
+                                        <td>
+                                             <form action="{% url 'AdminArea:PrintSalaryInvoice' %}" method="POST">
+                                            {% csrf_token %} 
+                                                <input type="hidden" name="pk" value="{{i.pk}}">
+                                                <button type="submit" class="btn btn-success btn-sm" target="blank">Download</button> 
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- subscribe end -->
         </div>
     </div>
 </div>

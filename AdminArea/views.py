@@ -28,10 +28,10 @@ def admin_login(request):
 				request.session['imageurl']=admin_user.photo.url
 				return redirect('AdminArea:AdminDashboard')
 			else:
-				FailedMsg="Your Login is Not activated"
+				FailedMsg="Your Login is not activated"
 				return render(request,'Login/admin_login.html',{'FailedMsg':FailedMsg})
 		except:
-			FailedMsg="Encorect Email or Password"
+			FailedMsg="Incorrect Email or Password"
 			return render(request,'Login/admin_login.html',{'FailedMsg':FailedMsg})
 	else:
 		return render(request,'Login/admin_login.html')
@@ -40,9 +40,11 @@ def admin_login(request):
 def admin_logout(request):
 	try:
 		del request.session['admin_email']
-		return render(request,'Login/admin_login.html')
+		del request.session['mname']
+		del request.session['imageurl']
+		return redirect('AdminArea:admin_login')
 	except:
-		return render(request,'Login/admin_login.html')
+		return redirect('AdminArea:admin_login')
 
 def AdminDashboard(request):
 	total_student=Student_Registration.objects.all().count()
@@ -115,7 +117,7 @@ def AdminForgotPassword(request):
 			subject="OTP Recived Successefully"                        
 			email_from=settings.EMAIL_HOST_USER
 			send_mail(subject,message,email_from,rec)
-			SuccessMsg="Check Your Email For The OTP"
+			SuccessMsg="Check Your Email for The OTP"
 
 			return render(request,'AdminArea/AdminOTP.html',{'AdminUser':AdminUser,'otp':otp,'SuccessMsg':SuccessMsg})
 		except Exception as e:
@@ -132,7 +134,7 @@ def AdminOTP(request):
 		if otp==user_otp:
 			return render(request,'AdminArea/AdminNewPassword.html',{'email':email})
 		else:
-			FailedMsg="Invelid OTP"
+			FailedMsg="invalid OTP"
 			return render(request,'AdminArea/AdminOTP.html',{'email':email,'FailedMsg':FailedMsg,'otp':otp})
 	else:
 		return render(request,'AdminArea/AdminOTP.html')
@@ -186,7 +188,7 @@ def AdminLockScreen(request):
 			if AdminUser.sreenpin==passcode:
 				return redirect('AdminArea:AdminDashboard')
 			else:
-				FailedMsg="Envalid Passcode"
+				FailedMsg="Incorrect Passcode"
 				return render(request,'AdminArea/AdminLockScreen.html',{'FailedMsg':FailedMsg})
 		except:
 			return redirect('AdminArea:admin_login')
@@ -403,7 +405,7 @@ def StudentAdmission(request):
 
 		try:
 			student=Student_Registration.objects.get(sid=sid)
-			FailedMsg="Student Id Alredy Registered"
+			FailedMsg="Student ID Alredy Registered"
 			return render(request,'AdminArea/StudentAdmission.html',{'FailedMsg':FailedMsg})
 		except:
 			Student_Registration.objects.create(
@@ -486,7 +488,7 @@ def EnrollStudentInquiry(request):
 			msg="Student Inquery Registered Successefully"
 			subject="Thanks for visiting Kalaveethi Institute"
 			website="https://kalaveethi.com/"
-			booklate="https://kalaveethi.com/courses/kalaveethibook/"
+			booklate="https://kalaveethi.com/Booklate/"
 			message=f"Hi {full_name}\n \nThank you for reaching out to Kalaveethi Institue Of Design. I’m Trupal, your admissions counselor. I look forward to working with you. Please feel free to text me here or my colleagues at  if you have any questions. \n \n \n Phone: +91 8160892915 \n Website: {website} \n \nDownload Booklate:{booklate}"
 			
 			client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
@@ -519,10 +521,10 @@ def AddSubmitions(request):
 		admin_user=request.session['admin_email']
 		try:
 			Submitions_Registration.objects.create(course=course,batch=batch_name,subject=subject,desc=desc,last_date=date,submitions_file=notice_file,admin_user_id=admin_user)
-			SuccessMsg="Submitions Added Successefully"
+			SuccessMsg="Submission Added Successefully"
 			return render(request,'AdminArea/AddSubmitions.html',{'SuccessMsg':SuccessMsg})
 		except:
-			FailedMsg="Submitions Added Failed"
+			FailedMsg="Submission Added Failed"
 			return render(request,'AdminArea/AddSubmitions.html',{'FailedMsg':FailedMsg})
 	else:
 		return render(request,'AdminArea/AddSubmitions.html')
@@ -648,10 +650,10 @@ def AdminScheduleClass(request):
 		admin_user=request.session['admin_email']
 		try:
 			Student_Schedule.objects.create(from_date=from_date,to_date=to_date,from_time=from_time,to_time=to_time,subject=subject,classtype=class_type,batch_nm=batch_for,organizer=organizer,admin_user_id=admin_user)
-			SuccessMsg="class Added Successefully"
+			SuccessMsg="Schedule Added Successefully"
 			return render(request,'AdminArea/AddClassSchedule.html',{'SuccessMsg':SuccessMsg})
 		except:
-			FailedMsg="class Added Failed"
+			FailedMsg="Schedule Added Failed"
 			return render(request,'AdminArea/AddClassSchedule.html',{'FailedMsg':FailedMsg})
 	else:
 		return render(request,'AdminArea/AddClassSchedule.html')
@@ -744,7 +746,7 @@ def AddFees(request):
 
 			rec=[email,]
 			subject="Fees installment paid successefully"
-			website="https://kalaveethi.com/"
+			website="https://institutemaster.kalaveethi.com/"
 			message=f" \n Hello {full_name}, \n \n This is a confirmation that we have just received your secure payment. \n \n Thank you for the recent payment that you made on {date} for the amount of Rs: {amount}. This is a confirmation that amount has been successfully received.\n \n \n Kalaveethi Institue Of Design. \n {website} "
 			email_from=settings.EMAIL_HOST_USER
 			send_mail(subject,message,email_from,rec)
@@ -796,11 +798,11 @@ def CertificateGrade(request):
 		admin_user=request.session['admin_email']
 		try:
 			Student_Certificate.objects.create(admin_user_id=admin_user,student_id=sid,grade=grade,take_date=date,certificate_pdf=Certificate_file)
-			SuccessMsg="Certificate Successefully Genarated"
+			SuccessMsg="Certificate Genarated Successefully"
 			student=Student_Registration.objects.get(sid=sid)
 			return render(request,'AdminArea/CertificateGrad.html',{'student':student,'SuccessMsg':SuccessMsg})
 		except:
-			FailedMsg="Genarated Failed"
+			FailedMsg="Certificate Genarated Failed"
 			student=Student_Registration.objects.get(sid=sid)
 			return render(request,'AdminArea/CertificateGrad.html',{'student':student,'FailedMsg':FailedMsg})
 	else:
@@ -882,7 +884,8 @@ def ShowFacultyIdList(request):
 	return render(request,'AdminArea/ShowFacultyIdList.html',{'FacultyList':FacultyList})
 
 def Viewfacultysalary(request):
-	return render(request,'AdminArea/Viewfacultysalary.html')
+	SalaryList = Faculty_Salary.objects.all().order_by('-recipt_no')
+	return render(request,'AdminArea/Viewfacultysalary.html',{'SalaryList':SalaryList})
 def AddSalary(request):
 	if request.method=="POST":
 		fid=request.POST['fid']
@@ -905,8 +908,8 @@ def AddSalary(request):
 			full_name=faculty.first_name+" "+faculty.middel_name
 
 			rec=[email,]
-			subject="Fees installment paid successefully"
-			website="https://kalaveethi.com/"
+			subject="Salary Paid Successefully"
+			website="https://institutemaster.kalaveethi.com/"
 			message=f" \n Hello {full_name} \n \n This is a confirmation that we have just received your secure payment. \n \n Thank you for the recent payment that you made on {from_date} for the amount of Rs: {amount}. This is a confirmation that amount has been successfully received.\n \n \n Kalaveethi Institue Of Design. \n {website} "
 			email_from=settings.EMAIL_HOST_USER
 			send_mail(subject,message,email_from,rec)
@@ -1049,7 +1052,7 @@ def Addemployee(request):
             rec=[email,]
             subject="Joining Successefully"
             full_name=fname+" "+lname
-            website="https://student.kalaveethi.com/"
+            website="https://institutemaster.kalaveethi.com/"
             message=f" \n Dear {full_name},  \n \n Your SID Number is : {fid} \n Password is : {password} \n \n   Welcome to Kalaveethi!  Thank you, for being part of Kalaveethi family. Kalaveethi Institute Of Design Enhance your knowledge towards designing, personality development skill, will as sure you the best guidance in the field of  and will give you an opportunity to meet with different skill expertise in your respective field. Wish you very all the best and hope to build better career. \n From, Kalaveethi Institute of Design. \n Visit Now :-\n {website} "
             email_from=settings.EMAIL_HOST_USER
             send_mail(subject,message,email_from,rec)
@@ -1254,7 +1257,11 @@ def faculty_profile_update(request,slug):
 		return render(request,'AdminArea/faculty_profile_update.html',{'faculty':faculty})
 
 	
-
+def PrintSalaryInvoice(request):
+	pk=request.POST['pk']
+	InvoiceInfo=Faculty_Salary.objects.get(pk=pk)
+	faculty=Faculty_Registration.objects.get(faculty_id=InvoiceInfo.faculty_user_id)
+	return render(request,'AdminArea/PrintSalaryInvoice.html',{'InvoiceInfo':InvoiceInfo,'faculty':faculty})
 
 def deleteprofile(request,slug):
 	delete_profile= Faculty_Registration.objects.get(pk=slug)

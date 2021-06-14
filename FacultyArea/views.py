@@ -22,8 +22,7 @@ def FacultyLogin(request):
 		try:
 			faculty_user=Faculty_Registration.objects.get(faculty_id=fid,password=password)
 			if faculty_user.status == 'activated':
-				request.session['faculty_id']=faculty_user.faculty_id
-	 
+				request.session['faculty_id']=faculty_user.faculty_id 
 				request.session['middle_name']=faculty_user.first_name
 				request.session['imageurlfaculty']=faculty_user.photo.url
 				return redirect('FacultyArea:FacultyDashborad')
@@ -31,7 +30,7 @@ def FacultyLogin(request):
 				FailedMsg="Your Login is Not activated"
 				return render(request,'Login/FacultyLogin.html',{'FailedMsg':FailedMsg})
 		except:
-			FailedMsg="Encorect Email or Password"
+			FailedMsg="Incorrect ID or Password"
 			return render(request,'Login/FacultyLogin.html',{'FailedMsg':FailedMsg})
 	else:
 		return render(request,'Login/FacultyLogin.html')
@@ -41,9 +40,9 @@ def FacultyLogout(request):
 		del request.session['middle_name']
 		del request.session['imageurlfaculty']
 		del request.session['faculty_id']
-		return render(request,'Login/FacultyLogin.html')
+		return render('FacultyArea:FacultyLogin')
 	except:
-		return render(request,'Login/FacultyLogin.html')
+		return redirect('FacultyArea:FacultyLogin')
 
 def FacultyDashborad(request):
 	total_student=Student_Registration.objects.all().count()
@@ -73,7 +72,7 @@ def FacultyForgotPassword(request):
 			Faculty=Faculty_Registration.objects.get(faculty_id=fid)
 			email=Faculty.email
 			otp=random.randint(100000,999999)
-			message="Your OTP For Registration Is"+" "+str(otp)
+			message="Your OTP For Forgot Password Is"+" "+str(otp)
 			rec=[email,]
 			subject="OTP Recived Successefully"                        
 			email_from=settings.EMAIL_HOST_USER
@@ -85,7 +84,7 @@ def FacultyForgotPassword(request):
 			return render(request,'FacultyArea/FacultyOTP.html',{'Faculty':Faculty,'otp':otp,'SuccessMsg':SuccessMsg})
 		except Exception as e:
 			print(e)
-			FailedMsg="Student Not Found"
+			FailedMsg="Faculty Not Found"
 			return render(request,'FacultyArea/FacultyForgotPassword.html',{'FailedMsg':FailedMsg})
 	else:
 		return render(request,'FacultyArea/FacultyForgotPassword.html')
@@ -97,7 +96,7 @@ def FacultyOTP(request):
 		if otp==user_otp:
 			return render(request,'FacultyArea/FacultyNewPassword.html',{'fid':fid})
 		else:
-			FailedMsg="Invelid OTP"
+			FailedMsg="Invalid OTP"
 			return render(request,'FacultyArea/AdmintOTP.html',{'fid':fid,'FailedMsg':FailedMsg,'otp':otp})
 	else:
 		return render(request,'FacultyArea/FacultyOTP.html')
@@ -232,10 +231,10 @@ def FacultyAddSubmitions(request):
 		faculty_user=request.session['faculty_id']
 		try:
 			Submitions_Registration.objects.create(course=course,batch=batch_name,subject=subject,desc=desc,last_date=date,submitions_file=notice_file,faculty_user_id=faculty_user)
-			SuccessMsg="Submitions Added Successefully"
+			SuccessMsg="Submission Added Successefully"
 			return render(request,'FacultyArea/FacultyAddSubmitions.html',{'SuccessMsg':SuccessMsg})
 		except:
-			FailedMsg="Submitions Added Failed"
+			FailedMsg="Submission Added Failed"
 			return render(request,'FacultyArea/FacultyAddSubmitions.html',{'FailedMsg':FailedMsg})
 	else:
 		return render(request,'FacultyArea/FacultyAddSubmitions.html')
@@ -269,10 +268,10 @@ def FacultyScheduleClass(request):
 		faculty_user=request.session['faculty_id']
 		try:
 			Student_Schedule.objects.create(from_date=from_date,to_date=to_date,from_time=from_time,to_time=to_time,subject=subject,classtype=class_type,batch_nm=batch_for,organizer=organizer,faculty_user_id=faculty_user)
-			SuccessMsg="class Added Successefully"
+			SuccessMsg="ScheduleClass Added Successefully"
 			return render(request,'FacultyArea/FacultyAddClassSchedule.html',{'SuccessMsg':SuccessMsg})
 		except:
-			FailedMsg="class Added Failed"
+			FailedMsg="ScheduleClass Added Failed"
 			return render(request,'FacultyArea/FacultyAddClassSchedule.html',{'FailedMsg':FailedMsg})
 	else:
 		return render(request,'FacultyArea/FacultyAddClassSchedule.html')

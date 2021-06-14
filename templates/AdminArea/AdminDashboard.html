@@ -267,7 +267,6 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Status</th>
                                         <th>Date</th>
                                         <th>Name</th>
                                         <th>Mobile</th>
@@ -285,12 +284,7 @@
                                     {% for i in StudentInquiryList %}
                                     <tr>
                                         <td>{{i.inquiry_num}}</td>
-                                        <td>
-                                            <div class="form-check form-switch">
-                                                <input type="checkbox" class="form-check-input" id="customswitch1">
-                                                <label class="form-check-label" for="customswitch1">{{i.status}}</label>
-                                            </div>
-                                        </td>
+                                       
                                         <td>{{i.inquiry_date}}</td>
                                         <td>{{i.full_name}}</td>
                                         <td>{{i.mobile}}</td>
@@ -376,7 +370,7 @@
                                     <tr>
                                         <td>
                                             {% if i.status == 'Approw' %}
-                                            <a href="#!" class="btn btn-success btn-sm dissabled">Approwd</a>
+                                            <a href="#!" class="btn btn-success btn-sm dissabled">Approved</a>
                                             {% elif i.status == 'Panding_Request' %}
                                             <a href="#!" class="btn btn-info btn-sm dissabled">Panding</a>
                                             {% else %}

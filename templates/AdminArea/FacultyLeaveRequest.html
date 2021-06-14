@@ -69,7 +69,7 @@
                             <div class="col text-end d-inline-block">
                             <form action="{% url 'AdminArea:FacultyLeaveRequest' %}" method="POST">{% csrf_token %}
                                 <input type="hidden" name="leave_pk" value="{{i.pk}}">
-                                <button type="submit" name="btn-status" value="Approw" class="btn btn-outline-success"><i class="me-2" data-feather="check-circle"></i>Approw</button>
+                                <button type="submit" name="btn-status" value="Approw" class="btn btn-outline-success"><i class="me-2" data-feather="check-circle"></i>Approve</button>
                             </form>
                             <div class="col text-end d-inline-block mt-2">
                             <form action="{% url 'AdminArea:ViewLeaveRequest' %}" method="POST">{% csrf_token %}

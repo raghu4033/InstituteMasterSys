@@ -30,11 +30,11 @@ def StudentLogin(request):
 				request.session['studentphoto']=student.photo.url
 				return redirect('StudentArea:StudentDashboard')
 			else:
-				FailedMsg="Your Login is Not activated"
+				FailedMsg="Your Login is not activated"
 				print(msg)
 				return render(request,'Login/index.html',{'FailedMsg':FailedMsg})
 		except Exception as e:
-			FailedMsg="Encorect Email or Password"
+			FailedMsg="Incorrect SID or Password"
 			return render(request,'Login/index.html',{'FailedMsg':FailedMsg})
 	else:
 		return render(request,'Login/index.html')
@@ -45,7 +45,7 @@ def StudentLogout(request):
 		del request.session['studentphoto']
 		return redirect('StudentArea:StudentLogin')
 	except:
-		return render(request,'Login/index.html')
+		return redirect('StudentArea:StudentLogin')
 
 def StudentDashboard(request):
 	Student=Student_Registration.objects.get(sid=request.session['sid'])
@@ -68,7 +68,7 @@ def StudentDashboard(request):
 
 	P = int(PresentClass)
 	T = int(TatalClass)
-	PER = '{:}'.format((P/T)*100)
+	PER = '{:.2f}'.format((P/T)*100)
 	print(PER)
 
 
@@ -95,7 +95,7 @@ def StudentForgotPassword(request):
 			student=Student_Registration.objects.get(sid=sid)
 			email=student.email
 			otp=random.randint(100000,999999)
-			message="Your OTP For Registration Is"+" "+str(otp)
+			message="Your OTP For Forgot Password is"+" "+str(otp)
 			rec=[email,]
 			subject="OTP Recived Successefully"                        
 			email_from=settings.EMAIL_HOST_USER
