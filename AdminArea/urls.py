@@ -1,9 +1,11 @@
 from django.urls import path
 from . import views
 AdminArea = "AdminArea"
+from django.contrib.auth.decorators import login_required
+
 urlpatterns = [
     path('', views.index,name='index'),
-    path('admin_login/',views.admin_login,name='admin_login'),
+    path('AdminLogin/',views.admin_login,name='admin_login'),
     path('admin_logout/',views.admin_logout,name='admin_logout'),
     path('AdminForgotPassword/',views.AdminForgotPassword,name='AdminForgotPassword'),
     path('AdminOTP/',views.AdminOTP,name='AdminOTP'),

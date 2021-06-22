@@ -12,6 +12,8 @@ from django.views.decorators.csrf import csrf_exempt
 from datetime import date
 import json
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+
 
 
 def index(request):
@@ -456,8 +458,8 @@ def StudentAdmission(request):
 			send_mail(subject,message,email_from,rec)
 			print(message)
 
-			client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
-			client.api.messages.create(to=f"+91{mobile}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
+			# client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
+			# client.api.messages.create(to=f"+91{mobile}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
 
 
 			SuccessMsg="Student Registered Successefully"
@@ -938,7 +940,7 @@ def PrintSalaryInvoice(request):
 
 def TakeStudentAttendence(request):
 	if request.method=="POST":
-		class_for=request.POST['class_for']
+		class_for=str(request.POST['class_for'])
 		Batch=Student_Registration.objects.filter(course_type=class_for)
 		result = []
 		for i in Batch:
