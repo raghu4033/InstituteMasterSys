@@ -458,8 +458,8 @@ def StudentAdmission(request):
 			send_mail(subject,message,email_from,rec)
 			print(message)
 
-			# client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
-			# client.api.messages.create(to=f"+91{mobile}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
+			client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
+			client.api.messages.create(to=f"+91{mobile}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
 
 
 			SuccessMsg="Student Registered Successefully"
@@ -493,8 +493,8 @@ def EnrollStudentInquiry(request):
 			booklate="https://kalaveethi.com/Booklate/"
 			message=f"Hi {full_name}\n \nThank you for reaching out to Kalaveethi Institue Of Design. I’m Trupal, your admissions counselor. I look forward to working with you. Please feel free to text me here or my colleagues at  if you have any questions. \n \n \n Phone: +91 8160892915 \n Website: {website} \n \nDownload Booklate:{booklate}"
 			
-			# client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
-			# client.api.messages.create(to=f"+91{mobile_number}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
+			client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
+			client.api.messages.create(to=f"+91{mobile_number}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
 
 			rec=[email,]
 			email_from=settings.EMAIL_HOST_USER
@@ -754,8 +754,8 @@ def AddFees(request):
 			send_mail(subject,message,email_from,rec)
 		
 
-			# client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
-			# client.api.messages.create(to=f"+91{mobile_number}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
+			client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
+			client.api.messages.create(to=f"+91{mobile_number}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
 
 			feesdetails = StudentFees.objects.filter(student_id=sid)
 			SuccessMsg="Student Fees Paid Successefully"
@@ -917,8 +917,8 @@ def AddSalary(request):
 			send_mail(subject,message,email_from,rec)
 			
 
-			# client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
-			# client.api.messages.create(to=f"+91{mobile_number}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
+			client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
+			client.api.messages.create(to=f"+91{mobile_number}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
 
 			
 			SuccessMsg="Salary Paid Successefully"
@@ -1059,8 +1059,8 @@ def Addemployee(request):
             email_from=settings.EMAIL_HOST_USER
             send_mail(subject,message,email_from,rec)
 
-            # client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
-            # client.api.messages.create(to=f"+91{mobile}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
+            client = Client(settings.TWILIO['TWILIO_ACCOUNT_SID'],settings.TWILIO['TWILIO_AUTH_TOKEN'])
+            client.api.messages.create(to=f"+91{mobile}",from_=settings.TWILIO['TWILIO_NUMBER'],body=message)
 
 
             return render(request,'AdminArea/Addemployee.html',{'SuccessMsg':SuccessMsg})
