@@ -68,8 +68,10 @@ def StudentDashboard(request):
 
 	P = int(PresentClass)
 	T = int(TatalClass)
-	PER = '{:.2f}'.format((P/T)*100)
-	print(PER)
+	try:
+		PER = '{:.2f}'.format((P/T)*100)
+	except:
+		PER = 0
 
 
 	total_amount=[]
