@@ -65,13 +65,13 @@ The **Institute Master System** simplifies student and faculty management with f
 ## 🎨 **Screenshots**
 
 ### 🔷 **Admin Panel**
-![Admin Panel](./images/admin-panel.png)
+![Admin Panel](./static/AdminDashboard.png)
 
 ### 🔷 **Student Panel**
-![Student Panel](./images/student-panel.png)
+![Student Panel](./static/StudentDarshboard2.png)
 
 ### 🔷 **Faculty Panel**
-![Faculty Panel](./images/faculty-panel.png)
+![Faculty Panel](./static/StudentDashboard.png)
 
 ---
 
